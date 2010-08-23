@@ -30,7 +30,7 @@
     biti &#x107;e mogu&#x107;e rekurzivno brisati sadr&#x17E;aj mape (zajedno sa mapom bri&#x161;u se
     pod-mape i datoteke koje ona sadr&#x17E;i).
     </para>
-    
+
     <para>
     Operacije brisanja, izrezivanja, kopiranja i vra&#x107;anja mapa zahtijevaju
     da je odabrana barem jedna mapa.  Mape se odabiru klikom na ku&#x107;icu
