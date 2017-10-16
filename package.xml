@@ -22,7 +22,7 @@
   <email>chuck@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-13</date>
+ <date>2017-10-16</date>
  <version>
   <release>4.0.0</release>
   <api>4.0.0</api>
@@ -318,7 +318,7 @@
    <file name="manager.php" role="horde" />
    <file name="permissions.php" role="horde" />
    <file name="quota.php" role="horde" />
-   <file name="README" role="doc" />
+   <file name="README.rst" role="doc" />
    <file name="selectlist.php" role="horde" />
    <file name="share.php" role="horde" />
    <file name="view.php" role="horde" />
@@ -472,7 +472,7 @@
    <install as="gollem/manager.php" name="manager.php" />
    <install as="gollem/permissions.php" name="permissions.php" />
    <install as="gollem/quota.php" name="quota.php" />
-   <install as="README" name="README" />
+   <install as="README.rst" name="README.rst" />
    <install as="gollem/selectlist.php" name="selectlist.php" />
    <install as="gollem/share.php" name="share.php" />
    <install as="gollem/view.php" name="view.php" />
@@ -962,7 +962,7 @@
    <stability>
     <release>beta</release>
     <api>beta</api></stability>
-   <date>2017-10-13</date>
+   <date>2017-10-16</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * 
