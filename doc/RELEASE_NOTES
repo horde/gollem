@@ -13,10 +13,10 @@ database, as part of a real filesystem, or on FTP, Samba or SSH servers. For
 more information on Gollem, visit http://www.horde.org/apps/gollem.
 
 For upgrading instructions, please see
-http://www.horde.org/apps/gollem/docs/UPGRADING
+http://www.horde.org/apps/gollem/doc/UPGRADING
 
 For detailed installation and configuration instructions, please see
-http://www.horde.org/apps/gollem/docs/INSTALL
+http://www.horde.org/apps/gollem/doc/INSTALL
 
 The major changes compared to Gollem version H5 (3.0.0) are:
     * Fixed saving column preferences.
