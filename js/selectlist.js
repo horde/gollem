@@ -1,7 +1,7 @@
 /**
  * Provides the javascript for the selectlist.php script.
  *
- * See the enclosed file COPYING for license information (LGPL). If you
+ * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  */
 

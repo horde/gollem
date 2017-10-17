@@ -4,7 +4,7 @@
  *
  * Copyright 2005-2007 Vijay Mahrra <vijay.mahrra@es.easynet.net>
  *
- * See the enclosed file COPYING for license information (GPL). If you
+ * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
  *
  * @author   Vijay Mahrra <vijay.mahrra@es.easynet.net>

@@ -1,7 +1,7 @@
 /**
  * Provides the javascript for the edit.php script.
  *
- * See the enclosed file COPYING for license information (GPL). If you
+ * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
  */
 
