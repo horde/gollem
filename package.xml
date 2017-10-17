@@ -22,7 +22,7 @@
   <email>chuck@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-16</date>
+ <date>2017-10-17</date>
  <version>
   <release>4.0.0</release>
   <api>4.0.0</api>
@@ -312,9 +312,9 @@
     </dir> <!-- /themes/default -->
    </dir> <!-- /themes -->
    <file name="clipboard.php" role="horde" />
-   <file name="COPYING" role="doc" />
    <file name="edit.php" role="horde" />
    <file name="index.php" role="horde" />
+   <file name="LICENSE" role="doc" />
    <file name="manager.php" role="horde" />
    <file name="permissions.php" role="horde" />
    <file name="quota.php" role="horde" />
@@ -466,16 +466,6 @@
  <phprelease>
   <filelist>
    <install as="gollem/clipboard.php" name="clipboard.php" />
-   <install as="COPYING" name="COPYING" />
-   <install as="gollem/edit.php" name="edit.php" />
-   <install as="gollem/index.php" name="index.php" />
-   <install as="gollem/manager.php" name="manager.php" />
-   <install as="gollem/permissions.php" name="permissions.php" />
-   <install as="gollem/quota.php" name="quota.php" />
-   <install as="README.rst" name="README.rst" />
-   <install as="gollem/selectlist.php" name="selectlist.php" />
-   <install as="gollem/share.php" name="share.php" />
-   <install as="gollem/view.php" name="view.php" />
    <install as="gollem/config/.htaccess" name="config/.htaccess" />
    <install as="gollem/config/backends.php" name="config/backends.php" />
    <install as="gollem/config/conf.xml" name="config/conf.xml" />
@@ -486,6 +476,8 @@
    <install as="INSTALL" name="doc/INSTALL" />
    <install as="RELEASE_NOTES" name="doc/RELEASE_NOTES" />
    <install as="UPGRADING" name="doc/UPGRADING" />
+   <install as="gollem/edit.php" name="edit.php" />
+   <install as="gollem/index.php" name="index.php" />
    <install as="gollem/js/clipboard.js" name="js/clipboard.js" />
    <install as="gollem/js/edit.js" name="js/edit.js" />
    <install as="gollem/js/login.js" name="js/login.js" />
@@ -496,15 +488,15 @@
    <install as="gollem/lib/Application.php" name="lib/Application.php" />
    <install as="gollem/lib/Auth.php" name="lib/Auth.php" />
    <install as="gollem/lib/Exception.php" name="lib/Exception.php" />
-   <install as="gollem/lib/Gollem.php" name="lib/Gollem.php" />
-   <install as="gollem/lib/Test.php" name="lib/Test.php" />
    <install as="gollem/lib/Factory/Shares.php" name="lib/Factory/Shares.php" />
    <install as="gollem/lib/Factory/Vfs.php" name="lib/Factory/Vfs.php" />
    <install as="gollem/lib/Factory/VfsDefault.php" name="lib/Factory/VfsDefault.php" />
+   <install as="gollem/lib/Gollem.php" name="lib/Gollem.php" />
    <install as="gollem/lib/LoginTasks/SystemTask/Upgrade.php" name="lib/LoginTasks/SystemTask/Upgrade.php" />
    <install as="gollem/lib/Prefs/Special/Columnselect.php" name="lib/Prefs/Special/Columnselect.php" />
+   <install as="gollem/lib/Test.php" name="lib/Test.php" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="gollem/locale/.htaccess" name="locale/.htaccess" />
-   <install as="gollem/locale/gollem.pot" name="locale/gollem.pot" />
    <install as="gollem/locale/bg/LC_MESSAGES/gollem.mo" name="locale/bg/LC_MESSAGES/gollem.mo" />
    <install as="gollem/locale/bg/LC_MESSAGES/gollem.po" name="locale/bg/LC_MESSAGES/gollem.po" />
    <install as="gollem/locale/ca/help.xml" name="locale/ca/help.xml" />
@@ -533,6 +525,7 @@
    <install as="gollem/locale/fi/LC_MESSAGES/gollem.po" name="locale/fi/LC_MESSAGES/gollem.po" />
    <install as="gollem/locale/fr/LC_MESSAGES/gollem.mo" name="locale/fr/LC_MESSAGES/gollem.mo" />
    <install as="gollem/locale/fr/LC_MESSAGES/gollem.po" name="locale/fr/LC_MESSAGES/gollem.po" />
+   <install as="gollem/locale/gollem.pot" name="locale/gollem.pot" />
    <install as="gollem/locale/hr/help.xml" name="locale/hr/help.xml" />
    <install as="gollem/locale/hr/LC_MESSAGES/gollem.mo" name="locale/hr/LC_MESSAGES/gollem.mo" />
    <install as="gollem/locale/hr/LC_MESSAGES/gollem.po" name="locale/hr/LC_MESSAGES/gollem.po" />
@@ -573,16 +566,21 @@
    <install as="gollem/locale/zh_TW/help.xml" name="locale/zh_TW/help.xml" />
    <install as="gollem/locale/zh_TW/LC_MESSAGES/gollem.mo" name="locale/zh_TW/LC_MESSAGES/gollem.mo" />
    <install as="gollem/locale/zh_TW/LC_MESSAGES/gollem.po" name="locale/zh_TW/LC_MESSAGES/gollem.po" />
+   <install as="gollem/manager.php" name="manager.php" />
    <install as="gollem/migration/1_gollem_base_tables.php" name="migration/1_gollem_base_tables.php" />
    <install as="gollem/migration/2_gollem_upgrade_autoincrement.php" name="migration/2_gollem_upgrade_autoincrement.php" />
    <install as="gollem/migration/3_gollem_upgrade_parents.php" name="migration/3_gollem_upgrade_parents.php" />
+   <install as="gollem/permissions.php" name="permissions.php" />
+   <install as="gollem/quota.php" name="quota.php" />
+   <install as="README.rst" name="README.rst" />
+   <install as="gollem/selectlist.php" name="selectlist.php" />
+   <install as="gollem/share.php" name="share.php" />
    <install as="gollem/templates/.htaccess" name="templates/.htaccess" />
    <install as="gollem/templates/clipboard.html.php" name="templates/clipboard.html.php" />
    <install as="gollem/templates/edit.html.php" name="templates/edit.html.php" />
    <install as="gollem/templates/manager.html.php" name="templates/manager.html.php" />
    <install as="gollem/templates/quota.html.php" name="templates/quota.html.php" />
    <install as="gollem/templates/selectlist.html.php" name="templates/selectlist.html.php" />
-   <install as="gollem/themes/default/screen.css" name="themes/default/screen.css" />
    <install as="gollem/themes/default/graphics/az.png" name="themes/default/graphics/az.png" />
    <install as="gollem/themes/default/graphics/clipboard.png" name="themes/default/graphics/clipboard.png" />
    <install as="gollem/themes/default/graphics/copy.png" name="themes/default/graphics/copy.png" />
@@ -602,6 +600,8 @@
    <install as="gollem/themes/default/graphics/quota.png" name="themes/default/graphics/quota.png" />
    <install as="gollem/themes/default/graphics/reload.png" name="themes/default/graphics/reload.png" />
    <install as="gollem/themes/default/graphics/za.png" name="themes/default/graphics/za.png" />
+   <install as="gollem/themes/default/screen.css" name="themes/default/screen.css" />
+   <install as="gollem/view.php" name="view.php" />
   </filelist>
  </phprelease>
  <changelog>
@@ -962,7 +962,7 @@
    <stability>
     <release>beta</release>
     <api>beta</api></stability>
-   <date>2017-10-16</date>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * 
