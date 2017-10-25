@@ -22,7 +22,7 @@
         }
     ],
     "version": "4.0.0",
-    "time": "2017-04-11",
+    "time": "2017-10-17",
     "repositories": [
         {
             "type": "pear",
@@ -30,11 +30,11 @@
         }
     ],
     "require": {
-        "php": "^5.3",
+        "php": "^5.3 || ^7",
         "pear-pear.horde.org/horde": "^5.0.2",
         "pear-pear.horde.org/Horde_Auth": "^2",
         "pear-pear.horde.org/Horde_Cache": "^2",
-        "pear-pear.horde.org/Horde_Core": "^2.7",
+        "pear-pear.horde.org/Horde_Core": "^2.30",
         "pear-pear.horde.org/Horde_Editor": "^2",
         "pear-pear.horde.org/Horde_Exception": "^2",
         "pear-pear.horde.org/Horde_Mime": "^2",
@@ -52,5 +52,14 @@
     "suggest": {
         "pear-pear.horde.org/Horde_Db": "^2",
         "pear-pear.horde.org/Horde_Share": "^2"
+    },
+    "replace": {
+        "pear-pear.horde.org/gollem": "4.*",
+        "pear-horde/gollem": "4.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gollem": "lib/"
+        }
     }
 }
