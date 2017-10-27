@@ -4,6 +4,16 @@ v4.0.0-git
 
 
 -------
+v3.0.12
+-------
+
+[jan] SECURITY: Fix unauthorized access to files from backends that don't
+      require authentication (Reported by Tim O'Driscoll
+      <tim.odriscoll@lambrookschool.co.uk>).
+[jan] Officially support PHP 7.
+
+
+-------
 v3.0.11
 -------
 
@@ -129,9 +139,9 @@ v3.0.0beta1
 [jan] Use standard Horde dialogs.
 
 
-----------
-v2.0.3-git
-----------
+------
+v2.0.3
+------
 
 [jan] Fix setting quota parameters to the VFS backend (Bug #11455).
 [jan] Fix getViewLink() API method (Bug #11226).
@@ -159,27 +169,34 @@ v2.0.1
 [jan] Fix JavaScript for Actions drop down list (Bug #10695).
 
 
-----
-v2.0
-----
+------
+v2.0.0
+------
+
+[jan] Update Slovak translation.
+
+
+---------
+v2.0.0RC2
+---------
 
 [jan] Fix corruption of downloaded files (Bug #8481).
 [jan] Catch if VFS backend doesn't support size() (Bug #10637).
 [mms] Fix editing text files.
 
 
---------
-v2.0-RC1
---------
+---------
+v2.0.0RC1
+---------
 
 [jan] Fix usage of createhome parameter (Bug #10592).
 [mms] Fix display of 'columnselect' preference (Bug #10628).
 [jan] Don't require login for login-less VFS backends.
 
 
------------
-v2.0-ALPHA2
------------
+------------
+v2.0.0alpha2
+------------
 
 [jan] Fix file viewing.
 [jan] Add missing backends configuration.
@@ -187,10 +204,11 @@ v2.0-ALPHA2
 [jan] Fix broken dependency.
 
 
------------
-v2.0-ALPHA1
------------
+------------
+v2.0.0alpha1
+------------
 
+First alpha release for Horde 4.
 [jan] Convert authentication infrastructure to H4.
 [jan] Provide default configuration files instead of .dist versions.
 [mms] Convert to use H4.
@@ -247,14 +265,14 @@ v1.1-RC1
 [mms] Compress download data.
 [jan] Add Ukrainian translation (Andriy Kopystyansky <anri@polynet.lviv.ua>).
 [bak] Add browse API to allow browsing backends through WebDAV (Request #5337).
-[cjh] Inline PHP-generated javascript to avoid cross-domain leaking
-      (Bug #5307).
+[cjh] Inline PHP-generated javascript to avoid cross-domain leaking (Bug
+      #5307).
 [mms] Preserve URL anchor information when performing login.
 [mms] All javascript now contained in static, cacheable files.
 [cjh] Add javascript sortable tables to Gollem.
 [cjh] Use optimized Horde_Template code as Gollem_Template.
-[cjh] Fix javascript errors when filenames contain quotes (Bug #3824),
-      and make several links work without JavaScript.
+[cjh] Fix javascript errors when filenames contain quotes (Bug #3824), and make
+      several links work without JavaScript.
 [jan] Add editing of text files.
 [mms] Add examples/checks for SSH2 VFS driver.
 
@@ -307,8 +325,8 @@ v1.0.2-RC1
 v1.0.1
 ------
 
-[mms] Don't try to login using Horde auth credentials if hordeauth is off
-      (Bug #3078).
+[mms] Don't try to login using Horde auth credentials if hordeauth is off (Bug
+      #3078).
 [mms] Can select default permissions for newly created files and directories
       per backend.
 
@@ -322,8 +340,8 @@ v1.0.1-RC1
 [mms] Add interface to facilitate admins in editing permissions on a
       per-backend basis (Bug #2255, vijay.mahrra@es.easynet.net).
 [mms] Add support for VFS quota checking (Bug #162).
-[mms] Fix autocreation of home directories when home is also the root
-      directory (Bug #2603).
+[mms] Fix autocreation of home directories when home is also the root directory
+      (Bug #2603).
 [mms] Add language selection to login screen if using gollem as the
       authentication driver.
 [mms] Add 'redirect_on_logout' and 'alternate_login' config parameters.
@@ -335,8 +353,8 @@ v1.0.1-RC1
 v1.0
 ----
 
-[mms] Move filter parameter in backends.php from the VFS 'params' array to
-      the driver's base level.
+[mms] Move filter parameter in backends.php from the VFS 'params' array to the
+      driver's base level.
 [mms] Home should default to root, not the base directory, if it is undefined.
 [mms] Pass configuration error messages to the login screen on aborted login.
 
@@ -380,8 +398,8 @@ v1.0-ALPHA
 [mas] Change any output of <b> and <i> tags to <strong> and <em> for better
       accessibility support.
 [mms] Remove 'change_server' and 'change_port' configuration parameters and
-      instead allow admin to choose which VFS parameters can be overriden
-      by the user at login time via the backend configuration.
+      instead allow admin to choose which VFS parameters can be overriden by
+      the user at login time via the backend configuration.
 [mms] Honor the Horde-wide 'redirect_on_logout' and 'alternate_login'
       configuration parameters.
 [jan] Add Latvian translation (Janis Eisaks <jancs@dv.lv>).
@@ -391,61 +409,60 @@ v1.0-ALPHA
 [mms] Allow user to switch between multiple backends during a single session.
 [mms] Add backend selection to the left tree sidebar.
 [jan] Allow to switch backends in select file popup window.
-[cjh] Consistently use Folder, not Directory
-      (Benoit St-Andre <ben@benoitst-andre.net>).
+[cjh] Consistently use Folder, not Directory (Benoit St-Andre
+      <ben@benoitst-andre.net>).
 [cjh] Fix loading of an extra frameset on login screen reloads.
-[mms] Add API for other Horde applications to show a file dialog to select
-      and return files.
+[mms] Add API for other Horde applications to show a file dialog to select and
+      return files.
 [jan] Add regular expression filters for directory listings (Peter Arien
       <Peter.Arien@cc.kuleuven.ac.be>).
 [cjh] Add recursive deletion of directories (Jeff Graves <jeff@image-src.com>).
 [mms] Only support viewing one backend at a time now.
 [mms] Encrypt passwords in session.
 [mms] Moved all session creation code to Gollem_Session::.
-[cjh] Enforce all permissions for backends if they are set
-      (Amith Varghese <amith@xalan.com>).
+[cjh] Enforce all permissions for backends if they are set (Amith Varghese
+      <amith@xalan.com>).
 [mms] Added test script.
 [mms] Allow up to three files to be uploaded at once.
-[cjh] View files in a new window, allowing viewing of types that we don't
-      allow inline display of.
+[cjh] View files in a new window, allowing viewing of types that we don't allow
+      inline display of.
 [cjh] Copy/Paste files functionality (Michael Varghese
       <mike.varghese@ascellatech.com>).
-[max] Fix 'hordeauth' is set to true, but the realm not getting
-      stripped from the username.
-[cjh] Add preferences for which columns to display
-      (Liam Hoekenga <liamr@umich.edu>).
+[max] Fix 'hordeauth' is set to true, but the realm not getting stripped from
+      the username.
+[cjh] Add preferences for which columns to display (Liam Hoekenga
+      <liamr@umich.edu>).
 [jan] Add Romanian translation (Eugen Hoanca <eugenh@urban-grafx.ro>).
-[cjh] Display the total size of files in a directory
-      (Tero Matinlassi <tero.matinlassi@edu.vantaa.fi>).
+[cjh] Display the total size of files in a directory (Tero Matinlassi
+      <tero.matinlassi@edu.vantaa.fi>).
 [cjh] Add move/copy between different backends (j.huinink@wanadoo.nl).
 [cjh] Add ability to view different backends side-by-side
       (j.huinink@wanadoo.nl).
-[cjh] Add Move/Copy functionality
-      (Michael Varghese <mike.varghese@ascellatech.com>).
-[cjh] Preference for showing/hiding .dotfiles
-      (Liam Hoekenga <liamr@umich.edu>).
+[cjh] Add Move/Copy functionality (Michael Varghese
+      <mike.varghese@ascellatech.com>).
+[cjh] Preference for showing/hiding .dotfiles (Liam Hoekenga
+      <liamr@umich.edu>).
 [cjh] Put download links in a separate column. Having the filename sometimes
       mean view and sometimes mean download was very confusing.
-[cjh] Add support for 'home' parameter in backend configuration
-      (Liam Hoekenga <liamr@umich.edu>).
+[cjh] Add support for 'home' parameter in backend configuration (Liam Hoekenga
+      <liamr@umich.edu>).
 [cjh] Add Change Directory menu item (Liam Hoekenga <liamr@umich.edu>).
 [jan] Add Bulgarian translation (Miroslav Pendev <pendev@hotmail.com>).
-[cjh] If 'hordeauth' is set to 'full', usernames will not be stripped
-      of anything after the first @ when doing Horde authentication.
+[cjh] If 'hordeauth' is set to 'full', usernames will not be stripped of
+      anything after the first @ when doing Horde authentication.
 [mac] Use MIME_Viewers to display filetypes we recognize.
-[cjh] Make the server list more dynamic; automatically log users in when
-      they select a server that doesn't require any more credentials, and
-      reload the form when they change servers to make sure the fields are
-      accurate.
+[cjh] Make the server list more dynamic; automatically log users in when they
+      select a server that doesn't require any more credentials, and reload the
+      form when they change servers to make sure the fields are accurate.
 [mac] Allow users to select an FTP server (if the admin allows) and add a
       server list again.
 [mac] Add conf.xml.
-[cjh] Gollem is now completely based on the VFS backend system. Thanks
-      to Michael Varghese <mike.varghese@ascellatech.com>.
+[cjh] Gollem is now completely based on the VFS backend system. Thanks to
+      Michael Varghese <mike.varghese@ascellatech.com>.
 [jan] Add Norwegian Nynorsk translation (Per-Stian Vatne <psv@orsta.org>).
 [cjh] Close a potential problem with register_globals On and $js_onLoad.
-[cjh] Respect show_dotfiles settings in servers.php
-      (Marcus I. Ryan <marcus@riboflavin.net>).
+[cjh] Respect show_dotfiles settings in servers.php (Marcus I. Ryan
+      <marcus@riboflavin.net>).
 [cjh] Use the new PrefsUI class.
 [jon] Adapt to the new Horde::img() syntax.
 [cjh] Use passive mode.
@@ -485,8 +502,8 @@ v1.0-ALPHA
 [cjh] Define the HORDE_BASE constant in config/conf.php, and use it when
       referring to any of Horde's files.
 [max] Remove connection tracking, made obsolete by redirect.php.
-[jon] Retired config/menu.txt in favor of config/menu.php.  This file follows
-      a new format based on native PHP data structures.
+[jon] Retired config/menu.txt in favor of config/menu.php.  This file follows a
+      new format based on native PHP data structures.
 [jon] Use the Horde temporary file routines.
 [cjh] Added a few new icons and tweaked some minor layout stuff.
 [cjh] Moved IMP's poppassd script into lib/Password/poppassd.php. Doesn't work
