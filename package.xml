@@ -618,6 +618,9 @@
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * First alpha release for Horde 4.
+* [jan] Convert authentication infrastructure to H4.
+* [jan] Provide default configuration files instead of .dist versions.
+* [mms] Convert to use H4.
    </notes>
   </release>
   <release>
@@ -739,8 +742,8 @@
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * [jan] Convert templates to Horde_View.
-* [jan] Fix getViewLink() API method (Bug #11226).
-* [jan] Update Turkish translation (İstanbul Technical University).
+* [jan] Fix sorting if using a pager.
+* [jan] Use standard Horde dialogs.
    </notes>
   </release>
   <release>
