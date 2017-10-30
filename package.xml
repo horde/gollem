@@ -971,5 +971,18 @@
 * 
    </notes>
   </release>
+  <release>
+   <version>
+    <release>3.0.13</release>
+    <api>3.0.0</api></version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api></stability>
+   <date>2017-09-21</date>
+   <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
+   <notes>
+* 
+   </notes>
+  </release>
  </changelog>
 </package>
