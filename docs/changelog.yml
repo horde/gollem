@@ -9,12 +9,22 @@
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
   notes:
+3.0.13:
+  api: 3.0.0
+  state:
+    release: stable
+    api: stable
+  date: 2017-09-21
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes:
 3.0.12:
   api: 3.0.0
   state:
     release: stable
     api: stable
-  date: 2017-08-01
+  date: 2017-09-21
   license:
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
@@ -196,7 +206,7 @@
   state:
     release: beta
     api: beta
-  date: false
+  date:
   license:
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
