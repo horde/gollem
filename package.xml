@@ -2,7 +2,7 @@
 <package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>gollem</name>
  <channel>pear.horde.org</channel>
- <summary>Web-based file manager</summary>
+ <summary>File manager application</summary>
  <description>Gollem is a web-based file manager, providing the ability to fully manage a hierarchical file system stored in a variety of backends such as a SQL database, as part of a real filesystem, or on FTP, Samba or SSH servers.</description>
  <lead>
   <name>Jan Schneider</name>
@@ -22,7 +22,7 @@
   <email>chuck@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-17</date>
+ <date>2017-11-11</date>
  <version>
   <release>4.0.0</release>
   <api>4.0.0</api>
@@ -965,7 +965,7 @@
    <stability>
     <release>beta</release>
     <api>beta</api></stability>
-   <date>2017-10-17</date>
+   <date>2017-11-11</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * 
