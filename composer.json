@@ -1,8 +1,8 @@
 {
     "name": "horde/gollem",
-    "description": "Web-based file manager",
-    "type": "library",
-    "homepage": "https://pear.horde.org",
+    "description": "File manager application",
+    "type": "project",
+    "homepage": "https://www.horde.org/apps/gollem",
     "license": "GPL-2.0",
     "authors": [
         {
@@ -22,7 +22,7 @@
         }
     ],
     "version": "3.0.13",
-    "time": "2017-09-21",
+    "time": "2017-11-14",
     "repositories": [
         {
             "type": "pear",
