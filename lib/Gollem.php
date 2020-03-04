@@ -692,10 +692,11 @@ class Gollem
                 $dir = implode('/', $part);
                 if ((strstr($dir, self::$backend['root']) !== false) &&
                     (self::$backend['root'] != $dir)) {
+                    $part = htmlspecialchars($parts[($i - 1)]);
                     if ($i == $parts_count) {
-                        $label[] = $parts[($i - 1)];
+                        $label[] = $part;
                     } else {
-                        $label[] = Horde::link($url->add('dir', $dir), sprintf(_("Up to %s"), $dir)) . htmlspecialchars($parts[($i - 1)]) . '</a>';
+                        $label[] = Horde::link($url->add('dir', $dir), sprintf(_("Up to %s"), $dir)) . $part . '</a>';
                     }
                 }
             }

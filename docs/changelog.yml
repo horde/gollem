@@ -8,7 +8,8 @@
   license:
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
-  notes:
+  notes: |
+    [jan] SECURITY: Fix XSS vulnerability in breadcrumb output (Reported by: polict of Shielder, CVE-2020-8034).
 3.0.12:
   api: 3.0.0
   state:
