@@ -1,14 +1,4 @@
 ---
-4.0.0:
-  api: 4.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2017-10-17
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes:
 3.0.13:
   api: 3.0.0
   state:
@@ -206,7 +196,7 @@
   state:
     release: beta
     api: beta
-  date:
+  date: 2012-11-14
   license:
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
