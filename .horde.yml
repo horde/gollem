@@ -29,7 +29,7 @@ authors:
     active: false
     role: lead
 version:
-  release: 3.0.13
+  release: 3.0.14
   api: 3.0.0
 state:
   release: stable

@@ -1,4 +1,15 @@
 ---
+3.0.14:
+  api: 3.0.0
+  state:
+    release: stable
+    api: stable
+  date: 2020-04-20
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |+
+    
 3.0.13:
   api: 3.0.0
   state:

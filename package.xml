@@ -24,7 +24,7 @@
  </lead>
  <date>2020-04-20</date>
  <version>
-  <release>3.0.13</release>
+  <release>3.0.14</release>
   <api>3.0.0</api>
  </version>
  <stability>
@@ -33,7 +33,7 @@
  </stability>
  <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
  <notes>
-* [jan] SECURITY: Fix XSS vulnerability in breadcrumb output (Reported by: polict of Shielder, CVE-2020-8034).
+* 
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -605,6 +605,31 @@
    </filelist>
  </phprelease>
  <changelog>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   <release>
    <version>
     <release>2.0.0alpha1</release>
@@ -1012,10 +1037,25 @@
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2017-10-17</date>
+   <date>2020-04-20</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * [jan] SECURITY: Fix XSS vulnerability in breadcrumb output (Reported by: polict of Shielder, CVE-2020-8034).
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>3.0.14</release>
+    <api>3.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2020-04-20</date>
+   <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
+   <notes>
+* 
    </notes>
   </release>
  </changelog>
