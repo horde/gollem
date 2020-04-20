@@ -1,6 +1,9 @@
------------
-v3.0.13-git
------------
+-------
+v3.0.13
+-------
+
+[jan] SECURITY: Fix XSS vulnerability in breadcrumb output (Reported by: polict
+      of Shielder, CVE-2020-8034).
 
 
 -------

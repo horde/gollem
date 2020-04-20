@@ -33,7 +33,7 @@
  </stability>
  <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
  <notes>
-* 
+* [jan] SECURITY: Fix XSS vulnerability in breadcrumb output (Reported by: polict of Shielder, CVE-2020-8034).
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -626,10 +626,12 @@
   <release>
    <version>
     <release>2.0.0alpha2</release>
-    <api>2.0.0alpha2</api></version>
+    <api>2.0.0alpha2</api>
+   </version>
    <stability>
     <release>alpha</release>
-    <api>alpha</api></stability>
+    <api>alpha</api>
+   </stability>
    <date>2011-09-30</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -642,10 +644,12 @@
   <release>
    <version>
     <release>2.0.0RC1</release>
-    <api>2.0.0RC1</api></version>
+    <api>2.0.0RC1</api>
+   </version>
    <stability>
     <release>beta</release>
-    <api>beta</api></stability>
+    <api>beta</api>
+   </stability>
    <date>2011-10-11</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -657,10 +661,12 @@
   <release>
    <version>
     <release>2.0.0RC2</release>
-    <api>2.0.0RC2</api></version>
+    <api>2.0.0RC2</api>
+   </version>
    <stability>
     <release>beta</release>
-    <api>beta</api></stability>
+    <api>beta</api>
+   </stability>
    <date>2011-10-18</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -672,10 +678,12 @@
   <release>
    <version>
     <release>2.0.0</release>
-    <api>2.0.0</api></version>
+    <api>2.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2011-10-27</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -685,10 +693,12 @@
   <release>
    <version>
     <release>2.0.1</release>
-    <api>2.0.0</api></version>
+    <api>2.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2011-11-22</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -702,10 +712,12 @@
   <release>
    <version>
     <release>2.0.2</release>
-    <api>2.0.0</api></version>
+    <api>2.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2012-04-11</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -718,10 +730,12 @@
   <release>
    <version>
     <release>2.0.3</release>
-    <api>2.0.0</api></version>
+    <api>2.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2012-04-11</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -739,6 +753,7 @@
     <release>beta</release>
     <api>beta</api>
    </stability>
+   <date>2012-11-14</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * [jan] Convert templates to Horde_View.
@@ -749,10 +764,12 @@
   <release>
    <version>
     <release>3.0.0RC1</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>beta</release>
-    <api>beta</api></stability>
+    <api>beta</api>
+   </stability>
    <date>2012-11-27</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -764,10 +781,12 @@
   <release>
    <version>
     <release>3.0.0RC2</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>beta</release>
-    <api>beta</api></stability>
+    <api>beta</api>
+   </stability>
    <date>2013-01-10</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -784,10 +803,12 @@
   <release>
    <version>
     <release>3.0.0</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2013-02-12</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -797,10 +818,12 @@
   <release>
    <version>
     <release>3.0.1</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2013-06-12</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -810,10 +833,12 @@
   <release>
    <version>
     <release>3.0.2</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2013-06-12</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -823,10 +848,12 @@
   <release>
    <version>
     <release>3.0.3</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2014-08-04</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -837,10 +864,12 @@
   <release>
    <version>
     <release>3.0.4</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2015-08-01</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -854,10 +883,12 @@
   <release>
    <version>
     <release>3.0.5</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2015-08-06</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -867,10 +898,12 @@
   <release>
    <version>
     <release>3.0.6</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2015-10-21</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -880,10 +913,12 @@
   <release>
    <version>
     <release>3.0.7</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2016-02-02</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -894,10 +929,12 @@
   <release>
    <version>
     <release>3.0.8</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2016-03-21</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -907,10 +944,12 @@
   <release>
    <version>
     <release>3.0.9</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2016-07-01</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -921,10 +960,12 @@
   <release>
    <version>
     <release>3.0.10</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2016-12-16</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -934,10 +975,12 @@
   <release>
    <version>
     <release>3.0.11</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2017-08-01</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -947,10 +990,12 @@
   <release>
    <version>
     <release>3.0.12</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
+    <api>stable</api>
+   </stability>
    <date>2017-09-21</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
@@ -961,14 +1006,16 @@
   <release>
    <version>
     <release>3.0.13</release>
-    <api>3.0.0</api></version>
+    <api>3.0.0</api>
+   </version>
    <stability>
     <release>stable</release>
-    <api>stable</api></stability>
-   <date>2020-04-20</date>
+    <api>stable</api>
+   </stability>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
-* 
+* [jan] SECURITY: Fix XSS vulnerability in breadcrumb output (Reported by: polict of Shielder, CVE-2020-8034).
    </notes>
   </release>
  </changelog>
