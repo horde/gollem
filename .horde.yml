@@ -29,37 +29,37 @@ authors:
     active: false
     role: lead
 version:
-  release: 4.0.0
-  api: 4.0.0
+  release: 5.0.0alpha1
+  api: 5.0.0alpha1
 state:
-  release: beta
-  api: beta
+  release: alpha
+  api: alpha
 license:
   identifier: GPL-2.0
   uri: http://www.horde.org/licenses/gpl
 dependencies:
   required:
-    php: ^5.3 || ^7
-    pear:
-      pear.horde.org/horde: ^5.0.2
-      pear.horde.org/Horde_Auth: ^2
-      pear.horde.org/Horde_Cache: ^2
-      pear.horde.org/Horde_Core: ^2.30
-      pear.horde.org/Horde_Editor: ^2
-      pear.horde.org/Horde_Exception: ^2
-      pear.horde.org/Horde_Mime: ^2
-      pear.horde.org/Horde_Mime_Viewer: ^2
-      pear.horde.org/Horde_Perms: ^2
-      pear.horde.org/Horde_Serialize: ^2
-      pear.horde.org/Horde_Support: ^2
-      pear.horde.org/Horde_Url: ^2
-      pear.horde.org/Horde_Util: ^2
-      pear.horde.org/Horde_Vfs: ^2
-      pear.horde.org/Horde_View: ^2
+    php: ^7
+    composer:
+      horde/horde: ^6
+      horde/auth: ^3
+      horde/cache: ^3
+      horde/core: ^3
+      horde/editor: ^3
+      horde/exception: ^3
+      horde/mime: ^3
+      horde/mime_viewer: ^3
+      horde/perms: ^3
+      horde/serialize: ^3
+      horde/support: ^3
+      horde/url: ^3
+      horde/util: ^3
+      horde/vfs: ^3
+      horde/view: ^3
     ext:
       gettext: '*'
       json: '*'
   optional:
-    pear:
-      pear.horde.org/Horde_Db: ^2
-      pear.horde.org/Horde_Share: ^2
+    composer:
+      horde/db: ^3
+      horde/share: ^3

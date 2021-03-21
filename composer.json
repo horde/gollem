@@ -1,7 +1,7 @@
 {
     "name": "horde/gollem",
     "description": "File manager application",
-    "type": "project",
+    "type": "horde-application",
     "homepage": "https://www.horde.org/apps/gollem",
     "license": "GPL-2.0",
     "authors": [
@@ -21,41 +21,37 @@
             "role": "lead"
         }
     ],
-    "version": "4.0.0",
-    "time": "2017-11-11",
+    "time": "2021-03-21",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com/"
         }
     ],
     "require": {
-        "php": "^5.3 || ^7",
-        "pear-pear.horde.org/horde": "^5.0.2",
-        "pear-pear.horde.org/Horde_Auth": "^2",
-        "pear-pear.horde.org/Horde_Cache": "^2",
-        "pear-pear.horde.org/Horde_Core": "^2.30",
-        "pear-pear.horde.org/Horde_Editor": "^2",
-        "pear-pear.horde.org/Horde_Exception": "^2",
-        "pear-pear.horde.org/Horde_Mime": "^2",
-        "pear-pear.horde.org/Horde_Mime_Viewer": "^2",
-        "pear-pear.horde.org/Horde_Perms": "^2",
-        "pear-pear.horde.org/Horde_Serialize": "^2",
-        "pear-pear.horde.org/Horde_Support": "^2",
-        "pear-pear.horde.org/Horde_Url": "^2",
-        "pear-pear.horde.org/Horde_Util": "^2",
-        "pear-pear.horde.org/Horde_Vfs": "^2",
-        "pear-pear.horde.org/Horde_View": "^2",
+        "horde/horde-installer-plugin": "*",
+        "php": "^7",
+        "horde/horde": "^6",
+        "horde/auth": "^3",
+        "horde/cache": "^3",
+        "horde/core": "^3",
+        "horde/editor": "^3",
+        "horde/exception": "^3",
+        "horde/mime": "^3",
+        "horde/mime_viewer": "^3",
+        "horde/perms": "^3",
+        "horde/serialize": "^3",
+        "horde/support": "^3",
+        "horde/url": "^3",
+        "horde/util": "^3",
+        "horde/vfs": "^3",
+        "horde/view": "^3",
         "ext-gettext": "*",
         "ext-json": "*"
     },
     "suggest": {
-        "pear-pear.horde.org/Horde_Db": "^2",
-        "pear-pear.horde.org/Horde_Share": "^2"
-    },
-    "replace": {
-        "pear-pear.horde.org/gollem": "4.*",
-        "pear-horde/gollem": "4.*"
+        "horde/db": "^3",
+        "horde/share": "^3"
     },
     "autoload": {
         "psr-0": {

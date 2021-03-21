@@ -1,4 +1,15 @@
 ---
+5.0.0alpha1:
+  api: 5.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2021-03-21
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    [rla] Add H6 composer compatible metadata
 4.0.0:
   api: 4.0.0
   state:
@@ -8,7 +19,7 @@
   license:
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
-  notes:
+  notes: ~
 3.0.14:
   api: 3.0.0
   state:
@@ -19,7 +30,6 @@
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
   notes: |+
-    
 3.0.13:
   api: 3.0.0
   state:
@@ -218,7 +228,7 @@
   state:
     release: beta
     api: beta
-  date:
+  date: ~
   license:
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
