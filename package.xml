@@ -24,7 +24,7 @@
  </lead>
  <date>2021-07-04</date>
  <version>
-  <release>5.0.0alpha1</release>
+  <release>5.0.0alpha2</release>
   <api>5.0.0alpha1</api>
  </version>
  <stability>
@@ -33,7 +33,7 @@
  </stability>
  <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
  <notes>
-* [rla] Add H6 composer compatible metadata
+* 
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -490,6 +490,48 @@
   </filelist>
  </phprelease>
  <changelog>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   <release>
    <version>
     <release>1.0.01</release>
@@ -1310,16 +1352,31 @@
   <release>
    <version>
     <release>5.0.0alpha1</release>
-    <api>5.0.0alpha1</api>
+    <api>5.0.0</api>
    </version>
    <stability>
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2021-03-21</date>
+   <date>2021-07-04</date>
    <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
    <notes>
 * [rla] Add H6 composer compatible metadata
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>5.0.0alpha2</release>
+    <api>5.0.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2021-07-04</date>
+   <license uri="http://www.horde.org/licenses/gpl">GPL-2.0</license>
+   <notes>
+* 
    </notes>
   </release>
  </changelog>
