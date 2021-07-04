@@ -21,7 +21,7 @@
             "role": "lead"
         }
     ],
-    "time": "2021-03-21",
+    "time": "2021-07-04",
     "repositories": [
         {
             "type": "composer",
@@ -31,27 +31,28 @@
     "require": {
         "horde/horde-installer-plugin": "*",
         "php": "^7",
-        "horde/horde": "^6 || dev-FRAMEWORK_6_0",
-        "horde/auth": "^3 || dev-FRAMEWORK_6_0",
-        "horde/cache": "^3 || dev-FRAMEWORK_6_0",
-        "horde/core": "^3 || dev-FRAMEWORK_6_0",
-        "horde/editor": "^3 || dev-FRAMEWORK_6_0",
-        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
-        "horde/mime": "^3 || dev-FRAMEWORK_6_0",
-        "horde/mime_viewer": "^3 || dev-FRAMEWORK_6_0",
-        "horde/perms": "^3 || dev-FRAMEWORK_6_0",
-        "horde/serialize": "^3 || dev-FRAMEWORK_6_0",
-        "horde/support": "^3 || dev-FRAMEWORK_6_0",
-        "horde/url": "^3 || dev-FRAMEWORK_6_0",
-        "horde/util": "^3 || dev-FRAMEWORK_6_0",
-        "horde/vfs": "^3 || dev-FRAMEWORK_6_0",
-        "horde/view": "^3 || dev-FRAMEWORK_6_0",
+        "horde/horde": "^6",
+        "horde/auth": "^3",
+        "horde/cache": "^3",
+        "horde/core": "^3",
+        "horde/editor": "^3",
+        "horde/exception": "^3",
+        "horde/mime": "^3",
+        "horde/mime_viewer": "^3",
+        "horde/perms": "^3",
+        "horde/serialize": "^3",
+        "horde/support": "^3",
+        "horde/url": "^3",
+        "horde/util": "^3",
+        "horde/vfs": "^3",
+        "horde/view": "^3",
         "ext-gettext": "*",
         "ext-json": "*"
     },
+    "require-dev": {},
     "suggest": {
-        "horde/db": "^3 || dev-FRAMEWORK_6_0",
-        "horde/share": "^3 || dev-FRAMEWORK_6_0"
+        "horde/db": "^3",
+        "horde/share": "^3"
     },
     "autoload": {
         "psr-0": {
