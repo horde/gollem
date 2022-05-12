@@ -39,7 +39,7 @@ license:
   uri: http://www.horde.org/licenses/gpl
 dependencies:
   required:
-    php: ^7
+    php: ^7.4 || ^8
     composer:
       horde/horde: ^6
       horde/auth: ^3
