@@ -53,7 +53,7 @@ $_prefs['sortby'] = array(
     'type' => 'enum',
     'enum' => array(
         Gollem::SORT_TYPE => _("File Type"),
-        Gollem::SORT_DATE => _("File Name"),
+        Gollem::SORT_NAME => _("File Name"),
         Gollem::SORT_DATE => _("File Modification Time"),
         Gollem::SORT_SIZE => _("File Size")
     ),
