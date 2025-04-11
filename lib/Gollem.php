@@ -10,6 +10,7 @@
  * @author   Max Kalika <max@horde.org>
  * @author   Chuck Hagenbuch <chuck@horde.org>
  * @author   Michael Slusarz <slusarz@horde.org>
+ * @author   Heinz Schweiger <heinz@htl-steyr.ac.at>
  * @category Horde
  * @license  http://www.horde.org/licenses/gpl GPL
  * @package  Gollem
@@ -776,4 +777,48 @@ class Gollem
         }
         return array($name, $path);
     }
+
+    /**
+     * Return human readable file sizes.
+     *
+     * @param integer $size Size in bytes.
+     *
+     * @return string  Human readable size with kB, MB, ... prefixes.
+     */
+    static function formatFileSize($size) {
+        $units = array('B', 'kB', 'MB', 'GB', 'TB');
+        $unitIndex = 0;
+
+        while ($size >= 1024 && $unitIndex < count($units) - 1) {
+            $size /= 1024;
+            $unitIndex++;
+        }
+
+        return round($size, 1) . ' ' . $units[$unitIndex];
+    }
+
+    /**
+     * Return Gollems's initial page.
+     *
+     * @return Horde_Url  URL object.
+     */
+    static public function getInitialPage()
+    {
+        global $registry;
+
+        switch ($registry->getView()) {
+            case $registry::VIEW_SMARTMOBILE:
+                $url = new Horde_Core_Smartmobile_Url(Horde::url('smartmobile.php'));
+                $url->setAnchor('folder');
+                $url->add('backend_key', Gollem_Auth::getPreferredBackend());
+                return $url;
+
+            default:
+                if ($initial_page = $registry->get('initial_page')) {
+                    return Horde::url($registry->get('webroot') . '/' . $initial_page);
+                }
+                return Horde::url('manager.php');
+        }
+    }
+
 }

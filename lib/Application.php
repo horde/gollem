@@ -14,6 +14,7 @@
  * @author   Michael Slusarz <slusarz@horde.org>
  * @author   Ben Klang <bklang@horde.org>
  * @author   Amith Varghese <amith@xalan.com>
+ * @author   Heinz Schweiger <heinz@htl-steyr.ac.at>
  * @category Horde
  * @license  http://www.horde.org/licenses/gpl GPL
  * @package  Gollem
@@ -46,6 +47,10 @@ class Gollem_Application extends Horde_Registry_Application
         'authenticate',
         'transparent',
         'validate'
+    );
+
+    public $features = array(
+        'smartmobileView' => true
     );
 
     /**
@@ -335,6 +340,13 @@ class Gollem_Application extends Horde_Registry_Application
         }
 
         return $res;
+    }
+
+    /**
+     */
+    public function getInitialPage()
+    {
+        return strval(Gollem::getInitialPage()->setRaw(true));
     }
 
 }
