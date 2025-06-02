@@ -93,8 +93,8 @@
 
 // FTP Example.
 $backends['ftp'] = array(
-    // ENABLED by default
-    'disabled' => false,
+    // DISABLED by default
+    'disabled' => true,
     'name' => 'FTP Server',
     'driver' => 'ftp',
     'hordeauth' => false,
