@@ -24,7 +24,7 @@
     "time": "2025-06-02",
     "repositories": [],
     "require": {
-        "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^2 || ^3",
+        "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^3 || ^2",
         "php": "^7.4 || ^8",
         "horde/horde": "^6 || dev-FRAMEWORK_6_0",
         "horde/auth": "^3 || dev-FRAMEWORK_6_0",
@@ -52,6 +52,9 @@
     "autoload": {
         "psr-0": {
             "Gollem": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Gollem\\": "src/"
         }
     },
     "autoload-dev": {},
