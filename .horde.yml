@@ -29,7 +29,7 @@ authors:
     active: false
     role: lead
 version:
-  release: 5.0.0alpha2
+  release: 5.0.0-alpha2
   api: 5.0.0alpha1
 state:
   release: alpha
@@ -37,6 +37,9 @@ state:
 license:
   identifier: GPL-2.0
   uri: http://www.horde.org/licenses/gpl
+autoload:
+  classmap:
+    - lib/
 dependencies:
   required:
     php: ^7.4 || ^8

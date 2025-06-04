@@ -1,16 +1,18 @@
 ---
-5.0.0alpha2:
-  api: 5.0.0
+5.0.0-alpha2:
+  api: 5.0.0-alpha1
   state:
     release: alpha
     api: alpha
-  date: 2021-07-04
+  date: 2025-06-04
   license:
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
-  notes: |+
-    
-5.0.0alpha1:
+  notes: |
+    style: apply php-cs-fixer php8.3+ rules
+    feat: Stub of a specific configuration form class for gollem
+    feat: Add Smartmobile View (contributed by Heinz Schweiger)
+5.0.0-alpha1:
   api: 5.0.0
   state:
     release: alpha
@@ -20,6 +22,7 @@
     identifier: GPL-2.0
     uri: http://www.horde.org/licenses/gpl
   notes: |
+    Original version string was 5.0.0alpha1
     [rla] Add H6 composer compatible metadata
 4.0.0:
   api: 4.0.0
@@ -192,6 +195,53 @@
     uri: http://www.horde.org/licenses/gpl
   notes: |
     [jan] Fix saving columns preference if only one backend exists (Bug #12003).
+3.0.0-beta1:
+  api: 3.0.0
+  state:
+    release: beta
+    api: beta
+  date: ~
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    Original version string was 3.0.0beta1
+    [jan] Convert templates to Horde_View.
+    [jan] Fix sorting if using a pager.
+    [jan] Use standard Horde dialogs.
+3.0.0-RC2:
+  api: 3.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2013-01-10
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    Original version string was 3.0.0RC2
+    [jan] Pass custom login parameters to VFS backend (Bug #11771).
+    [jan] Fix selecting display columns in preferences (Bug #11851).
+    [jan] Fix automatic login to other than the first backend.
+    [jan] Fix downloading if backend key doesn't match driver name (Bug #11746).
+    [jan] Update Basque translation (Ibon Igartua <ibon.igartua@ehu.es>).
+    [jan] Change recursive deletion preference to ask by default.
+    [jan] Fix share_id column if using old share backend (Bug #11833).
+    [jan] Show loading layer when changing backends on login form.
+3.0.0-RC1:
+  api: 3.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2012-11-27
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    Original version string was 3.0.0RC1
+    [jan] Don't show permissions link if permissions are disabled (Bug #11705).
+    [jan] Use short date format in file listing (Request #11722).
+    [jan] Update Dutch translation (Arjen de Korte <build+horde@de-korte.org>).
 3.0.0:
   api: 3.0.0
   state:
@@ -203,50 +253,6 @@
     uri: http://www.horde.org/licenses/gpl
   notes: |
     [jan] Update French translation (Paul De Vlieger <paul.de_vlieger@moniut.univ-bpclermont.fr>).
-3.0.0RC2:
-  api: 3.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2013-01-10
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes: |
-    [jan] Pass custom login parameters to VFS backend (Bug #11771).
-    [jan] Fix selecting display columns in preferences (Bug #11851).
-    [jan] Fix automatic login to other than the first backend.
-    [jan] Fix downloading if backend key doesn't match driver name (Bug #11746).
-    [jan] Update Basque translation (Ibon Igartua <ibon.igartua@ehu.es>).
-    [jan] Change recursive deletion preference to ask by default.
-    [jan] Fix share_id column if using old share backend (Bug #11833).
-    [jan] Show loading layer when changing backends on login form.
-3.0.0RC1:
-  api: 3.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2012-11-27
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes: |
-    [jan] Don't show permissions link if permissions are disabled (Bug #11705).
-    [jan] Use short date format in file listing (Request #11722).
-    [jan] Update Dutch translation (Arjen de Korte <build+horde@de-korte.org>).
-3.0.0beta1:
-  api: 3.0.0
-  state:
-    release: beta
-    api: beta
-  date: ~
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes: |
-    [jan] Convert templates to Horde_View.
-    [jan] Fix sorting if using a pager.
-    [jan] Use standard Horde dialogs.
 2.0.3:
   api: 2.0.0
   state:
@@ -289,6 +295,64 @@
     [jan] Fix downloading of file types without a MIME viewer (Bug #10709).
     [jan] Fix autocreating of home folders (Bug #10690).
     [jan] Fix JavaScript for Actions drop down list (Bug #10695).
+2.0.0-alpha2:
+  api: 2.0.0alpha2
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-09-30
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    Original version string was 2.0.0alpha2
+    [jan] Fix file viewing.
+    [jan] Add missing backends configuration.
+    [jan] Add missing sort icons.
+    [jan] Fix broken dependency.
+2.0.0-alpha1:
+  api: 2.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-09-30
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    Original version string was 2.0.0alpha1
+    First alpha release for Horde 4.
+    [jan] Convert authentication infrastructure to H4.
+    [jan] Provide default configuration files instead of .dist versions.
+    [mms] Convert to use H4.
+2.0.0-RC2:
+  api: 2.0.0RC2
+  state:
+    release: beta
+    api: beta
+  date: 2011-10-18
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    Original version string was 2.0.0RC2
+    [jan] Fix corruption of downloaded files (Bug #8481).
+    [jan] Catch if VFS backend doesn't support size() (Bug #10637).
+    [mms] Fix editing text files.
+2.0.0-RC1:
+  api: 2.0.0RC1
+  state:
+    release: beta
+    api: beta
+  date: 2011-10-11
+  license:
+    identifier: GPL-2.0
+    uri: http://www.horde.org/licenses/gpl
+  notes: |
+    Original version string was 2.0.0RC1
+    [jan] Fix usage of createhome parameter (Bug #10592).
+    [mms] Fix display of 'columnselect' preference (Bug #10628).
+    [jan] Don't require login for login-less VFS backends.
 2.0.0:
   api: 2.0.0
   state:
@@ -300,60 +364,6 @@
     uri: http://www.horde.org/licenses/gpl
   notes: |
     [jan] Update Slovak translation.
-2.0.0RC2:
-  api: 2.0.0RC2
-  state:
-    release: beta
-    api: beta
-  date: 2011-10-18
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes: |
-    [jan] Fix corruption of downloaded files (Bug #8481).
-    [jan] Catch if VFS backend doesn't support size() (Bug #10637).
-    [mms] Fix editing text files.
-2.0.0RC1:
-  api: 2.0.0RC1
-  state:
-    release: beta
-    api: beta
-  date: 2011-10-11
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes: |
-    [jan] Fix usage of createhome parameter (Bug #10592).
-    [mms] Fix display of 'columnselect' preference (Bug #10628).
-    [jan] Don't require login for login-less VFS backends.
-2.0.0alpha2:
-  api: 2.0.0alpha2
-  state:
-    release: alpha
-    api: alpha
-  date: 2011-09-30
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes: |
-    [jan] Fix file viewing.
-    [jan] Add missing backends configuration.
-    [jan] Add missing sort icons.
-    [jan] Fix broken dependency.
-2.0.0alpha1:
-  api: 2.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2011-09-30
-  license:
-    identifier: GPL-2.0
-    uri: http://www.horde.org/licenses/gpl
-  notes: |
-    First alpha release for Horde 4.
-    [jan] Convert authentication infrastructure to H4.
-    [jan] Provide default configuration files instead of .dist versions.
-    [mms] Convert to use H4.
 1.1.2:
   notes: |
     [mms] SECURITY: Fix CSS vulnerability when viewing file data (found by nightmare.lmw@anarchynet.org).
@@ -364,15 +374,9 @@
     [mms] Upgrade prototype.js to v1.6.1.
     [mms] Fix create folder dialog in IE (Bug #8216).
     [jan] Don't redirect to browse view if viewing a file fails.
-1.1:
+1.1.0-RC1:
   notes: |
-    [jan] Fix attachment dialog with only a single autologin backend (Bug #7096).
-    [jan] Start with first page again when filter string is changed (Bug #7935).
-    [mms] Navigation link now uses description from backends.php (Request #8037, Thomas Reifferscheid <thomas@reifferscheid.org>).
-    [mjr] Fix issue that was causing the wrong backend to be selected when being redirected to login.php.
-    [mms] Fix autologin when switching backends on login page (Bug #7892, horde@smartsector.hu).
-1.1-RC1:
-  notes: |
+    Original version string was 1.1-RC1
     [mms] Add folder caching.
     [mms] Add pager navigation and filtering (Request #7160, joel@scopserv.com).
     [jan] Add Estonian translation (Alar Sing <alar.sing@err.ee>).
@@ -392,6 +396,14 @@
     [cjh] Fix javascript errors when filenames contain quotes (Bug #3824), and make several links work without JavaScript.
     [jan] Add editing of text files.
     [mms] Add examples/checks for SSH2 VFS driver.
+1.1.0:
+  notes: |
+    Original version string was 1.1
+    [jan] Fix attachment dialog with only a single autologin backend (Bug #7096).
+    [jan] Start with first page again when filter string is changed (Bug #7935).
+    [mms] Navigation link now uses description from backends.php (Request #8037, Thomas Reifferscheid <thomas@reifferscheid.org>).
+    [mjr] Fix issue that was causing the wrong backend to be selected when being redirected to login.php.
+    [mms] Fix autologin when switching backends on login page (Bug #7892, horde@smartsector.hu).
 1.0.4:
   notes: |
     [jan] Add Estonian translation (Alar Sing <alar.sing@err.ee>).
@@ -404,21 +416,17 @@
     [jan] Add Slovenian translation (Duck <duck@obala.net>).
     [jan] Add Brazilian Portuguese translation (Fábio Gomes <flgoms@uol.com.br>).
     [mms] Don't show quota link in menu if quota support for current backend is disabled.
+1.0.2-RC1:
+  notes: |
+    [mms] Convert all page templates to Horde_Template.
+    [mms] Add row highlighting to manager page (Bug #2977).
+    [mms] Fix configtabs in configuration file (Bug #3119).
 1.0.2:
   notes: |
     [jan] Add Danish translation (Brian Truelsen <horde+i18n@briantruelsen.dk>).
     [mms] Allow admin to disable clipboard support in backends.php.
     [mms] Allow direct autologin from login page if there are no additional login parameters available (Bug #3299, jpolansky@lsit.ucsb.edu).
     [mms] Fix displaying/loading wrong backend when changing backends via the dropdown on login page (Bug #3298, jpolansky@lsit.ucsb.edu).
-1.0.2-RC1:
-  notes: |
-    [mms] Convert all page templates to Horde_Template.
-    [mms] Add row highlighting to manager page (Bug #2977).
-    [mms] Fix configtabs in configuration file (Bug #3119).
-1.0.1:
-  notes: |
-    [mms] Don't try to login using Horde auth credentials if hordeauth is off (Bug #3078).
-    [mms] Can select default permissions for newly created files and directories per backend.
 1.0.1-RC1:
   notes: |
     [mms] Indicate if no backends are available to a user.
@@ -430,30 +438,33 @@
     [mms] Add 'redirect_on_logout' and 'alternate_login' config parameters.
     [mms] Work around bug in VFS's autocreatePath() occuring in Horde <= 3.0.4.
     [jan] Add Polish translation (Krzysztof Kozlowski <kozik1@o2.pl>).
-1.0:
+1.0.1:
   notes: |
-    [mms] Move filter parameter in backends.php from the VFS 'params' array to the driver's base level.
-    [mms] Home should default to root, not the base directory, if it is undefined.
-    [mms] Pass configuration error messages to the login screen on aborted login.
-1.0-RC2:
+    [mms] Don't try to login using Horde auth credentials if hordeauth is off (Bug #3078).
+    [mms] Can select default permissions for newly created files and directories per backend.
+1.0.0-RC2:
   notes: |
+    Original version string was 1.0-RC2
     [mms] Allow home directory to be autocreated on login if it doesn't exist.
     [mms] Added ability to copy/cut between VFS backends.
     [mms] Added clipboard screen.
     [jan] Add Hungarian translation (Laszlo L. Tornoci <torlasz@xenia.sote.hu>).
-1.0-RC1:
+1.0.0-RC1:
   notes: |
+    Original version string was 1.0-RC1
     [mms] Exit back to login screen if autologin attempt fails.
     [mms] Fix logins when either 'home' or 'root' is a relative path.
     [mms] Skip login screen if there are no loginparams required.
     [mms] Add 'driver' and 'dir' parameters to download/view links so that these links are not tied to the current session.
     [jan] Add Finnish translation (Leena Heino <leena.heino@uta.fi>).
-1.0-BETA:
+1.0.0-BETA1:
   notes: |
+    Original version string was 1.0-BETA
     [mms] Consolidated template code to reduce the number of included files needed per page load.
     [mms] Added realPath() function to Gollem:: to lower minimum Horde requirement from 3.0.5 to 3.0.
-1.0-ALPHA:
+1.0.0-ALPHA1:
   notes: |
+    Original version string was 1.0-ALPHA
     [mas] Change any output of <b> and <i> tags to <strong> and <em> for better accessibility support.
     [mms] Remove 'change_server' and 'change_port' configuration parameters and instead allow admin to choose which VFS parameters can be overriden by the user at login time via the backend configuration.
     [mms] Honor the Horde-wide 'redirect_on_logout' and 'alternate_login' configuration parameters.
@@ -564,3 +575,9 @@
     [max] Added file manager actions.
     [max] Added ftp file manager.
     [max] Planning, beginning, modernizing.
+1.0.0:
+  notes: |
+    Original version string was 1.0
+    [mms] Move filter parameter in backends.php from the VFS 'params' array to the driver's base level.
+    [mms] Home should default to root, not the base directory, if it is undefined.
+    [mms] Pass configuration error messages to the login screen on aborted login.
