@@ -1,4 +1,5 @@
 <?php
+
 /**
  * A Horde_Injector based Horde_Vfs factory.
  *
@@ -46,16 +47,16 @@ class Gollem_Factory_Vfs extends Horde_Core_Factory_Base
             $params = $be_config['params'];
 
             switch (Horde_String::lower($be_config['driver'])) {
-            case 'sql':
-            case 'sqlfile':
-            case 'musql':
-                $db_params = $params;
-                unset($db_params['table']);
-                $params['db'] = $this->_injector
-                    ->getInstance('Horde_Core_Factory_Db')
-                    ->create('gollem', $db_params);
-                $params['user'] = $GLOBALS['registry']->getAuth();
-                break;
+                case 'sql':
+                case 'sqlfile':
+                case 'musql':
+                    $db_params = $params;
+                    unset($db_params['table']);
+                    $params['db'] = $this->_injector
+                        ->getInstance('Horde_Core_Factory_Db')
+                        ->create('gollem', $db_params);
+                    $params['user'] = $GLOBALS['registry']->getAuth();
+                    break;
             }
 
             $vfs = Horde_Vfs::factory($be_config['driver'], $params);

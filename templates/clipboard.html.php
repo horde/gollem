@@ -40,8 +40,12 @@
   <td>
    <label>
     <input type="checkbox" class="checkbox" name="items[]" value="<?php echo $entry['id'] ?>" />
-    <?php if ($entry['cut']) echo $this->cutgraphic ?>
-    <?php if ($entry['copy']) echo $this->copygraphic ?>
+    <?php if ($entry['cut']) {
+        echo $this->cutgraphic;
+    } ?>
+    <?php if ($entry['copy']) {
+        echo $this->copygraphic;
+    } ?>
     <?php echo $entry['name'] ?>
    </label>
   </td>

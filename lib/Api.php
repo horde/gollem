@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gollem external API interface.
  *
@@ -32,9 +33,10 @@ class Gollem_Api extends Horde_Registry_Api
      * @return array  The contents of $path.
      * @throws Gollem_Exception
      */
-    public function browse($path = '',
-                           $properties = array('name', 'icon' ,'browseable'))
-    {
+    public function browse(
+        $path = '',
+        $properties = array('name', 'icon' ,'browseable')
+    ) {
         $path = Gollem::stripAPIPath($path);
         $results = array();
 
@@ -307,9 +309,13 @@ class Gollem_Api extends Horde_Registry_Api
      *
      * @return string  The URL string.
      */
-    public function selectlistLink($link_text, $link_style, $formid,
-                                   $icon = false, $selectid = '')
-    {
+    public function selectlistLink(
+        $link_text,
+        $link_style,
+        $formid,
+        $icon = false,
+        $selectid = ''
+    ) {
         $link = Horde::link('#', $link_text, $link_style, '_blank', Horde::popupJs(Horde::url('selectlist.php'), array('params' => array_filter(array('formid' => $formid, 'cacheid' => $selectid)), 'height' => 500, 'width' => 300, 'urlencode' => true)) . 'return false;');
         if ($icon) {
             $link_text = Horde::img('gollem.png', $link_text);

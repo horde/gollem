@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gollem index file.
  *

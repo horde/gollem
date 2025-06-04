@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Gollem_Auth class provides authentication for Gollem.
  *
@@ -226,8 +227,11 @@ class Gollem_Auth
 
         /* Check for the existence of the backend in the config file. */
         if (empty($backends[$backend]) || !is_array($backends[$backend])) {
-            $entry = sprintf('Invalid backend key "%s" from client [%s]',
-                             $backend, $_SERVER['REMOTE_ADDR']);
+            $entry = sprintf(
+                'Invalid backend key "%s" from client [%s]',
+                $backend,
+                $_SERVER['REMOTE_ADDR']
+            );
             Horde::log($entry, 'ERR');
             return false;
         }

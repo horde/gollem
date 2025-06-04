@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gollem edit script.
  *
@@ -25,57 +26,57 @@ if ($vars->driver != Gollem::$backend['driver']) {
 
 /* Run through action handlers. */
 switch ($vars->actionID) {
-case 'save_file':
-    try {
-        $injector
-            ->getInstance('Gollem_Vfs')
-            ->writeData($vars->dir, $vars->file, $vars->content);
-        $message = sprintf(_("%s successfully saved."), $vars->file);
-    } catch (Horde_Vfs_Exception $e) {
-        $message = sprintf(_("Access denied to %s"), $vars->file);
-    }
-    echo Horde::wrapInlineScript(array(
-        'alert(' . Horde_Serialize::serialize($message, Horde_Serialize::JSON) . ')'
-    ));
-    break;
-
-case 'edit_file':
-    try {
-        $data = $injector
-            ->getInstance('Gollem_Vfs')
-            ->read($vars->dir, $vars->file);
-    } catch (Horde_Vfs_Exception $e) {
+    case 'save_file':
+        try {
+            $injector
+                ->getInstance('Gollem_Vfs')
+                ->writeData($vars->dir, $vars->file, $vars->content);
+            $message = sprintf(_("%s successfully saved."), $vars->file);
+        } catch (Horde_Vfs_Exception $e) {
+            $message = sprintf(_("Access denied to %s"), $vars->file);
+        }
         echo Horde::wrapInlineScript(array(
-            'alert(' . Horde_Serialize::serialize(sprintf(_("Access denied to %s"), $vars->file), Horde_Serialize::JSON) . ')'
+            'alert(' . Horde_Serialize::serialize($message, Horde_Serialize::JSON) . ')'
         ));
         break;
-    }
 
-    $mime_type = Horde_Mime_Magic::extToMIME($vars->type);
-    if (strpos($mime_type, 'text/') !== 0) {
-        break;
-    }
+    case 'edit_file':
+        try {
+            $data = $injector
+                ->getInstance('Gollem_Vfs')
+                ->read($vars->dir, $vars->file);
+        } catch (Horde_Vfs_Exception $e) {
+            echo Horde::wrapInlineScript(array(
+                'alert(' . Horde_Serialize::serialize(sprintf(_("Access denied to %s"), $vars->file), Horde_Serialize::JSON) . ')'
+            ));
+            break;
+        }
 
-    if ($mime_type == 'text/html') {
-        $injector->getInstance('Horde_Editor')->initialize(array('id' => 'content'));
-    }
+        $mime_type = Horde_Mime_Magic::extToMIME($vars->type);
+        if (strpos($mime_type, 'text/') !== 0) {
+            break;
+        }
 
-    $view = $injector->createInstance('Horde_View');
-    $view->self_url = Horde::url('edit.php');
-    $view->forminput = Horde_Util::formInput();
-    $view->vars = $vars;
-    $view->data = $data;
+        if ($mime_type == 'text/html') {
+            $injector->getInstance('Horde_Editor')->initialize(array('id' => 'content'));
+        }
 
-    $page_output->addScriptFile('edit.js');
-    $page_output->topbar = $page_output->sidebar = false;
+        $view = $injector->createInstance('Horde_View');
+        $view->self_url = Horde::url('edit.php');
+        $view->forminput = Horde_Util::formInput();
+        $view->vars = $vars;
+        $view->data = $data;
 
-    $page_output->header(array(
-        'title' => $title
-    ));
-    $notification->notify(array('listeners' => 'status'));
-    echo $view->render('edit');
-    $page_output->footer();
-    exit;
+        $page_output->addScriptFile('edit.js');
+        $page_output->topbar = $page_output->sidebar = false;
+
+        $page_output->header(array(
+            'title' => $title
+        ));
+        $notification->notify(array('listeners' => 'status'));
+        echo $view->render('edit');
+        $page_output->footer();
+        exit;
 }
 
 echo Horde::wrapInlineScript(array('window.close()'));

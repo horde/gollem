@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Login system task for automated upgrade tasks.
  *
@@ -31,15 +32,15 @@ class Gollem_LoginTasks_SystemTask_Upgrade extends Horde_Core_LoginTasks_SystemT
         global $prefs;
 
         switch ($version) {
-        case '2.0':
-            /* Upgrade to the new preferences format. */
-            if (!$prefs->isDefault('columns')) {
-                $cols = $prefs->getValue('columns');
-                if (!is_array(json_decode($cols))) {
-                    $prefs->setValue('columns', json_encode(explode("\t", $cols)));
+            case '2.0':
+                /* Upgrade to the new preferences format. */
+                if (!$prefs->isDefault('columns')) {
+                    $cols = $prefs->getValue('columns');
+                    if (!is_array(json_decode($cols))) {
+                        $prefs->setValue('columns', json_encode(explode("\t", $cols)));
+                    }
                 }
-            }
-            break;
+                break;
         }
     }
 

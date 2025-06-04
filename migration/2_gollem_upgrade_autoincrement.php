@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Adds autoincrement flags
  *

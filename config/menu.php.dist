@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file lets you extend Gollem's menu with your own items.
  *

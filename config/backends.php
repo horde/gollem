@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file specifies which backends people using your installation can log
  * in to.
@@ -217,8 +218,10 @@ $backends['sql'] = array(
 
     // The default connection details are pulled from the Horde-wide SQL
     // connection configuration.
-    'params' => array_merge($GLOBALS['conf']['sql'],
-                            array('table' => 'horde_vfs')),
+    'params' => array_merge(
+        $GLOBALS['conf']['sql'],
+        array('table' => 'horde_vfs')
+    ),
 
     // If you need different connection details than from the Horde-wide SQL
     // connection configuration, uncomment and set the following lines.
@@ -261,8 +264,10 @@ $backends['sqlhome'] = array(
 
     // The default connection details are pulled from the Horde-wide SQL
     // connection configuration.
-    'params' => array_merge($GLOBALS['conf']['sql'],
-                            array('table' => 'horde_vfs')),
+    'params' => array_merge(
+        $GLOBALS['conf']['sql'],
+        array('table' => 'horde_vfs')
+    ),
 
     // If you need different connection details than from the Horde-wide SQL
     // connection configuration, uncomment and set the following lines.

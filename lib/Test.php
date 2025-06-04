@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This class provides the Gollem configuration for the test script.
  *

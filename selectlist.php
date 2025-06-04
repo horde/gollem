@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Selectlist handler.
  *
@@ -34,28 +35,28 @@ $selectlist = $session->get('gollem', 'selectlist/' . $cacheid, Horde_Session::T
 
 /* Run through the action handlers. */
 switch ($vars->actionID) {
-case 'select':
-    if (is_array($vars->items) && count($vars->items)) {
-        foreach ($vars->items as $item) {
-            $item_value = Gollem::$backend['dir'] . '|' . $item;
-            if (empty($selectlist['files'])) {
-                $selectlist['files'] = array($item_value);
-            } else {
-                $item_key = array_search($item_value, $selectlist['files']);
-                if ($item_key !== false) {
-                    unset($selectlist['files'][$item_key]);
-                    sort($selectlist['files']);
+    case 'select':
+        if (is_array($vars->items) && count($vars->items)) {
+            foreach ($vars->items as $item) {
+                $item_value = Gollem::$backend['dir'] . '|' . $item;
+                if (empty($selectlist['files'])) {
+                    $selectlist['files'] = array($item_value);
                 } else {
-                    $selectlist['files'][] = $item_value;
+                    $item_key = array_search($item_value, $selectlist['files']);
+                    if ($item_key !== false) {
+                        unset($selectlist['files'][$item_key]);
+                        sort($selectlist['files']);
+                    } else {
+                        $selectlist['files'][] = $item_value;
+                    }
                 }
             }
+
+            $session->set('gollem', 'selectlist/' . $cacheid, $selectlist);
+
+            $filelist = array_keys(array_flip($selectlist['files']));
         }
-
-        $session->set('gollem', 'selectlist/' . $cacheid, $selectlist);
-
-        $filelist = array_keys(array_flip($selectlist['files']));
-    }
-    break;
+        break;
 }
 
 try {
@@ -118,41 +119,41 @@ if (is_array($info['list']) &&
 
         /* Create proper link. */
         switch ($val['type']) {
-        case '**dir':
-            $url = $self_url->copy()->add(array(
-                'cacheid' => $cacheid,
-                'dir' => Gollem::subdirectory(Gollem::$backend['dir'], $val['name']),
-                'formid' => $vars->formid
-            ));
-            $item['link'] = $url->link() . '<strong>' . $name . '</strong></a>';
-            $item['dir'] = true;
-            break;
-
-        case '**sym':
-            if ($val['linktype'] === '**dir') {
-                if (substr($val['link'], 0, 1) == '/') {
-                    $parts = explode('/', $val['link']);
-                    $name = array_pop($parts);
-                    $dir = implode('/', $parts);
-                } else {
-                    $name = $val['link'];
-                    $dir = Gollem::$backend['dir'];
-                }
-
+            case '**dir':
                 $url = $self_url->copy()->add(array(
                     'cacheid' => $cacheid,
                     'dir' => Gollem::subdirectory(Gollem::$backend['dir'], $val['name']),
                     'formid' => $vars->formid
                 ));
-                $item['link'] = $item['name'] . ' -> <strong>' . $url->link() . $val['link'] . '</a></strong>';
-            } else {
-                $item['link'] = $item['name'] . ' -> ' . $val['link'];
-            }
-            break;
+                $item['link'] = $url->link() . '<strong>' . $name . '</strong></a>';
+                $item['dir'] = true;
+                break;
 
-        default:
-            $item['link'] = $name;
-            break;
+            case '**sym':
+                if ($val['linktype'] === '**dir') {
+                    if (substr($val['link'], 0, 1) == '/') {
+                        $parts = explode('/', $val['link']);
+                        $name = array_pop($parts);
+                        $dir = implode('/', $parts);
+                    } else {
+                        $name = $val['link'];
+                        $dir = Gollem::$backend['dir'];
+                    }
+
+                    $url = $self_url->copy()->add(array(
+                        'cacheid' => $cacheid,
+                        'dir' => Gollem::subdirectory(Gollem::$backend['dir'], $val['name']),
+                        'formid' => $vars->formid
+                    ));
+                    $item['link'] = $item['name'] . ' -> <strong>' . $url->link() . $val['link'] . '</a></strong>';
+                } else {
+                    $item['link'] = $item['name'] . ' -> ' . $val['link'];
+                }
+                break;
+
+            default:
+                $item['link'] = $name;
+                break;
         }
 
         if (!empty($selectlist['files']) &&

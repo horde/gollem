@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2012-2025 Horde LLC (http://www.horde.org/)
  *
@@ -50,7 +51,9 @@ class Gollem_Ajax_Application_Smartmobile extends Horde_Core_Ajax_Application_Ha
         $backend_key = $this->vars->get('backend_key');
         $dir = $this->vars->get('dir');
 
-        if ($dir) Gollem::$backend['dir'] = $dir;
+        if ($dir) {
+            Gollem::$backend['dir'] = $dir;
+        }
         Gollem::changeDir();
 
         $GLOBALS['prefs']->setValue('sortby', Gollem::SORT_NAME);

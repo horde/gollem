@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gollem application API.
  *
@@ -222,7 +223,8 @@ class Gollem_Application extends Horde_Registry_Application
             null,
             null,
             null,
-            '__noselection');
+            '__noselection'
+        );
 
         if (Gollem::checkPermissions('backend', Horde_Perms::EDIT) &&
             Gollem::checkPermissions('directory', Horde_Perms::EDIT, Gollem::$backend['dir']) &&
@@ -230,7 +232,8 @@ class Gollem_Application extends Horde_Registry_Application
             $menu->add(
                 Horde::url('clipboard.php')->add('dir', Gollem::$backend['dir']),
                 _("Clipboard"),
-                'gollem-clipboard');
+                'gollem-clipboard'
+            );
         }
 
         if (!empty(Gollem::$backend['quota'])) {
@@ -253,7 +256,9 @@ class Gollem_Application extends Horde_Registry_Application
             !($GLOBALS['injector']->getInstance('Horde_Perms') instanceof Horde_Perms_Null)) {
             $menu->add(
                 Horde::url('permissions.php')->add('backend', $backend_key),
-                _("_Permissions"), 'horde-perms');
+                _("_Permissions"),
+                'horde-perms'
+            );
         }
     }
 
@@ -286,9 +291,11 @@ class Gollem_Application extends Horde_Registry_Application
 
     /**
      */
-    public function topbarCreate(Horde_Tree_Renderer_Base $tree, $parent = null,
-                                 array $params = array())
-    {
+    public function topbarCreate(
+        Horde_Tree_Renderer_Base $tree,
+        $parent = null,
+        array $params = array()
+    ) {
         $icon = Horde_Themes::img('gollem.png');
         $url = Horde::url('manager.php');
 

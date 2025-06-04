@@ -1,4 +1,5 @@
 <?php
+
 /**
  * gollem smartmobile view.
  *

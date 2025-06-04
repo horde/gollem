@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Base exception class for Gollem.
  *

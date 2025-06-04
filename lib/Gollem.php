@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gollem base library.
  *
@@ -18,13 +19,13 @@
 class Gollem
 {
     /* Sort constants. */
-    const SORT_TYPE = 0;
-    const SORT_NAME = 1;
-    const SORT_DATE = 2;
-    const SORT_SIZE = 3;
+    public const SORT_TYPE = 0;
+    public const SORT_NAME = 1;
+    public const SORT_DATE = 2;
+    public const SORT_SIZE = 3;
 
-    const SORT_ASCEND = 0;
-    const SORT_DESCEND = 1;
+    public const SORT_ASCEND = 0;
+    public const SORT_DESCEND = 1;
 
     /**
      * Configuration hash for the current backend.
@@ -216,9 +217,11 @@ class Gollem
         try {
             $files = $GLOBALS['injector']
                 ->getInstance('Gollem_Vfs')
-                ->listFolder($dir,
-                             isset(self::$backend['filter']) ? self::$backend['filter'] : null,
-                             $GLOBALS['prefs']->getValue('show_dotfiles'));
+                ->listFolder(
+                    $dir,
+                    isset(self::$backend['filter']) ? self::$backend['filter'] : null,
+                    $GLOBALS['prefs']->getValue('show_dotfiles')
+                );
         } catch (Horde_Vfs_Exception $e) {
             throw new Gollem_Exception($e);
         }
@@ -380,7 +383,8 @@ class Gollem
                 ->deleteFolder(
                     $dir,
                     $name,
-                    $GLOBALS['prefs']->getValue('recursive_deletes') != 'disabled');
+                    $GLOBALS['prefs']->getValue('recursive_deletes') != 'disabled'
+                );
         } catch (Horde_Vfs_Exception $e) {
             throw new Gollem_Exception($e);
         }
@@ -389,7 +393,8 @@ class Gollem
         try {
             $share = $shares->getShare(
                 $GLOBALS['session']->get('gollem', 'backend_key') . '|'
-                . $dir . '/' . $name);
+                . $dir . '/' . $name
+            );
             $shares->removeShare($share);
         } catch (Horde_Exception_NotFound $e) {
         } catch (Horde_Share_Exception $e) {
@@ -475,9 +480,13 @@ class Gollem
      *
      * @throws Gollem_Exception
      */
-    public static function moveFile($backend_f, $dir, $name, $backend_t,
-                                    $newdir)
-    {
+    public static function moveFile(
+        $backend_f,
+        $dir,
+        $name,
+        $backend_t,
+        $newdir
+    ) {
         self::_copyFile('move', $backend_f, $dir, $name, $backend_t, $newdir);
     }
 
@@ -492,9 +501,13 @@ class Gollem
      *
      * @throws Gollem_Exception
      */
-    public static function copyFile($backend_f, $dir, $name, $backend_t,
-                                    $newdir)
-    {
+    public static function copyFile(
+        $backend_f,
+        $dir,
+        $name,
+        $backend_t,
+        $newdir
+    ) {
         self::_copyFile('copy', $backend_f, $dir, $name, $backend_t, $newdir);
     }
 
@@ -503,9 +516,14 @@ class Gollem
      *
      * @throws Gollem_Exception
      */
-    protected static function _copyFile($mode, $backend_f, $dir, $name,
-                                        $backend_t, $newdir)
-    {
+    protected static function _copyFile(
+        $mode,
+        $backend_f,
+        $dir,
+        $name,
+        $backend_t,
+        $newdir
+    ) {
         $backend_key = $GLOBALS['session']->get('gollem', 'backend_key');
         $factory = $GLOBALS['injector']->getInstance('Gollem_Factory_Vfs');
 
@@ -610,57 +628,58 @@ class Gollem
      *
      * @return boolean  Returns true if the user has permission.
      */
-    public static function checkPermissions($filter,
-                                            $permission = Horde_Perms::READ,
-                                            $resource = null)
-    {
+    public static function checkPermissions(
+        $filter,
+        $permission = Horde_Perms::READ,
+        $resource = null
+    ) {
         $userID = $GLOBALS['registry']->getAuth();
 
         switch ($filter) {
-        case 'backend':
-            if (is_null($resource)) {
-                $resource = $GLOBALS['session']->get('gollem', 'backend_key');
-            }
-            $backendTag = 'gollem:backends:' . $resource;
-            $perms = $GLOBALS['injector']->getInstance('Horde_Perms');
-            return (!$perms->exists($backendTag) ||
-                    $perms->hasPermission($backendTag, $userID, $permission));
-
-        case 'directory':
-            if (empty(self::$backend['shares'])) {
-                return true;
-            }
-            if (is_null($resource)) {
-                $resource = self::$backend['dir'];
-            }
-            if (strpos($resource, self::$backend['home']) === 0) {
-                return true;
-            }
-            $shares = $GLOBALS['injector']->getInstance('Gollem_Shares');
-            $backend = $GLOBALS['session']->get('gollem', 'backend_key');
-            $directory = $resource;
-            while (strlen($directory) && $directory != './' && $directory != '/') {
-                try {
-                    return $shares->getShare($backend . '|' . $directory)
-                        ->hasPermission($userID, $permission);
-                } catch (Horde_Exception_NotFound $e) {
+            case 'backend':
+                if (is_null($resource)) {
+                    $resource = $GLOBALS['session']->get('gollem', 'backend_key');
                 }
-                $directory = dirname($directory);
-            }
-            /* Intermediate solution until we display shared folders
-             * independent from the directory tree. Check if there are
-             * any sub-directories with show permissions and allow
-             * browsing the directory in this case. */
-            if ($permission == Horde_Perms::READ ||
-                $permission == Horde_Perms::SHOW) {
-                $dirs = $shares->listShares($userID, array('perm' => Horde_Perms::SHOW));
-                foreach ($dirs as $dir) {
-                    if (strpos($dir->getName(), $backend . '|' . $resource) === 0) {
-                        return true;
+                $backendTag = 'gollem:backends:' . $resource;
+                $perms = $GLOBALS['injector']->getInstance('Horde_Perms');
+                return (!$perms->exists($backendTag) ||
+                        $perms->hasPermission($backendTag, $userID, $permission));
+
+            case 'directory':
+                if (empty(self::$backend['shares'])) {
+                    return true;
+                }
+                if (is_null($resource)) {
+                    $resource = self::$backend['dir'];
+                }
+                if (strpos($resource, self::$backend['home']) === 0) {
+                    return true;
+                }
+                $shares = $GLOBALS['injector']->getInstance('Gollem_Shares');
+                $backend = $GLOBALS['session']->get('gollem', 'backend_key');
+                $directory = $resource;
+                while (strlen($directory) && $directory != './' && $directory != '/') {
+                    try {
+                        return $shares->getShare($backend . '|' . $directory)
+                            ->hasPermission($userID, $permission);
+                    } catch (Horde_Exception_NotFound $e) {
+                    }
+                    $directory = dirname($directory);
+                }
+                /* Intermediate solution until we display shared folders
+                 * independent from the directory tree. Check if there are
+                 * any sub-directories with show permissions and allow
+                 * browsing the directory in this case. */
+                if ($permission == Horde_Perms::READ ||
+                    $permission == Horde_Perms::SHOW) {
+                    $dirs = $shares->listShares($userID, array('perm' => Horde_Perms::SHOW));
+                    foreach ($dirs as $dir) {
+                        if (strpos($dir->getName(), $backend . '|' . $resource) === 0) {
+                            return true;
+                        }
                     }
                 }
-            }
-            break;
+                break;
         }
 
         return false;
@@ -785,7 +804,8 @@ class Gollem
      *
      * @return string  Human readable size with kB, MB, ... prefixes.
      */
-    static function formatFileSize($size) {
+    public static function formatFileSize($size)
+    {
         $units = array('B', 'kB', 'MB', 'GB', 'TB');
         $unitIndex = 0;
 
@@ -802,7 +822,7 @@ class Gollem
      *
      * @return Horde_Url  URL object.
      */
-    static public function getInitialPage()
+    public static function getInitialPage()
     {
         global $registry;
 
