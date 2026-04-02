@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2023 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (ASL).  If you
  * did not receive this file, see http://www.horde.org/licenses/apache.
@@ -43,9 +43,9 @@ class Gollem_Smartmobile
 
         $this->vars = $vars;
 
-        $this->view = new Horde_View(array(
-            'templatePath' => GOLLEM_TEMPLATES . '/smartmobile'
-        ));
+        $this->view = new Horde_View([
+            'templatePath' => GOLLEM_TEMPLATES . '/smartmobile',
+        ]);
         $this->view->addHelper('Horde_Core_Smartmobile_View_Helper');
         $this->view->addHelper('Text');
 
@@ -54,7 +54,7 @@ class Gollem_Smartmobile
 
         $page_output->addScriptFile('smartmobile.js');
 
-        $notification->notify(array('listeners' => 'status'));
+        $notification->notify(['listeners' => 'status']);
     }
 
     /**
@@ -71,18 +71,18 @@ class Gollem_Smartmobile
     {
         global $injector, $session;
 
-        $this->view->list = array();
+        $this->view->list = [];
 
         foreach (Gollem_Auth::getBackend() as $key => $val) {
             $url = new Horde_Core_Smartmobile_Url();
             $url->setAnchor('folder');
             $url->add('backend_key', $key);
-            $this->view->list[] = array(
-                'img' =>  Horde_Themes_Image::tag('gollem.png', array('attr' => array('class' => 'ui-li-icon'))),
+            $this->view->list[] = [
+                'img' =>  Horde_Themes_Image::tag('gollem.png', ['attr' => ['class' => 'ui-li-icon']]),
                 'name' => $val['name'],
-                'url' => $url
+                'url' => $url,
 
-            );
+            ];
         }
     }
 
@@ -94,14 +94,14 @@ class Gollem_Smartmobile
     {
         global $page_output;
 
-        $code = array(
-            'text' => array(
-                'no_descrip' => _("No Description")
-            )
-        );
+        $code = [
+            'text' => [
+                'no_descrip' => _("No Description"),
+            ],
+        ];
 
-        $page_output->addInlineJsVars(array(
-            'var Ingo' => $code
-        ), array('top' => true));
+        $page_output->addInlineJsVars([
+            'var Ingo' => $code,
+        ], ['top' => true]);
     }
 }

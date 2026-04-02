@@ -3,7 +3,7 @@
 /**
  * Gollem base library.
  *
- * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -53,8 +53,8 @@ class Gollem
     {
         $dir = Horde_Util::realPath($dir);
 
-        if (!self::verifyDir($dir) ||
-            !self::checkPermissions('directory', Horde_Perms::READ, $dir)) {
+        if (!self::verifyDir($dir)
+            || !self::checkPermissions('directory', Horde_Perms::READ, $dir)) {
             throw new Gollem_Exception(sprintf(_("Access denied to folder \"%s\"."), $dir));
         }
         self::$backend['dir'] = $dir;
@@ -98,10 +98,10 @@ class Gollem
     protected static function _sortDirs($a, $b)
     {
         /* Sort symlinks to dirs as dirs */
-        $dira = ($a['type'] === '**dir') ||
-            (($a['type'] === '**sym') && ($a['linktype'] === '**dir'));
-        $dirb = ($b['type'] === '**dir') ||
-            (($b['type'] === '**sym') && ($b['linktype'] === '**dir'));
+        $dira = ($a['type'] === '**dir')
+            || (($a['type'] === '**sym') && ($a['linktype'] === '**dir'));
+        $dirb = ($b['type'] === '**dir')
+            || (($b['type'] === '**sym') && ($b['linktype'] === '**dir'));
 
         if ($GLOBALS['prefs']->getValue('sortdirsfirst')) {
             if ($dira && !$dirb) {
@@ -199,9 +199,9 @@ class Gollem
     {
         global $conf;
 
-        if (!empty($conf['foldercache']['use_cache']) &&
-            !empty($conf['cache']['driver']) &&
-            ($conf['cache']['driver'] != 'none')) {
+        if (!empty($conf['foldercache']['use_cache'])
+            && !empty($conf['cache']['driver'])
+            && ($conf['cache']['driver'] != 'none')) {
             $key = self::_getCacheID($dir);
 
             $cache = $GLOBALS['injector']->getInstance('Horde_Cache');
@@ -219,19 +219,19 @@ class Gollem
                 ->getInstance('Gollem_Vfs')
                 ->listFolder(
                     $dir,
-                    isset(self::$backend['filter']) ? self::$backend['filter'] : null,
+                    self::$backend['filter'] ?? null,
                     $GLOBALS['prefs']->getValue('show_dotfiles')
                 );
         } catch (Horde_Vfs_Exception $e) {
             throw new Gollem_Exception($e);
         }
-        $sortcols = array(
+        $sortcols = [
             self::SORT_TYPE => 'sortType',
             self::SORT_NAME => 'sortName',
             self::SORT_DATE => 'sortDate',
             self::SORT_SIZE => 'sortSize',
-        );
-        usort($files, array('Gollem', $sortcols[$GLOBALS['prefs']->getValue('sortby')]));
+        ];
+        usort($files, ['Gollem', $sortcols[$GLOBALS['prefs']->getValue('sortby')]]);
 
         if (isset($cache)) {
             $cache->set($key, Horde_Serialize::serialize($files, Horde_Serialize::BASIC), $conf['foldercache']['lifetime']);
@@ -247,13 +247,13 @@ class Gollem
      */
     protected static function _getCacheID($dir)
     {
-        return implode('|', array($GLOBALS['registry']->getAuth(),
-                                  $GLOBALS['session']->get('gollem', 'backend_key'),
-                                  $GLOBALS['prefs']->getValue('show_dotfiles'),
-                                  $GLOBALS['prefs']->getValue('sortdirsfirst'),
-                                  $GLOBALS['prefs']->getValue('sortby'),
-                                  $GLOBALS['prefs']->getValue('sortdir'),
-                                  $dir));
+        return implode('|', [$GLOBALS['registry']->getAuth(),
+            $GLOBALS['session']->get('gollem', 'backend_key'),
+            $GLOBALS['prefs']->getValue('show_dotfiles'),
+            $GLOBALS['prefs']->getValue('sortdirsfirst'),
+            $GLOBALS['prefs']->getValue('sortby'),
+            $GLOBALS['prefs']->getValue('sortdir'),
+            $dir]);
     }
 
     /**
@@ -265,9 +265,9 @@ class Gollem
     {
         global $conf;
 
-        if (!empty($conf['foldercache']['use_cache']) &&
-            !empty($conf['cache']['driver']) &&
-            ($conf['cache']['driver'] != 'none')) {
+        if (!empty($conf['foldercache']['use_cache'])
+            && !empty($conf['cache']['driver'])
+            && ($conf['cache']['driver'] != 'none')) {
             $cache = $GLOBALS['injector']->getInstance('Horde_Cache');
             $cache->expire(self::_getCacheID($dir));
         }
@@ -601,7 +601,7 @@ class Gollem
     public static function getColumns($backend)
     {
         if (!isset(self::$_columns)) {
-            self::$_columns = array();
+            self::$_columns = [];
             $sources = json_decode($GLOBALS['prefs']->getValue('columns'));
             foreach ($sources as $source) {
                 self::$_columns[array_shift($source)] = $source;
@@ -642,8 +642,8 @@ class Gollem
                 }
                 $backendTag = 'gollem:backends:' . $resource;
                 $perms = $GLOBALS['injector']->getInstance('Horde_Perms');
-                return (!$perms->exists($backendTag) ||
-                        $perms->hasPermission($backendTag, $userID, $permission));
+                return (!$perms->exists($backendTag)
+                        || $perms->hasPermission($backendTag, $userID, $permission));
 
             case 'directory':
                 if (empty(self::$backend['shares'])) {
@@ -670,9 +670,9 @@ class Gollem
                  * independent from the directory tree. Check if there are
                  * any sub-directories with show permissions and allow
                  * browsing the directory in this case. */
-                if ($permission == Horde_Perms::READ ||
-                    $permission == Horde_Perms::SHOW) {
-                    $dirs = $shares->listShares($userID, array('perm' => Horde_Perms::SHOW));
+                if ($permission == Horde_Perms::READ
+                    || $permission == Horde_Perms::SHOW) {
+                    $dirs = $shares->listShares($userID, ['perm' => Horde_Perms::SHOW]);
                     foreach ($dirs as $dir) {
                         if (strpos($dir->getName(), $backend . '|' . $resource) === 0) {
                             return true;
@@ -695,7 +695,7 @@ class Gollem
      */
     public static function directoryNavLink($currdir, $url)
     {
-        $label = array();
+        $label = [];
         $root_dir_name = self::$backend['name'];
 
         if ($currdir == $root_dir_name) {
@@ -710,8 +710,8 @@ class Gollem
             for ($i = 1; $i <= $parts_count; ++$i) {
                 $part = array_slice($parts, 0, $i);
                 $dir = implode('/', $part);
-                if ((strstr($dir, self::$backend['root']) !== false) &&
-                    (self::$backend['root'] != $dir)) {
+                if ((strstr($dir, self::$backend['root']) !== false)
+                    && (self::$backend['root'] != $dir)) {
                     $part = htmlspecialchars($parts[($i - 1)]);
                     if ($i == $parts_count) {
                         $label[] = $part;
@@ -736,8 +736,8 @@ class Gollem
     public static function getDisplayPath($path)
     {
         $path = Horde_Util::realPath($path);
-        if (self::$backend['root'] != '/' &&
-            strpos($path, self::$backend['root']) === 0) {
+        if (self::$backend['root'] != '/'
+            && strpos($path, self::$backend['root']) === 0) {
             $path = substr($path, Horde_String::length(self::$backend['root']));
         }
         return $path;
@@ -772,7 +772,7 @@ class Gollem
      */
     public static function pathEncode($path)
     {
-        return str_ireplace(array('%2F', '%2f'), '/', rawurlencode($path));
+        return str_ireplace(['%2F', '%2f'], '/', rawurlencode($path));
     }
 
     /**
@@ -794,7 +794,7 @@ class Gollem
             $name = $fullpath;
             $path = '';
         }
-        return array($name, $path);
+        return [$name, $path];
     }
 
     /**
@@ -806,7 +806,7 @@ class Gollem
      */
     public static function formatFileSize($size)
     {
-        $units = array('B', 'kB', 'MB', 'GB', 'TB');
+        $units = ['B', 'kB', 'MB', 'GB', 'TB'];
         $unitIndex = 0;
 
         while ($size >= 1024 && $unitIndex < count($units) - 1) {

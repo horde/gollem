@@ -3,7 +3,7 @@
 /**
  * The Gollem_Auth class provides authentication for Gollem.
  *
- * Copyright 2004-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2004-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -30,14 +30,14 @@ class Gollem_Auth
      *                Otherwise returns false.
      * @throws Horde_Auth_Exception
      */
-    public static function authenticate($credentials = array())
+    public static function authenticate($credentials = [])
     {
         $result = false;
 
         // Do 'horde' authentication.
         $gollem_app = $GLOBALS['registry']->getApiInstance('gollem', 'application');
-        if (!empty($gollem_app->initParams['authentication']) &&
-            ($gollem_app->initParams['authentication'] == 'horde')) {
+        if (!empty($gollem_app->initParams['authentication'])
+            && ($gollem_app->initParams['authentication'] == 'horde')) {
             if ($registry->getAuth()) {
                 return $result;
             }
@@ -51,10 +51,10 @@ class Gollem_Auth
         $backend = self::getBackend($credentials['backend_key']);
 
         // Check for hordeauth.
-        if ((!isset($credentials['userId']) ||
-             !isset($credentials['password'])) &&
-            !$GLOBALS['session']->exists('gollem', 'backend_key') &&
-            self::canAutoLogin($credentials['backend_key'])) {
+        if ((!isset($credentials['userId'])
+             || !isset($credentials['password']))
+            && !$GLOBALS['session']->exists('gollem', 'backend_key')
+            && self::canAutoLogin($credentials['backend_key'])) {
             if (!empty($backend['hordeauth'])) {
                 $credentials['userId'] = self::getAutologinID($credentials['backend_key']);
                 $credentials['password'] = $GLOBALS['registry']->getAuthCredential('password');
@@ -63,17 +63,17 @@ class Gollem_Auth
         }
 
         // Check for hardcoded backend credentials.
-        if (!isset($credentials['userId']) &&
-            !empty($backend['params']['username'])) {
+        if (!isset($credentials['userId'])
+            && !empty($backend['params']['username'])) {
             $credentials['userId'] = $backend['params']['username'];
         }
-        if (!isset($credentials['password']) &&
-            !empty($backend['params']['password'])) {
+        if (!isset($credentials['password'])
+            && !empty($backend['params']['password'])) {
             $credentials['password'] = $backend['params']['password'];
         }
 
-        if (!isset($credentials['userId']) ||
-            !isset($credentials['password'])) {
+        if (!isset($credentials['userId'])
+            || !isset($credentials['password'])) {
             throw new Horde_Auth_Exception('', Horde_Auth::REASON_BADLOGIN);
         }
 
@@ -81,8 +81,8 @@ class Gollem_Auth
             $vfs = $GLOBALS['injector']
                 ->getInstance('Gollem_Factory_Vfs')
                 ->create($credentials['backend_key']);
-            $params = array('username' => $credentials['userId'],
-                            'password' => $credentials['password']);
+            $params = ['username' => $credentials['userId'],
+                'password' => $credentials['password']];
             foreach (array_keys($backend['loginparams']) as $param) {
                 if (isset($credentials[$param])) {
                     $backend['params'][$param] = $params[$param] = $credentials[$param];
@@ -156,7 +156,7 @@ class Gollem_Auth
         $backends[$credentials['backend_key']] = $backend;
         self::_setBackends($backends);
 
-        return array('backend_key' => $credentials['backend_key']);
+        return ['backend_key' => $credentials['backend_key']];
     }
 
     /**
@@ -203,7 +203,12 @@ class Gollem_Auth
     {
         if (!($backends = self::_getBackends())) {
             try {
-                $backends = Horde::loadConfiguration('backends.php', 'backends', 'gollem');
+                /**
+                 * ARCHITECTURE VIOLATION: Using deprecated Horde::loadConfiguration()
+                 * @deprecated Use $registry->loadConfigFile() instead
+                 * @see Horde_Deprecated::loadConfiguration()
+                 */
+$backends = Horde::loadConfiguration('backends.php', 'backends', 'gollem');
                 if (is_null($backends)) {
                     return false;
                 }
@@ -213,8 +218,8 @@ class Gollem_Auth
             }
 
             foreach (array_keys($backends) as $key) {
-                if (!empty($backends[$key]['disabled']) ||
-                    !Gollem::checkPermissions('backend', Horde_Perms::SHOW, $key)) {
+                if (!empty($backends[$key]['disabled'])
+                    || !Gollem::checkPermissions('backend', Horde_Perms::SHOW, $key)) {
                     unset($backends[$key]);
                 }
             }
@@ -260,9 +265,9 @@ class Gollem_Auth
             }
             $preferred = is_array($backend['preferred'])
                 ? $backend['preferred']
-                : array($backend['preferred']);
-            if (in_array($_SERVER['SERVER_NAME'], $preferred) ||
-                in_array($_SERVER['HTTP_HOST'], $preferred)) {
+                : [$backend['preferred']];
+            if (in_array($_SERVER['SERVER_NAME'], $preferred)
+                || in_array($_SERVER['HTTP_HOST'], $preferred)) {
                 $backend_key = $key;
             }
         }
@@ -281,8 +286,8 @@ class Gollem_Auth
     public static function getAutologinID($backend)
     {
         $config = self::getBackend($backend);
-        return (!empty($config['hordeauth']) &&
-                strcasecmp($config['hordeauth'], 'full') === 0)
+        return (!empty($config['hordeauth'])
+                && strcasecmp($config['hordeauth'], 'full') === 0)
             ? $GLOBALS['registry']->getAuth()
             : $GLOBALS['registry']->getAuth('bare');
     }
@@ -301,16 +306,16 @@ class Gollem_Auth
             $key = self::getPreferredBackend();
         }
 
-        if ($key &&
-            $GLOBALS['registry']->getAuth() &&
-            ($config = self::getBackend($key)) &&
-            empty($config['loginparams']) &&
-            !empty($config['hordeauth'])) {
-            return array(
+        if ($key
+            && $GLOBALS['registry']->getAuth()
+            && ($config = self::getBackend($key))
+            && empty($config['loginparams'])
+            && !empty($config['hordeauth'])) {
+            return [
                 'userId' => self::getAutologinID($key),
                 'password' => $GLOBALS['registry']->getAuthCredential('password'),
-                'backend_key' => $key
-            );
+                'backend_key' => $key,
+            ];
         }
 
         return false;
@@ -336,8 +341,8 @@ class Gollem_Auth
     {
         global $session;
 
-        if (($backends = $session->get('gollem', 'backends', $session::TYPE_ARRAY)) &&
-            ($passwords = $session->get('gollem', 'backends_password', $session::TYPE_ARRAY))) {
+        if (($backends = $session->get('gollem', 'backends', $session::TYPE_ARRAY))
+            && ($passwords = $session->get('gollem', 'backends_password', $session::TYPE_ARRAY))) {
             foreach ($passwords as $key => $val) {
                 $backends[$key]['params']['password'] = $val;
             }
@@ -355,7 +360,7 @@ class Gollem_Auth
     {
         global $session;
 
-        $passwords = array();
+        $passwords = [];
         foreach ($backends as $key => $val) {
             if (isset($val['params']['password'])) {
                 $passwords[$key] = $val['params']['password'];

@@ -1,5 +1,5 @@
 <div id="folder" data-role="page">
-    <?php echo $this->smartmobileHeader(array('backlink' => array('#backends', _("Backends")), 'logout' => true, 'title' => _("Backends"))) ?>
+    <?php echo $this->smartmobileHeader(['backlink' => ['#backends', _("Backends")], 'logout' => true, 'title' => _("Backends")]) ?>
 
     <div data-role="content">
         <div id="gollem-folder-data" data-role="collapsible-set" data-content-theme="d"></div>

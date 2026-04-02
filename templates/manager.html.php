@@ -57,19 +57,19 @@
 <?php endif ?>
 <?php if ($this->list_count): ?>
 <?php if ($this->perms_chmod): ?>
-  <li><?php echo Horde::widget(array('url' => '#', 'title' => _("Change Permissions"), 'id' => 'gollem-chmod')) ?></li>
+  <li><?php echo Horde::widget(['url' => '#', 'title' => _("Change Permissions"), 'id' => 'gollem-chmod']) ?></li>
 <?php endif ?>
 <?php if ($this->hasclipboard): ?>
-  <li><?php echo Horde::widget(array('url' => '#', 'title' => _("Copy"), 'id' => 'gollem-copy')) ?></li>
+  <li><?php echo Horde::widget(['url' => '#', 'title' => _("Copy"), 'id' => 'gollem-copy']) ?></li>
 <?php if ($this->perms_delete): ?>
-  <li><?php echo Horde::widget(array('url' => '#', 'title' => _("Cut"), 'id' => 'gollem-cut')) ?></li>
+  <li><?php echo Horde::widget(['url' => '#', 'title' => _("Cut"), 'id' => 'gollem-cut']) ?></li>
 <?php endif ?>
 <?php endif ?>
 <?php if ($this->perms_delete): ?>
-  <li><?php echo Horde::widget(array('url' => '#', 'title' => _("Delete"), 'id' => 'gollem-delete')) ?></li>
+  <li><?php echo Horde::widget(['url' => '#', 'title' => _("Delete"), 'id' => 'gollem-delete']) ?></li>
 <?php endif ?>
 <?php if ($this->perms_edit): ?>
-  <li><?php echo Horde::widget(array('url' => '#', 'title' => _("Rename"), 'id' => 'gollem-rename')) ?></li>
+  <li><?php echo Horde::widget(['url' => '#', 'title' => _("Rename"), 'id' => 'gollem-rename']) ?></li>
 <?php endif ?>
 <?php endif ?>
  </ul>

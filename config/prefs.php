@@ -11,92 +11,92 @@
 
 // *** File Display Preferences ***
 
-$prefGroups['display'] = array(
+$prefGroups['display'] = [
     'column' => _("User Interface"),
     'label' => _("File Display"),
     'desc' => _("File display preferences."),
-    'members' => array(
+    'members' => [
         'show_dotfiles', 'sortdirsfirst', 'columnselect', 'sortby', 'sortdir',
-        'perpage'
-    )
-);
+        'perpage',
+    ],
+];
 
 // show dotfiles?
-$_prefs['show_dotfiles'] = array(
+$_prefs['show_dotfiles'] = [
     'value' => 0,
     'type' => 'checkbox',
-    'desc' => _("Show dotfiles?")
-);
+    'desc' => _("Show dotfiles?"),
+];
 
 // always sort directories before files
-$_prefs['sortdirsfirst'] = array(
+$_prefs['sortdirsfirst'] = [
     'value' => 1,
     'type' => 'checkbox',
-    'desc' => _("List folders first?")
-);
+    'desc' => _("List folders first?"),
+];
 
 // columns selection widget
-$_prefs['columnselect'] = array(
+$_prefs['columnselect'] = [
     'type' => 'special',
-    'handler' => 'Gollem_Prefs_Special_Columnselect'
-);
+    'handler' => 'Gollem_Prefs_Special_Columnselect',
+];
 
 // columns to be displayed
-$_prefs['columns'] = array(
+$_prefs['columns'] = [
     // 'value' = json_encode(array(array('ftp', 'type', 'name', 'size')))
-    'value' => '[]'
-);
+    'value' => '[]',
+];
 
 
 // user preferred sorting column
-$_prefs['sortby'] = array(
+$_prefs['sortby'] = [
     'value' => Gollem::SORT_TYPE,
     'type' => 'enum',
-    'enum' => array(
+    'enum' => [
         Gollem::SORT_TYPE => _("File Type"),
         Gollem::SORT_NAME => _("File Name"),
         Gollem::SORT_DATE => _("File Modification Time"),
-        Gollem::SORT_SIZE => _("File Size")
-    ),
-    'desc' => _("Default sorting criteria:")
-);
+        Gollem::SORT_SIZE => _("File Size"),
+    ],
+    'desc' => _("Default sorting criteria:"),
+];
 
 // user preferred sorting direction
-$_prefs['sortdir'] = array(
+$_prefs['sortdir'] = [
     'value' => 0,
     'type' => 'enum',
-    'enum' => array(
+    'enum' => [
         Gollem::SORT_ASCEND => _("Ascending"),
-        Gollem::SORT_DESCEND => _("Descending")
-    ),
-    'desc' => _("Default sorting direction:")
-);
+        Gollem::SORT_DESCEND => _("Descending"),
+    ],
+    'desc' => _("Default sorting direction:"),
+];
 
 // number of items per page
-$_prefs['perpage'] = array(
+$_prefs['perpage'] = [
     'value' => 30,
     'type' => 'number',
-    'desc' => _("Items per page")
-);
+    'desc' => _("Items per page"),
+];
 
 
 
 // *** File Actions Preferences ***
 
-$prefGroups['settings'] = array(
+$prefGroups['settings'] = [
     'column' => _("User Interface"),
     'label' => _("File Actions"),
     'desc' => _("File action settings."),
-    'members' => array('recursive_deletes'));
+    'members' => ['recursive_deletes']];
 
 // user preferred recursive deletes
-$_prefs['recursive_deletes'] = array(
+$_prefs['recursive_deletes'] = [
     'value' => 'warn',
     'type' => 'enum',
-    'enum' => array(
+    'enum' => [
         'disabled' => _("No"),
         'enabled' => _("Yes"),
-        'warn' => _("Ask")
-    ),
-    'desc' => _("Delete folders recursively?")
-);
+        'warn' => _("Ask"),
+    ],
+    'desc' => _("Delete folders recursively?"),
+];

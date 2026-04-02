@@ -3,7 +3,7 @@
 /**
  * Gollem quota script.
  *
- * Copyright 2005-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2005-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -25,9 +25,9 @@ $template = $injector->createInstance('Horde_View');
 if ($isPopup) {
     $template->closebutton = _("Close");
     $page_output->topbar = $page_output->sidebar = false;
-    $page_output->addInlineScript(array(
-        '$("closebutton").observe("click", function() { window.close(); })'
-    ), true);
+    $page_output->addInlineScript([
+        '$("closebutton").observe("click", function() { window.close(); })',
+    ], true);
 }
 
 /* Get the quota information. */
@@ -55,11 +55,11 @@ if (!empty(Gollem::$backend['quota'])) {
     }
 }
 
-$page_output->header(array(
-    'title' => _("Quota Display")
-));
+$page_output->header([
+    'title' => _("Quota Display"),
+]);
 if (!$isPopup) {
-    $notification->notify(array('listeners' => 'status'));
+    $notification->notify(['listeners' => 'status']);
 }
 echo $template->render('quota');
 $page_output->footer();

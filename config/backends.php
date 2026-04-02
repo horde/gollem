@@ -93,13 +93,13 @@
  */
 
 // FTP Example.
-$backends['ftp'] = array(
+$backends['ftp'] = [
     // DISABLED by default
     'disabled' => true,
     'name' => 'FTP Server',
     'driver' => 'ftp',
     'hordeauth' => false,
-    'params' => array(
+    'params' => [
         // The hostname/IP Address of the FTP server
         'hostspec' => 'localhost',
         // The port number of the FTP server
@@ -125,19 +125,19 @@ $backends['ftp'] = array(
         // The type of the remote FTP server. Possible values: 'unix', 'win',
         // 'netware'. By default, we attempt to auto-detect type.
         // 'type' => 'unix',
-    ),
-    'loginparams' => array(
+    ],
+    'loginparams' => [
         // Allow the user to change the FTP server
         // 'hostspec' => 'Hostname',
         // Allow the user to change the FTP port
         // 'port' => 'Port'
-    ),
+    ],
     // 'root' => '',
     // 'home' => '',
     // 'createhome' => false,
     // 'filter' => '^regex$',
     // 'quota' => false,
-    'attributes' => array(
+    'attributes' => [
         'type',
         'name',
         'edit',
@@ -146,18 +146,18 @@ $backends['ftp'] = array(
         'size',
         'permission',
         'owner',
-        'group'
-    )
-);
+        'group',
+    ],
+];
 
 // This backend uses Horde credentials to automatically log in.
-$backends['hordeftp'] = array(
+$backends['hordeftp'] = [
     // Disabled by default
     'disabled' => true,
     'name' => 'FTP Server',
     'driver' => 'ftp',
     'hordeauth' => true,
-    'params' => array(
+    'params' => [
         // The hostname/IP Address of the FTP server.
         'hostspec' => 'localhost',
         // The port number of the FTP server.
@@ -183,19 +183,19 @@ $backends['hordeftp'] = array(
         // The type of the remote FTP server. Possible values: 'unix', 'win',
         // 'netware'. By default, we attempt to auto-detect type.
         // 'type' => 'unix',
-    ),
-    'loginparams' => array(
+    ],
+    'loginparams' => [
         // Allow the user to change the FTP server.
         // 'hostspec' => 'Hostname',
         // Allow the user to change the FTP port.
         // 'port' => 'Port'
-    ),
+    ],
     // 'root' => '',
     // 'home' => '',
     // 'createhome' => false,
     // 'filter' => '^regex$',
     // 'quota' => false,
-    'attributes' => array(
+    'attributes' => [
         'type',
         'name',
         'edit',
@@ -204,12 +204,12 @@ $backends['hordeftp'] = array(
         'size',
         'permission',
         'owner',
-        'group'
-    )
-);
+        'group',
+    ],
+];
 
 // SQL Example.
-$backends['sql'] = array(
+$backends['sql'] = [
     // Disabled by default
     'disabled' => true,
     'name' => 'SQL Server',
@@ -220,7 +220,7 @@ $backends['sql'] = array(
     // connection configuration.
     'params' => array_merge(
         $GLOBALS['conf']['sql'],
-        array('table' => 'horde_vfs')
+        ['table' => 'horde_vfs']
     ),
 
     // If you need different connection details than from the Horde-wide SQL
@@ -238,24 +238,24 @@ $backends['sql'] = array(
     //     // directory for examples.
     //     'table' => 'horde_vfs'
     // ),
-    'loginparams' => array(),
+    'loginparams' => [],
     // 'root' => '',
     // 'home' => '',
     // 'createhome' => false,
     // 'filter' => '^regex$',
     // 'quota' => false,
-    'attributes' => array(
+    'attributes' => [
         'type',
         'name',
         'edit',
         'download',
         'modified',
-        'size'
-    )
-);
+        'size',
+    ],
+];
 
 // This backend specifies a home directory and root directory in a SQL vfs.
-$backends['sqlhome'] = array(
+$backends['sqlhome'] = [
     // Disabled by default
     'disabled' => true,
     'name' => 'SQL Server with home',
@@ -266,7 +266,7 @@ $backends['sqlhome'] = array(
     // connection configuration.
     'params' => array_merge(
         $GLOBALS['conf']['sql'],
-        array('table' => 'horde_vfs')
+        ['table' => 'horde_vfs']
     ),
 
     // If you need different connection details than from the Horde-wide SQL
@@ -284,14 +284,14 @@ $backends['sqlhome'] = array(
     //     // directory for examples.
     //     'table' => 'horde_vfs'
     // ),
-    'loginparams' => array(),
+    'loginparams' => [],
     'root' => '/home',
     'home' => '/home/' . $GLOBALS['registry']->getAuth(),
     // 'createhome' => false,
     // 'filter' => '^regex$',
     // 'quota' => false,
     'shares' => true,
-    'attributes' => array(
+    'attributes' => [
         'type',
         'name',
         'share',
@@ -300,33 +300,33 @@ $backends['sqlhome'] = array(
         'modified',
         'size',
         'owner',
-    )
-);
+    ],
+];
 
 // NOTE: /exampledir/home and all subdirectories should be, for
 // security reasons, owned by your web server user and mode 700 or you
 // will need to use suexec or something else that can adjust the web
 // server effective uid.
-$backends['file'] = array(
+$backends['file'] = [
     // Disabled by default
     'disabled' => true,
     'name' => 'Virtual Home Directories',
     'driver' => 'file',
     'hordeauth' => true,
-    'params' => array(
+    'params' => [
         // The base location under which the user home directories live.
         'vfsroot' => '/exampledir/home/',
         // The default permissions to set for newly created folders and files.
         // 'permissions' => '750'
-    ),
-    'loginparams' => array(),
+    ],
+    'loginparams' => [],
     'root' => '/',
     'home' => $GLOBALS['registry']->getAuth(),
     // 'createhome' => false,
     // 'filter' => '^regex$',
     // 'quota' => false,
     'shares' => true,
-    'attributes' => array(
+    'attributes' => [
         'type',
         'name',
         'share',
@@ -334,17 +334,17 @@ $backends['file'] = array(
         'download',
         'modified',
         'size',
-    )
-);
+    ],
+];
 
 // SMB Example
-$backends['smb'] = array(
+$backends['smb'] = [
     // Disabled by default
     'disabled' => true,
     'name' => 'SMB Server',
     'driver' => 'smb',
     'hordeauth' => false,
-    'params' => array(
+    'params' => [
         'hostspec' => 'example',
         'port' => 139,
         'share' => 'homes',
@@ -358,38 +358,38 @@ $backends['smb'] = array(
         // The default permissions to set for newly created folders and
         // files.
         // 'permissions' => '750'
-    ),
-    'loginparams' => array(
+    ],
+    'loginparams' => [
         // Allow the user to change to Samba server.
         // 'hostspec' => 'Hostname',
         // Allow the user to change the Samba port.
         // 'port' => 'Port',
         // Allow the user to change the Samba share.
         // 'share' => 'Share',
-    ),
+    ],
     // 'root' => '',
     // 'home' => '',
     // 'createhome' => false,
     // 'filter' => '^regex$',
     // 'quota' => false,
-    'attributes' => array(
+    'attributes' => [
         'type',
         'name',
         'edit',
         'download',
         'modified',
-        'size'
-    )
-);
+        'size',
+    ],
+];
 
 // SSH2 Example
-$backends['ssh2'] = array(
+$backends['ssh2'] = [
     // Disabled by default
     'disabled' => true,
     'name' => 'SSH2 Server',
     'driver' => 'ssh2',
     'hordeauth' => false,
-    'params' => array(
+    'params' => [
         // The hostname/IP Address of the SSH server
         'hostspec' => 'ssh2.example.com',
         // The port number of the SSH server
@@ -405,19 +405,19 @@ $backends['ssh2'] = array(
         // The default permissions to set for newly created folders and
         // files.
         // 'permissions' => '750'
-    ),
-    'loginparams' => array(
+    ],
+    'loginparams' => [
         // Allow the user to change the SSH server
         // 'hostspec' => 'Hostname',
         // Allow the user to change the SSH port
         // 'port' => 'Port'
-    ),
+    ],
     // 'root' => '',
     // 'home' => '',
     // 'createhome' => false,
     // 'filter' => '^regex$',
     // 'quota' => false,
-    'attributes' => array(
+    'attributes' => [
         'type',
         'name',
         'edit',
@@ -426,6 +426,6 @@ $backends['ssh2'] = array(
         'size',
         'permission',
         'owner',
-        'group'
-    )
-);
+        'group',
+    ],
+];

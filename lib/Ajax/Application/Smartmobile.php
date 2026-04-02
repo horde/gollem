@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2025 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (ASL). If you
  * did not receive this file, see http://www.horde.org/licenses/apache.
@@ -62,15 +62,15 @@ class Gollem_Ajax_Application_Smartmobile extends Horde_Core_Ajax_Application_Ha
         $out = new stdClass();
         $out->backendName = Gollem::$backend['name'];
 
-        $out->folderlist = array(
+        $out->folderlist = [
             'l' => _("Subfolders of ") . Gollem::$backend['dir'],
-            'e' => array()
-        );
+            'e' => [],
+        ];
 
-        $out->filelist = array(
+        $out->filelist = [
             'l' => _("Files of ") . Gollem::$backend['dir'],
-            'e' => array()
-        );
+            'e' => [],
+        ];
 
         $folder_url = new Horde_Core_Smartmobile_Url();
         $folder_url->setAnchor('folder');
@@ -81,32 +81,37 @@ class Gollem_Ajax_Application_Smartmobile extends Horde_Core_Ajax_Application_Ha
         foreach ($list as $val) {
             switch ($val['type']) {
                 case '**dir':
-                    $out->folderlist['e'][] = array(
+                    $out->folderlist['e'][] = [
                         'n' => $val['name'],
-                        'u' => strval($folder_url->copy()->setRaw(true)->add(array('dir' => Gollem::subdirectory(Gollem::$backend['dir'], $val['name'])
-                        )))
-                    );
+                        'u' => strval($folder_url->copy()->setRaw(true)->add(['dir' => Gollem::subdirectory(Gollem::$backend['dir'], $val['name']),
+                        ])),
+                    ];
                     break;
 
                 default:
                     if (empty($icon_cache[$val['type']])) {
-                        $icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
+                        /**
+                         * ARCHITECTURE VIOLATION: Using deprecated Horde::img()
+                         * @deprecated Use Horde_Themes_Image::tag() instead
+                         * @see Horde_Deprecated::img()
+                         */
+$icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
                     }
                     $icon = $icon_cache[$val['type']];
 
                     // Try a view link.
-                    $url = $view_url->copy()->add(array(
+                    $url = $view_url->copy()->add([
                         'type' => $val['type'],
                         'file' => $val['name'],
                         'dir' => Gollem::$backend['dir'],
-                        'driver' => Gollem::$backend['driver']
-                    ));
-                    $out->filelist['e'][] = array(
+                        'driver' => Gollem::$backend['driver'],
+                    ]);
+                    $out->filelist['e'][] = [
                         'n' => $val['name'] . ' (' . Gollem::formatFileSize($val['size']) . ')',
                         'i' => $icon,
                         'u' => strval($url->setRaw(true)),
-                        'd' => strftime($GLOBALS['prefs']->getValue('date_format_mini'), $val['date'])
-                    );
+                        'd' => strftime($GLOBALS['prefs']->getValue('date_format_mini'), $val['date']),
+                    ];
                     break;
             }
         }

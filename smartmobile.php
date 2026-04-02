@@ -3,7 +3,7 @@
 /**
  * gollem smartmobile view.
  *
- * Copyright 2012-2023 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (ASL).  If you
  * did not receive this file, see http://www.horde.org/licenses/apache.
@@ -22,10 +22,10 @@ Horde_Registry::appInit('gollem');
 
 $ob = new Gollem_Smartmobile($injector->getInstance('Horde_Variables'));
 
-$page_output->header(array(
+$page_output->header([
     'title' => _("Mobile"),
-    'view' => $registry::VIEW_SMARTMOBILE
-));
+    'view' => $registry::VIEW_SMARTMOBILE,
+]);
 
 $ob->render();
 

@@ -3,7 +3,7 @@
 /**
  * Gollem view script.
  *
- * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -16,17 +16,17 @@
  */
 
 require_once __DIR__ . '/lib/Application.php';
-Horde_Registry::appInit('gollem', array(
-    'session_control' => 'readonly'
-));
+Horde_Registry::appInit('gollem', [
+    'session_control' => 'readonly',
+]);
 
 $vars = Horde_Variables::getDefaultVariables();
 
 if ($vars->driver != Gollem::$backend['driver']) {
-    Horde::url('login.php')->add(array(
+    Horde::url('login.php')->add([
         'backend_key' => $vars->driver,
-        'url' => Horde::signUrl(Horde::selfUrl(true))
-    ))->redirect();
+        'url' => Horde::signUrl(Horde::selfUrl(true)),
+    ])->redirect();
 }
 
 try {
@@ -39,7 +39,7 @@ $gollem_vfs = $injector->getInstance('Gollem_Vfs');
 $stream = null;
 $data = '';
 try {
-    if (is_callable(array($gollem_vfs, 'readStream'))) {
+    if (is_callable([$gollem_vfs, 'readStream'])) {
         $stream = $gollem_vfs->readStream($vars->dir, $vars->file);
     } else {
         $data = $gollem_vfs->read($vars->dir, $vars->file);

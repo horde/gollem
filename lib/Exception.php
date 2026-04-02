@@ -3,7 +3,7 @@
 /**
  * Base exception class for Gollem.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -13,6 +13,4 @@
  * @license  http://www.horde.org/licenses/gpl GPL
  * @package  Gollem
  */
-class Gollem_Exception extends Horde_Exception_Wrapped
-{
-}
+class Gollem_Exception extends Horde_Exception_Wrapped {}

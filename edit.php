@@ -3,7 +3,7 @@
 /**
  * Gollem edit script.
  *
- * Copyright 2006-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2006-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -20,7 +20,7 @@ Horde_Registry::appInit('gollem');
 $vars = Horde_Variables::getDefaultVariables();
 
 if ($vars->driver != Gollem::$backend['driver']) {
-    echo Horde::wrapInlineScript(array('window.close();'));
+    echo Horde::wrapInlineScript(['window.close();']);
     exit;
 }
 
@@ -35,9 +35,9 @@ switch ($vars->actionID) {
         } catch (Horde_Vfs_Exception $e) {
             $message = sprintf(_("Access denied to %s"), $vars->file);
         }
-        echo Horde::wrapInlineScript(array(
-            'alert(' . Horde_Serialize::serialize($message, Horde_Serialize::JSON) . ')'
-        ));
+        echo Horde::wrapInlineScript([
+            'alert(' . Horde_Serialize::serialize($message, Horde_Serialize::JSON) . ')',
+        ]);
         break;
 
     case 'edit_file':
@@ -46,9 +46,9 @@ switch ($vars->actionID) {
                 ->getInstance('Gollem_Vfs')
                 ->read($vars->dir, $vars->file);
         } catch (Horde_Vfs_Exception $e) {
-            echo Horde::wrapInlineScript(array(
-                'alert(' . Horde_Serialize::serialize(sprintf(_("Access denied to %s"), $vars->file), Horde_Serialize::JSON) . ')'
-            ));
+            echo Horde::wrapInlineScript([
+                'alert(' . Horde_Serialize::serialize(sprintf(_("Access denied to %s"), $vars->file), Horde_Serialize::JSON) . ')',
+            ]);
             break;
         }
 
@@ -58,7 +58,7 @@ switch ($vars->actionID) {
         }
 
         if ($mime_type == 'text/html') {
-            $injector->getInstance('Horde_Editor')->initialize(array('id' => 'content'));
+            $injector->getInstance('Horde_Editor')->initialize(['id' => 'content']);
         }
 
         $view = $injector->createInstance('Horde_View');
@@ -70,13 +70,13 @@ switch ($vars->actionID) {
         $page_output->addScriptFile('edit.js');
         $page_output->topbar = $page_output->sidebar = false;
 
-        $page_output->header(array(
-            'title' => $title
-        ));
-        $notification->notify(array('listeners' => 'status'));
+        $page_output->header([
+            'title' => $title,
+        ]);
+        $notification->notify(['listeners' => 'status']);
         echo $view->render('edit');
         $page_output->footer();
         exit;
 }
 
-echo Horde::wrapInlineScript(array('window.close()'));
+echo Horde::wrapInlineScript(['window.close()']);

@@ -3,7 +3,7 @@
 /**
  * Special prefs handling for the 'columnselect' preference.
  *
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -26,9 +26,9 @@ class Gollem_Prefs_Special_Columnselect implements Horde_Core_Prefs_Ui_Special
      */
     public function display(Horde_Core_Prefs_Ui $ui)
     {
-        $sources = array();
+        $sources = [];
         foreach (Gollem_Auth::getBackend() as $source => $info) {
-            $selected = $unselected = array();
+            $selected = $unselected = [];
             $selected_list = array_flip(Gollem::getColumns($source));
             foreach ($info['attributes'] as $column) {
                 if (isset($selected_list[$column])) {
@@ -37,20 +37,20 @@ class Gollem_Prefs_Special_Columnselect implements Horde_Core_Prefs_Ui_Special
                     $unselected[$column] = $column;
                 }
             }
-            $sources[$source] = array(
+            $sources[$source] = [
                 'label' => $info['name'],
                 'selected' => $selected,
                 'unselected' => $unselected,
-            );
+            ];
         }
 
-        return Horde_Core_Prefs_Ui_Widgets::source(array(
+        return Horde_Core_Prefs_Ui_Widgets::source([
             'mainlabel' => _("Choose which columns to display, and in what order:"),
             'selectlabel' => _("These columns will display in this order:"),
             'sourcelabel' => _("Select a backend:"),
             'sources' => $sources,
-            'unselectlabel' => _("Columns that will not be displayed:")
-        ));
+            'unselectlabel' => _("Columns that will not be displayed:"),
+        ]);
     }
 
     /**
@@ -65,7 +65,7 @@ class Gollem_Prefs_Special_Columnselect implements Horde_Core_Prefs_Ui_Special
         if (count($backends) == 1) {
             $sources = json_decode($ui->vars->sources);
             array_unshift($sources, key($backends));
-            $sources = json_encode(array($sources));
+            $sources = json_encode([$sources]);
         } else {
             $sources = $ui->vars->sources;
         }

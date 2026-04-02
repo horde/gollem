@@ -1,5 +1,5 @@
 <div id="backends" data-role="page">
- <?php echo $this->smartmobileHeader(array('logout' => true, 'portal' => true, 'title' => _("Backend List"))) ?>
+ <?php echo $this->smartmobileHeader(['logout' => true, 'portal' => true, 'title' => _("Backend List")]) ?>
 
  <div data-role="content">
   <ul data-role="listview" data-filter="true" id="gollem-backend-list">

@@ -3,7 +3,7 @@
 /**
  * Login system task for automated upgrade tasks.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -21,9 +21,9 @@ class Gollem_LoginTasks_SystemTask_Upgrade extends Horde_Core_LoginTasks_SystemT
 
     /**
      */
-    protected $_versions = array(
-        '2.0'
-    );
+    protected $_versions = [
+        '2.0',
+    ];
 
     /**
      */

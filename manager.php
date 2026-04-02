@@ -3,7 +3,7 @@
 /**
  * Gollem main file manager script.
  *
- * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did notcan receive this file, see http://www.horde.org/licenses/gpl.
@@ -32,12 +32,12 @@ try {
 $old_dir = Gollem::$backend['dir'];
 
 /* Get permissions. */
-$delete_perms = Gollem::checkPermissions('backend', Horde_Perms::DELETE) &&
-    Gollem::checkPermissions('directory', Horde_Perms::DELETE, Gollem::$backend['dir']);
-$edit_perms = Gollem::checkPermissions('backend', Horde_Perms::EDIT) &&
-    Gollem::checkPermissions('directory', Horde_Perms::EDIT, Gollem::$backend['dir']);
-$read_perms = Gollem::checkPermissions('backend', Horde_Perms::READ) &&
-    Gollem::checkPermissions('directory', Horde_Perms::READ, Gollem::$backend['dir']);
+$delete_perms = Gollem::checkPermissions('backend', Horde_Perms::DELETE)
+    && Gollem::checkPermissions('directory', Horde_Perms::DELETE, Gollem::$backend['dir']);
+$edit_perms = Gollem::checkPermissions('backend', Horde_Perms::EDIT)
+    && Gollem::checkPermissions('directory', Horde_Perms::EDIT, Gollem::$backend['dir']);
+$read_perms = Gollem::checkPermissions('backend', Horde_Perms::READ)
+    && Gollem::checkPermissions('directory', Horde_Perms::READ, Gollem::$backend['dir']);
 
 /* Get VFS object. */
 $gollem_vfs = $injector->getInstance('Gollem_Vfs');
@@ -135,13 +135,13 @@ switch ($vars->actionID) {
 
             if (is_array($vars->items) && count($vars->items)) {
                 foreach ($vars->items as $item) {
-                    $file = array(
+                    $file = [
                         'action' => $action,
                         'backend' => $backkey,
                         'display' => Gollem::getDisplayPath($old_dir . '/' . $item),
                         'name' => $item,
-                        'path' => $old_dir
-                    );
+                        'path' => $old_dir,
+                    ];
                     $clipboard[] = $file;
                     $session->set('gollem', 'clipboard', $clipboard);
                     if ($action == 'copy') {
@@ -252,10 +252,10 @@ if ($session->get('gollem', 'filter') != $vars->searchfield) {
 $session->set('gollem', 'filter', strval($vars->searchfield));
 
 /* Get the list of copy/cut files in this directory. */
-$clipboard_files = array();
+$clipboard_files = [];
 foreach ($clipboard as $val) {
-    if (($backkey == $val['backend']) &&
-        ($val['path'] == Gollem::$backend['dir'])) {
+    if (($backkey == $val['backend'])
+        && ($val['path'] == Gollem::$backend['dir'])) {
         $clipboard_files[$val['name']] = 1;
     }
 }
@@ -267,15 +267,15 @@ $columns = Gollem::getColumns($backkey);
 $template = $injector->createInstance('Horde_View');
 
 $attrib = $gollem_vfs->getModifiablePermissions();
-foreach (array('owner', 'group', 'all') as $val) {
-    foreach (array('read', 'write', 'execute') as $val2) {
+foreach (['owner', 'group', 'all'] as $val) {
+    foreach (['read', 'write', 'execute'] as $val2) {
         if (isset($attrib[$val][$val2])) {
             $template->{$val . '_' . $val2} = !$attrib[$val][$val2];
         }
     }
 }
 
-$all_columns = array('type', 'name', 'share', 'edit', 'download', 'modified', 'size', 'permission', 'owner', 'group');
+$all_columns = ['type', 'name', 'share', 'edit', 'download', 'modified', 'size', 'permission', 'owner', 'group'];
 foreach ($all_columns as $column) {
     $template->{'columns_' . $column} = in_array($column, $columns);
 }
@@ -284,31 +284,31 @@ $template->action = $refresh_url;
 $template->forminput = Horde_Util::formInput();
 $template->dir = Gollem::$backend['dir'];
 $template->navlink = Gollem::directoryNavLink(Gollem::$backend['dir'], $manager_url);
-$template->refresh = Horde::widget(array(
+$template->refresh = Horde::widget([
     'url' => $refresh_url,
     'title' => _("Refresh"),
-    'id' => 'gollem-refresh'
-));
+    'id' => 'gollem-refresh',
+]);
 
 $template->hasclipboard = $edit_perms;
 
-$shares_enabled = !empty(Gollem::$backend['shares']) &&
-    strpos(Gollem::$backend['dir'], Gollem::$backend['home']) === 0;
+$shares_enabled = !empty(Gollem::$backend['shares'])
+    && strpos(Gollem::$backend['dir'], Gollem::$backend['home']) === 0;
 if ($shares_enabled) {
     $shares = $injector->getInstance('Gollem_Shares');
     $perms_url_base = Horde::url('share.php', true)->add('app', 'gollem');
     $share_name = $backkey . '|' . Gollem::$backend['dir'];
-    $template->share_folder = Horde::widget(array(
+    $template->share_folder = Horde::widget([
         'url' => $perms_url_base->add('share', $share_name),
         'title' => _("Share Folder"),
         'target' => '_blank',
         'class' => 'gollem-sharefolder',
         'onclick' => Horde::popupJs(
             $perms_url_base,
-            array('params' => array('share' => $share_name),
-                  'urlencode' => true)
-        ) . 'return false;'
-    ));
+            ['params' => ['share' => $share_name],
+                'urlencode' => true]
+        ) . 'return false;',
+    ]);
 }
 
 if ($edit_perms) {
@@ -320,7 +320,7 @@ if ($edit_perms) {
     $injector->getInstance('Horde_View_Sidebar')->addNewButton(
         _("Create Folder"),
         Horde::url('#'),
-        array('id' => 'gollem-createfolder')
+        ['id' => 'gollem-createfolder']
     );
 } else {
     $template->perms_edit = false;
@@ -328,11 +328,11 @@ if ($edit_perms) {
 }
 
 if ($read_perms) {
-    $template->change_folder = Horde::widget(array(
+    $template->change_folder = Horde::widget([
         'url' => Horde::url('#'),
         'title' => _("Change Folder"),
-        'id' => 'gollem-changefolder'
-    ));
+        'id' => 'gollem-changefolder',
+    ]);
 }
 
 if ($numitem) {
@@ -347,11 +347,11 @@ if ($numitem) {
     $template->list_count = false;
 }
 
-$icon_cache = array();
+$icon_cache = [];
 $total = 0;
 
 if (is_array($list) && $numitem && $read_perms) {
-    $entry = array();
+    $entry = [];
     $page_caption = '';
 
     $template->empty_dir = false;
@@ -367,8 +367,8 @@ if (is_array($list) && $numitem && $read_perms) {
 
     foreach ($list as $key => $val) {
         /* Check if a filter is not empty and filter matches filename. */
-        if (strlen($vars->searchfield) &&
-            !preg_match('/' . preg_quote($vars->searchfield, '/') . '/', $val['name'])) {
+        if (strlen($vars->searchfield)
+            && !preg_match('/' . preg_quote($vars->searchfield, '/') . '/', $val['name'])) {
             continue;
         }
 
@@ -377,7 +377,7 @@ if (is_array($list) && $numitem && $read_perms) {
             continue;
         }
 
-        $item = array(
+        $item = [
             'date' => htmlspecialchars(strftime($prefs->getValue('date_format_mini'), $val['date'])),
             'dl' => false,
             'edit' => false,
@@ -387,8 +387,8 @@ if (is_array($list) && $numitem && $read_perms) {
             'owner' => empty($val['owner']) ? '-' : htmlspecialchars($val['owner']),
             'perms' => empty($val['perms']) ? '-' : htmlspecialchars($val['perms']),
             'size' => ($val['type'] == '**dir') ? '-' : number_format($val['size'], 0, '.', ','),
-            'type' => htmlspecialchars($val['type'])
-        );
+            'type' => htmlspecialchars($val['type']),
+        ];
 
         $name = str_replace(' ', '&nbsp;', $item['name']);
 
@@ -404,7 +404,12 @@ if (is_array($list) && $numitem && $read_perms) {
             $item['graphic'] = '<span class="iconImg gollem-folder"></span>';
         } else {
             if (empty($icon_cache[$val['type']])) {
-                $icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
+                /**
+                 * ARCHITECTURE VIOLATION: Using deprecated Horde::img()
+                 * @deprecated Use Horde_Themes_Image::tag() instead
+                 * @see Horde_Deprecated::img()
+                 */
+$icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
             }
             $item['graphic'] = $icon_cache[$val['type']];
         }
@@ -420,7 +425,7 @@ if (is_array($list) && $numitem && $read_perms) {
                     . $name . '</a>';
                 if ($shares_enabled) {
                     $share = $backkey . '|' . $subdir;
-                    $item['share'] = $perms_url_base->add('share', $share)->link(array('title' => $shares->exists($share) ? _("Shared Folder") : _("Share Folder"), 'target' => '_blank', 'onclick' => Horde::popupJs($perms_url_base, array('params' => array('share' => $share), 'urlencode' => true)) . 'return false;'));
+                    $item['share'] = $perms_url_base->add('share', $share)->link(['title' => $shares->exists($share) ? _("Shared Folder") : _("Share Folder"), 'target' => '_blank', 'onclick' => Horde::popupJs($perms_url_base, ['params' => ['share' => $share], 'urlencode' => true]) . 'return false;']);
                     $item['share_disabled'] = !$shares->exists($share);
                 }
                 break;
@@ -452,26 +457,26 @@ if (is_array($list) && $numitem && $read_perms) {
 
                 // Edit link if possible.
                 if (strpos($mime_type, 'text/') === 0) {
-                    $url = $edit_url->copy()->add(array(
+                    $url = $edit_url->copy()->add([
                         'actionID' => 'edit_file',
                         'type' => $val['type'],
                         'file' => $val['name'],
                         'dir' => Gollem::$backend['dir'],
-                        'driver' => Gollem::$backend['driver']
-                    ));
+                        'driver' => Gollem::$backend['driver'],
+                    ]);
                     $item['edit'] = Horde::link('#', '', '', '_blank', Horde::popupJs($url));
                 }
 
                 // We can always download files.
-                $item['dl'] = $registry->downloadUrl($val['name'], array('dir' => Gollem::$backend['dir'], 'backend' => $GLOBALS['session']->get('gollem', 'backend_key')))->link(array('title' => sprintf(_("Download %s"), $val['name'])));
+                $item['dl'] = $registry->downloadUrl($val['name'], ['dir' => Gollem::$backend['dir'], 'backend' => $GLOBALS['session']->get('gollem', 'backend_key')])->link(['title' => sprintf(_("Download %s"), $val['name'])]);
 
                 // Try a view link.
-                $url = $view_url->copy()->add(array(
+                $url = $view_url->copy()->add([
                     'type' => $val['type'],
                     'file' => $val['name'],
                     'dir' => Gollem::$backend['dir'],
-                    'driver' => Gollem::$backend['driver']
-                ));
+                    'driver' => Gollem::$backend['driver'],
+                ]);
                 $item['link'] = Horde::link('#', '', '', '_blank', Horde::popupJs($url)) . $name . '</a>';
                 break;
         }
@@ -489,18 +494,18 @@ if (is_array($list) && $numitem && $read_perms) {
         $end = min($total, $start + $perpage - 1);
 
         $vars->set('page', $page);
-        $pager = new Horde_Core_Ui_Pager('page', $vars, array(
+        $pager = new Horde_Core_Ui_Pager('page', $vars, [
             'num' => $total,
             'url' => $refresh_url,
             'page_count' => 10,
-            'perpage' => $perpage
-        ));
+            'perpage' => $perpage,
+        ]);
         $page_caption = $pager->render();
     }
 
-    $headers = array();
+    $headers = [];
     foreach ($columns as $head) {
-        $hdr = array('class' => '');
+        $hdr = ['class' => ''];
         $sort = null;
 
         switch ($head) {
@@ -576,9 +581,9 @@ if (is_array($list) && $numitem && $read_perms) {
         if ($sort !== null) {
             if ($sortby == $sort) {
                 $hdr['class'] = ($sortdir ? 'sortup' : 'sortdown');
-                $params = array('actionID' => 'change_sortdir', 'sortdir' => 1 - $sortdir);
+                $params = ['actionID' => 'change_sortdir', 'sortdir' => 1 - $sortdir];
             } else {
-                $params = array('actionID' => 'change_sortby', 'sortby' => $sort);
+                $params = ['actionID' => 'change_sortby', 'sortby' => $sort];
             }
             $hdr['label'] = '<a href="' . Horde::selfUrl()->add($params) . '" class="sortlink">' . htmlspecialchars($hdr['label']) . '</a>';
         }
@@ -598,13 +603,13 @@ $template->itemcount = sprintf(ngettext(_("%d item"), _("%d items"), $total), $t
 
 $page_output->addScriptFile('manager.js');
 $page_output->addScriptPackage('Horde_Core_Script_Package_Dialog');
-$page_output->addInlineJsVars(array(
-    'var GollemVar' => array(
+$page_output->addInlineJsVars([
+    'var GollemVar' => [
         'actionUrl' => strval(Horde::url('manager.php')),
         'empty_input' => intval($GLOBALS['browser']->hasQuirk('empty_file_input_value')),
-        'warn_recursive' => intval($prefs->getValue('recursive_deletes') == 'warn')
-    ),
-    'var GollemText' => array(
+        'warn_recursive' => intval($prefs->getValue('recursive_deletes') == 'warn'),
+    ],
+    'var GollemText' => [
         'change_directory' => _("Change Folder"),
         'create_folder' => _("Create Folder"),
         'delete_confirm_1' => _("The following items will be permanently deleted:"),
@@ -616,12 +621,12 @@ $page_output->addInlineJsVars(array(
         'rename' => _("Rename"),
         'select_item' => _("Please select an item before this action."),
         'specify_upload' => _("Please specify at least one file to upload."),
-    )
-));
+    ],
+]);
 
-$page_output->header(array(
-    'title' => $title
-));
-$notification->notify(array('listeners' => 'status'));
+$page_output->header([
+    'title' => $title,
+]);
+$notification->notify(['listeners' => 'status']);
 echo $template->render('manager');
 $page_output->footer();

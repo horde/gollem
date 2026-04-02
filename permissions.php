@@ -3,7 +3,7 @@
 /**
  * Gollem permissions administration page.
  *
- * Copyright 2005-2007 Vijay Mahrra <vijay.mahrra@es.easynet.net>
+ * Copyright 2005-2026 Vijay Mahrra <vijay.mahrra@es.easynet.net>
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -15,7 +15,7 @@
  */
 
 require_once __DIR__ . '/lib/Application.php';
-Horde_Registry::appInit('gollem', array('admin' => true));
+Horde_Registry::appInit('gollem', ['admin' => true]);
 
 if (!Gollem_Auth::getBackend()) {
     $notification->push(_("You need at least one backend defined to set permissions."), 'horde.error');

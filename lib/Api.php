@@ -6,7 +6,7 @@
  * This file defines Gollem's external API interface. Other applications
  * can interact with Gollem through this API.
  *
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -35,10 +35,10 @@ class Gollem_Api extends Horde_Registry_Api
      */
     public function browse(
         $path = '',
-        $properties = array('name', 'icon' ,'browseable')
+        $properties = ['name', 'icon','browseable']
     ) {
         $path = Gollem::stripAPIPath($path);
-        $results = array();
+        $results = [];
 
         if ($path == '') {
             // We are at the root of gollem.  Return a set of folders, one for
@@ -56,7 +56,7 @@ class Gollem_Api extends Horde_Registry_Api
             $fullpath = substr($path, strlen($backend_key) + 1);
 
             // Get the VFS-standard $name,$path pair
-            list($name, $path) = Gollem::getVFSPath($fullpath);
+            [$name, $path] = Gollem::getVFSPath($fullpath);
 
             // Check to see if the request is a file or folder
             $gollem_vfs = $GLOBALS['injector']->getInstance('Gollem_Vfs');
@@ -134,7 +134,7 @@ class Gollem_Api extends Horde_Registry_Api
         $fullpath = substr($path, strlen($backend_key) + 1);
 
         // Get the VFS-standard $name,$path pair
-        list($name, $path) = Gollem::getVFSPath($fullpath);
+        [$name, $path] = Gollem::getVFSPath($fullpath);
 
         return $GLOBALS['injector']
             ->getInstance('Gollem_Vfs')
@@ -167,7 +167,7 @@ class Gollem_Api extends Horde_Registry_Api
         $fullpath = substr($path, strlen($backend_key) + 1);
 
         // Get the VFS-standard $name,$path pair
-        list($name, $path) = Gollem::getVFSPath($fullpath);
+        [$name, $path] = Gollem::getVFSPath($fullpath);
 
         return $GLOBALS['injector']
             ->getInstance('Gollem_Vfs')
@@ -194,8 +194,8 @@ class Gollem_Api extends Horde_Registry_Api
 
         // We must be inside one of the VFS areas.  Determine which one.
         // Locate the backend_key in the path
-        if (!strchr($path, '/') ||
-            !strchr($dest, '/')) {
+        if (!strchr($path, '/')
+            || !strchr($dest, '/')) {
             // Disallow attempts to rename a share-level directory.
             throw new Gollem_Exception(_('Renaming of backends is not allowed.'));
         }
@@ -213,8 +213,8 @@ class Gollem_Api extends Horde_Registry_Api
         $dstfullpath = substr($dest, strlen($backend_key) + 1);
 
         // Get the VFS-standard $name,$path pair
-        list($srcname, $srcpath) = Gollem::getVFSPath($srcfullpath);
-        list($dstname, $dstpath) = Gollem::getVFSPath($dstfullpath);
+        [$srcname, $srcpath] = Gollem::getVFSPath($srcfullpath);
+        [$dstname, $dstpath] = Gollem::getVFSPath($dstfullpath);
 
         $GLOBALS['injector']
             ->getInstance('Gollem_Vfs')
@@ -245,7 +245,7 @@ class Gollem_Api extends Horde_Registry_Api
         $fullpath = substr($path, strlen($backend_key) + 1);
 
         // Get the VFS-standard $name,$path pair
-        list($name, $path) = Gollem::getVFSPath($fullpath);
+        [$name, $path] = Gollem::getVFSPath($fullpath);
 
         // Apparently Gollem::verifyDir() (called by deleteF* next) needs to
         // see a path with a leading '/'
@@ -275,12 +275,12 @@ class Gollem_Api extends Horde_Registry_Api
         }
         $backend = Gollem_Auth::getBackend($backend_key);
 
-        return Horde::url('view.php')->add(array(
+        return Horde::url('view.php')->add([
             'dir' => $dir,
             'driver' => $backend['driver'],
             'file' => $file,
-            'type' => substr($file, strrpos($file, '.') + 1)
-        ));
+            'type' => substr($file, strrpos($file, '.') + 1),
+        ]);
     }
 
     /**
@@ -316,9 +316,14 @@ class Gollem_Api extends Horde_Registry_Api
         $icon = false,
         $selectid = ''
     ) {
-        $link = Horde::link('#', $link_text, $link_style, '_blank', Horde::popupJs(Horde::url('selectlist.php'), array('params' => array_filter(array('formid' => $formid, 'cacheid' => $selectid)), 'height' => 500, 'width' => 300, 'urlencode' => true)) . 'return false;');
+        $link = Horde::link('#', $link_text, $link_style, '_blank', Horde::popupJs(Horde::url('selectlist.php'), ['params' => array_filter(['formid' => $formid, 'cacheid' => $selectid]), 'height' => 500, 'width' => 300, 'urlencode' => true]) . 'return false;');
         if ($icon) {
-            $link_text = Horde::img('gollem.png', $link_text);
+            /**
+             * ARCHITECTURE VIOLATION: Using deprecated Horde::img()
+             * @deprecated Use Horde_Themes_Image::tag() instead
+             * @see Horde_Deprecated::img()
+             */
+$link_text = Horde::img('gollem.png', $link_text);
         }
         return '<script type="text/javascript">document.write(\''
             . addslashes($link . $link_text) . '<\' + \'/a>\');</script>';
@@ -341,10 +346,10 @@ class Gollem_Api extends Horde_Registry_Api
             return null;
         }
 
-        $list = array();
+        $list = [];
         foreach ($selectlist['files'] as $val) {
-            list($dir, $filename) = explode('|', $val);
-            $list[] = array($dir => $filename);
+            [$dir, $filename] = explode('|', $val);
+            $list[] = [$dir => $filename];
         }
 
         return $list;
@@ -366,7 +371,7 @@ class Gollem_Api extends Horde_Registry_Api
             return null;
         }
 
-        list($dir, $filename) = explode('|', $selectlist['files'][$index]);
+        [$dir, $filename] = explode('|', $selectlist['files'][$index]);
         return $GLOBALS['injector']
             ->getInstance('Gollem_Vfs')
             ->read($dir, $filename);
@@ -382,14 +387,14 @@ class Gollem_Api extends Horde_Registry_Api
      *
      * @return string  The selection ID.
      */
-    public function setSelectlist($selectid = '', $files = array())
+    public function setSelectlist($selectid = '', $files = [])
     {
         if (empty($selectid)) {
             $selectid = uniqid(mt_rand());
         }
 
         if (count($files) > 0) {
-            $list = array();
+            $list = [];
             foreach ($files as $file) {
                 $list[] = key($file) . '|' . current($file);
             }

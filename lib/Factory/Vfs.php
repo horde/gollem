@@ -13,7 +13,7 @@
 /**
  * A Horde_Injector based Horde_Vfs factory.
  *
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -31,7 +31,7 @@ class Gollem_Factory_Vfs extends Horde_Core_Factory_Base
      *
      * @var array
      */
-    private $_instances = array();
+    private $_instances = [];
 
     /**
      * Returns the VFS instance.
@@ -66,12 +66,12 @@ class Gollem_Factory_Vfs extends Horde_Core_Factory_Base
                 if (isset($be_config['quota_val'])) {
                     $vfs->setQuota($be_config['quota_val'], $be_config['quota_metric']);
                 } else {
-                    $quota_metric = array(
+                    $quota_metric = [
                         'B' => Horde_Vfs::QUOTA_METRIC_BYTE,
                         'KB' => Horde_Vfs::QUOTA_METRIC_KB,
                         'MB' => Horde_Vfs::QUOTA_METRIC_MB,
-                        'GB' => Horde_Vfs::QUOTA_METRIC_GB
-                    );
+                        'GB' => Horde_Vfs::QUOTA_METRIC_GB,
+                    ];
                     $quota_str = explode(' ', $be_config['quota'], 2);
                     if (is_numeric($quota_str[0])) {
                         $metric = trim(Horde_String::upper($quota_str[1]));

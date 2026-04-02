@@ -3,7 +3,7 @@
 /**
  * Adds autoincrement flags
  *
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (GPL). If you
  * did not receive this file, see http://www.horde.org/licenses/gpl.
@@ -32,7 +32,7 @@ class GollemUpgradeAutoIncrement extends Horde_Db_Migration_Base
      */
     public function down()
     {
-        $this->changeColumn('gollem_shares', 'share_id', 'integer', array('null' => false));
+        $this->changeColumn('gollem_shares', 'share_id', 'integer', ['null' => false]);
     }
 
 }
