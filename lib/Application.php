@@ -36,6 +36,8 @@ if (!defined('HORDE_BASE')) {
     }
 }
 
+use Horde\Util\Variables;
+
 /* Load the Horde Framework core (needed to autoload
  * Horde_Registry_Application::). */
 require_once HORDE_BASE . '/lib/core.php';
@@ -322,7 +324,7 @@ class Gollem_Application extends Horde_Registry_Application
      *
      * @throws Horde_Vfs_Exception
      */
-    public function download(Horde_Variables $vars)
+    public function download(Variables|Horde_Variables $vars)
     {
         global $injector, $session;
 
