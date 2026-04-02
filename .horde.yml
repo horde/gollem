@@ -42,7 +42,7 @@ autoload:
     - lib/
 dependencies:
   required:
-    php: ^7.4 || ^8
+    php: ^8
     composer:
       horde/horde: ^6
       horde/auth: ^3
@@ -66,3 +66,8 @@ dependencies:
     composer:
       horde/db: ^3
       horde/share: ^3
+vendor: horde
+keywords:
+  - filemanager
+  - vfs
+  - webdav
