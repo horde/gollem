@@ -21,9 +21,8 @@ class GollemUpgradeAutoIncrement extends Horde_Db_Migration_Base
     public function up()
     {
         $this->changeColumn('gollem_shares', 'share_id', 'autoincrementKey');
-        try {
+        if (in_array('gollem_shares_seq', $this->tables())) {
             $this->dropTable('gollem_shares_seq');
-        } catch (Horde_Db_Exception $e) {
         }
     }
 
