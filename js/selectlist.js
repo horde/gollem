@@ -9,7 +9,7 @@ var Gollem_Selectlist = {
 
     returnID: function()
     {
-        var formid = $F('formid'),
+        var formid = document.getElementById('formid').value,
             field = parent.opener.document[formid].selectlist_selectid,
             field2 = parent.opener.document[formid].actionID;
 
@@ -19,7 +19,7 @@ var Gollem_Selectlist = {
             return;
         }
 
-        field.value = $F('cacheid');
+        field.value = document.getElementById('cacheid').value;
         field2.value = 'selectlist_process';
 
         parent.opener.document[formid].submit();
@@ -28,20 +28,17 @@ var Gollem_Selectlist = {
 
     clickHandler: function(e)
     {
-        if (e.isRightClick()) {
+        if (e.button === 2) {
             return;
         }
 
-        var id, tmp,
-            elt = e.element();
+        var elt = e.target.closest('#addbutton, #cancelbutton, #donebutton');
 
-        while (Object.isElement(elt)) {
-            id = elt.readAttribute('id');
-
-            switch (id) {
+        if (elt) {
+            switch (elt.id) {
             case 'addbutton':
-                $('actionID').setValue('select');
-                $('selectlist').submit();
+                document.getElementById('actionID').value = 'select';
+                document.getElementById('selectlist').submit();
                 return;
 
             case 'cancelbutton':
@@ -52,16 +49,14 @@ var Gollem_Selectlist = {
                 this.returnID();
                 return;
             }
-
-            elt = elt.up();
         }
     },
 
     onDomLoad: function()
     {
-        $('selectlist').observe('click', this.clickHandler.bindAsEventListener(this));
+        document.getElementById('selectlist').addEventListener('click', this.clickHandler.bind(this));
     }
 
 };
 
-document.observe('dom:loaded', Gollem_Selectlist.onDomLoad.bind(Gollem_Selectlist));
+document.addEventListener('DOMContentLoaded', Gollem_Selectlist.onDomLoad.bind(Gollem_Selectlist));

@@ -16,14 +16,12 @@ var GollemLogin = {
 
     changeHandler: function(e)
     {
-        switch (e.element().readAttribute('id')) {
-        case 'backend_key':
+        if (e.target.id === 'backend_key') {
             RedBox.loading();
-            $('horde_login').submit();
-            break;
+            document.getElementById('horde_login').submit();
         }
     }
 
-}
+};
 
-document.observe('change', GollemLogin.changeHandler);
+document.addEventListener('change', GollemLogin.changeHandler);

@@ -12,42 +12,48 @@ var GollemClipboard = {
 
     clickHandler: function(e)
     {
-        if (e.isRightClick()) {
+        if (e.button === 2) {
             return;
         }
 
-        var id, tmp,
-            elt = e.element();
+        var elt = e.target.closest('#gollem-selectall, #gollem-pastebutton, #gollem-clearbutton, #gollem-cancelbutton');
 
-        while (Object.isElement(elt)) {
-            id = elt.readAttribute('id');
+        if (!elt) {
+            return;
+        }
 
-            switch (id) {
-            case 'gollem-selectall':
-                tmp = elt.getValue();
-                elt.next('SPAN').update(tmp ? this.selectnone : this.selectall);
-                $('gollem-clipboard').getInputs('checkbox').without(elt).invoke('setValue', tmp);
-                return;
+        var form = document.getElementById('gollem-clipboard');
 
-            case 'gollem-pastebutton':
-                $('actionID').setValue('paste_items');
-                $('gollem-clipboard').submit();
-                return;
-
-            case 'gollem-clearbutton':
-                $('actionID').setValue('clear_items');
-                $('gollem-clipboard').submit();
-                return;
-
-            case 'gollem-cancelbutton':
-                $('gollem-clipboard').submit();
-                return;
+        switch (elt.id) {
+        case 'gollem-selectall':
+            var checked = elt.checked;
+            var span = elt.nextElementSibling;
+            if (span && span.tagName === 'SPAN') {
+                span.textContent = checked ? this.selectnone : this.selectall;
             }
+            Array.from(form.querySelectorAll('input[type="checkbox"]')).forEach(function(cb) {
+                if (cb !== elt) {
+                    cb.checked = checked;
+                }
+            });
+            return;
 
-            elt = elt.up();
+        case 'gollem-pastebutton':
+            document.getElementById('actionID').value = 'paste_items';
+            form.submit();
+            return;
+
+        case 'gollem-clearbutton':
+            document.getElementById('actionID').value = 'clear_items';
+            form.submit();
+            return;
+
+        case 'gollem-cancelbutton':
+            form.submit();
+            return;
         }
     }
 
 };
 
-document.observe('click', GollemClipboard.clickHandler.bindAsEventListener(GollemClipboard));
+document.addEventListener('click', GollemClipboard.clickHandler.bind(GollemClipboard));
