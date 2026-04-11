@@ -9,13 +9,13 @@ var GollemEdit = {
 
     onDomLoad: function()
     {
-        $('cancelbutton').observe('click', function() {
+        document.getElementById('cancelbutton').addEventListener('click', function() {
             window.close();
         });
 
-        $('gollem-edit').focus();
+        document.getElementById('gollem-edit').focus();
     }
 
 };
 
-document.observe('dom:loaded', GollemEdit.onDomLoad.bind(GollemEdit));
+document.addEventListener('DOMContentLoaded', GollemEdit.onDomLoad.bind(GollemEdit));

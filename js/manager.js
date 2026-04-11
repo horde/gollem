@@ -9,26 +9,28 @@ var Gollem = {
 
     getChecked: function()
     {
-        return this.getElements().findAll(function(e) {
+        return this.getElements().filter(function(e) {
             return e.checked;
         });
     },
 
     getElements: function()
     {
-        return $('manager').getInputs(null, 'items[]');
+        return Array.from(document.getElementById('manager').querySelectorAll('input[name="items[]"]'));
     },
 
     getSelected: function()
     {
-        return this.getChecked().pluck('value').join("\n");
+        return this.getChecked().map(function(e) {
+            return e.value;
+        }).join("\n");
     },
 
     toggleSelection: function()
     {
         var e = this.getElements(),
-            checked = (this.getChecked().size() != e.length);
-        e.each(function(f) {
+            checked = (this.getChecked().length != e.length);
+        e.forEach(function(f) {
             f.checked = checked;
         });
     },
@@ -36,23 +38,23 @@ var Gollem = {
     getItemsArray: function()
     {
         var i = 0,
-            it = $('manager').getInputs(null, 'itemTypes[]');
+            it = Array.from(document.getElementById('manager').querySelectorAll('input[name="itemTypes[]"]'));
 
-        return this.getElements().collect(function(m) {
+        return this.getElements().map(function(m) {
             return { c: m.checked, v: m.value, t: it[i++].value };
         });
     },
 
     getSelectedFoldersList: function()
     {
-        return this.getItemsArray().collect(function(i) {
+        return this.getItemsArray().map(function(i) {
             return (i.c && i.t == '**dir') ? i.v : null;
-        }).compact().join("\n");
+        }).filter(function(x) { return x != null; }).join("\n");
     },
 
     _clearChecks: function()
     {
-        this.getChecked().each(function(e) {
+        this.getChecked().forEach(function(e) {
             e.checked = false;
         });
     },
@@ -60,9 +62,9 @@ var Gollem = {
     renameItems: function()
     {
         var c = this.getChecked();
-        if (c.size()) {
+        if (c.length) {
             c[0].checked = false;
-            $('renamefrm_oldname').setValue(c[0].value);
+            document.getElementById('renamefrm_oldname').value = c[0].value;
             HordeDialog.display({
                 form_id: 'renamefrm',
                 input_val: c[0].value,
@@ -78,7 +80,7 @@ var Gollem = {
         if (window.confirm(GollemText.delete_confirm_1 + '\n' + this.getSelected() + '\n' + GollemText.delete_confirm_2)) {
             if (GollemVar.warn_recursive) {
                 sf = this.getSelectedFoldersList();
-                if (!sf.empty() &&
+                if (sf !== '' &&
                     !window.confirm(GollemText.delete_recurs_1 + '\n' + sf + '\n' + GollemText.delete_recurs_2)) {
                     cont = false;
                 }
@@ -88,25 +90,26 @@ var Gollem = {
         }
 
         if (cont) {
-            $('actionID').setValue('delete_items');
-            $('manager').submit();
+            document.getElementById('actionID').value = 'delete_items';
+            document.getElementById('manager').submit();
         }
     },
 
     createFolderOK: function()
     {
-        if ($F('dialog_input')) {
-            $('new_folder').setValue($F('dialog_input'));
-            $('actionID').setValue('create_folder');
-            $('manager').submit();
+        var val = document.getElementById('dialog_input').value;
+        if (val) {
+            document.getElementById('new_folder').value = val;
+            document.getElementById('actionID').value = 'create_folder';
+            document.getElementById('manager').submit();
         }
     },
 
     chmodOK: function()
     {
-        var all = group = owner = 0;
+        var all = 0, group = 0, owner = 0;
 
-        $('chmodfrm').getElements().each(function(e) {
+        Array.from(document.getElementById('chmodfrm').elements).forEach(function(e) {
             if (e.name == 'owner[]' && e.checked) {
                 owner |= e.value;
             } else if (e.name == 'group[]' && e.checked) {
@@ -116,18 +119,18 @@ var Gollem = {
             }
         });
 
-        $('chmod').setValue('0' + owner + '' + group + '' + all);
-        $('actionID').setValue('chmod_modify');
-        $('manager').submit();
+        document.getElementById('chmod').value = '0' + owner + '' + group + '' + all;
+        document.getElementById('actionID').value = 'chmod_modify';
+        document.getElementById('manager').submit();
     },
 
     renameOK: function()
     {
         var c = this.getChecked(),
-            newname = $F('dialog_input'),
-            newNames = $F('new_names'),
-            oldname = $F('renamefrm_oldname'),
-            oldNames = $F('old_names');
+            newname = document.getElementById('dialog_input').value,
+            newNames = document.getElementById('new_names').value,
+            oldname = document.getElementById('renamefrm_oldname').value,
+            oldNames = document.getElementById('old_names').value;
 
         if (newname && newname != oldname) {
             newNames += '|' + newname;
@@ -141,48 +144,49 @@ var Gollem = {
             oldNames = oldNames.substring(1);
         }
 
-        $('new_names').setValue(newNames);
-        $('old_names').setValue(oldNames);
+        document.getElementById('new_names').value = newNames;
+        document.getElementById('old_names').value = oldNames;
 
-        if (c.size()) {
-            this.renameItems.defer();
+        if (c.length) {
+            setTimeout(Gollem.renameItems.bind(Gollem), 0);
         } else {
-            $('actionID').setValue('rename_items');
-            $('manager').submit();
+            document.getElementById('actionID').value = 'rename_items';
+            document.getElementById('manager').submit();
         }
     },
 
     changeDirectoryOK: function()
     {
-        if ($F('dialog_input')) {
-            $('dir').setValue($F('dialog_input'));
-            $('manager').submit();
+        var val = document.getElementById('dialog_input').value;
+        if (val) {
+            document.getElementById('dir').value = val;
+            document.getElementById('manager').submit();
         }
     },
 
     uploadFields: function()
     {
-        return $('manager').getInputs('file').collect(function(m) {
-            return (m.name.substr(0, 12) == 'file_upload_') ? m : null;
-        }).compact();
+        return Array.from(document.getElementById('manager').querySelectorAll('input[type="file"]')).filter(function(m) {
+            return m.name.substr(0, 12) == 'file_upload_';
+        });
     },
 
     uploadFile: function()
     {
         if (this.uploadsExist()) {
-            $('actionID').setValue('upload_file');
-            $('manager').submit();
+            document.getElementById('actionID').value = 'upload_file';
+            document.getElementById('manager').submit();
         }
     },
 
     uploadsExist: function()
     {
         if (GollemVar.empty_input ||
-            this.uploadFields().find(function(f) { return $F(f); })) {
+            this.uploadFields().find(function(f) { return f.value; })) {
             return true;
         }
         alert(GollemText.specify_upload);
-        $('file_upload_1').focus();
+        document.getElementById('file_upload_1').focus();
         return false;
     },
 
@@ -194,42 +198,48 @@ var Gollem = {
 
         var file, lastRow,
             fields = this.uploadFields(),
-            usedFields = fields.findAll(function(f) { return $F(f).length; }).length;
+            usedFields = fields.filter(function(f) { return f.value.length; }).length;
 
         if (usedFields == fields.length) {
-            lastRow = $('upload_row_' + usedFields);
+            lastRow = document.getElementById('upload_row_' + usedFields);
             if (lastRow) {
-                file = new Element('INPUT', { type: 'file', name: 'file_upload_' + (usedFields + 1), size: 25 });
-                lastRow.insert({ after:
-                    new Element('DIV', { id: 'upload_row_' + (usedFields + 1) }).insert(
-                        new Element('STRONG').insert(GollemText.file + ' ' + (usedFields + 1) + ':')
-                    ).insert(' ').insert(file)
-                });
-                file.observe('change', this.uploadChanged.bind(this));
+                file = document.createElement('input');
+                file.type = 'file';
+                file.name = 'file_upload_' + (usedFields + 1);
+                file.size = 25;
+
+                var strong = document.createElement('strong');
+                strong.textContent = GollemText.file + ' ' + (usedFields + 1) + ':';
+
+                var div = document.createElement('div');
+                div.id = 'upload_row_' + (usedFields + 1);
+                div.appendChild(strong);
+                div.appendChild(document.createTextNode(' '));
+                div.appendChild(file);
+
+                lastRow.after(div);
+                file.addEventListener('change', this.uploadChanged.bind(this));
             }
         }
     },
 
     clickHandler: function(e)
     {
-        if (e.isRightClick()) {
+        if (e.button === 2) {
             return;
         }
 
-        var id, tmp,
-            elt = e.element();
+        var elt = e.target.closest('[id]');
 
-        while (Object.isElement(elt)) {
-            id = elt.readAttribute('id');
-
-            switch (id) {
+        while (elt) {
+            switch (elt.id) {
             case 'gollem-changefolder':
                 this._clearChecks();
                 HordeDialog.display({
                     form_id: 'cdfrm',
                     text: GollemText.change_directory
                 });
-                e.stop();
+                e.preventDefault();
                 return;
 
             case 'checkall':
@@ -242,7 +252,7 @@ var Gollem = {
                     form_id: 'createfrm',
                     text: GollemText.create_folder
                 });
-                e.stop();
+                e.preventDefault();
                 return;
 
             case 'uploadfile':
@@ -250,7 +260,7 @@ var Gollem = {
                 break;
 
             case 'gollem-rename':
-                if (!this.getChecked().size()) {
+                if (!this.getChecked().length) {
                     alert(GollemText.select_item);
                     break;
                 }
@@ -258,7 +268,7 @@ var Gollem = {
                 break;
 
             case 'gollem-delete':
-                if (!this.getChecked().size()) {
+                if (!this.getChecked().length) {
                     alert(GollemText.select_item);
                     break;
                 }
@@ -266,12 +276,16 @@ var Gollem = {
                 break;
 
             case 'gollem-chmod':
-                if (!this.getChecked().size()) {
+                if (!this.getChecked().length) {
                     alert(GollemText.select_item);
                     break;
                 }
+                var attrs = document.getElementById('gollem-attributes');
+                var cloned = attrs.cloneNode(true);
+                cloned.hidden = false;
+                cloned.style.display = '';
                 HordeDialog.display({
-                    form: $('gollem-attributes').clone(true).show(),
+                    form: cloned,
                     form_id: 'chmodfrm',
                     form_opts: { action: GollemVar.actionUrl },
                     header: GollemText.permissions
@@ -279,66 +293,73 @@ var Gollem = {
                 break;
 
             case 'gollem-cut':
-                if (!this.getChecked().size()) {
+                if (!this.getChecked().length) {
                     alert(GollemText.select_item);
                     break;
                 }
-                $('actionID').setValue('cut_items');
-                $('manager').submit();
+                document.getElementById('actionID').value = 'cut_items';
+                document.getElementById('manager').submit();
                 break;
 
             case 'gollem-copy':
-                if (!this.getChecked().size()) {
+                if (!this.getChecked().length) {
                     alert(GollemText.select_item);
                     break;
                 }
-                $('actionID').setValue('copy_items');
-                $('manager').submit();
+                document.getElementById('actionID').value = 'copy_items';
+                document.getElementById('manager').submit();
                 break;
             }
 
-            elt = elt.up();
+            elt = elt.parentElement ? elt.parentElement.closest('[id]') : null;
         }
     },
 
     okHandler: function(e)
     {
-        switch (e.element().identify()) {
-        case 'cdfrm':
-            Gollem.changeDirectoryOK();
-            break;
+        var elt = e.target;
+        if (!elt.id) {
+            elt = elt.closest('[id]');
+        }
 
-        case 'chmodfrm':
-            Gollem.chmodOK();
-            break;
+        if (elt) {
+            switch (elt.id) {
+            case 'cdfrm':
+                Gollem.changeDirectoryOK();
+                break;
 
-        case 'createfrm':
-            Gollem.createFolderOK();
-            break;
+            case 'chmodfrm':
+                Gollem.chmodOK();
+                break;
 
-        case 'renamefrm':
-            Gollem.renameOK();
-            break;
+            case 'createfrm':
+                Gollem.createFolderOK();
+                break;
+
+            case 'renamefrm':
+                Gollem.renameOK();
+                break;
+            }
         }
     },
 
-    closeHandler: function(e)
+    closeHandler: function()
     {
-        $('new_names', 'old_names').invoke('setValue', '');
+        document.getElementById('new_names').value = '';
+        document.getElementById('old_names').value = '';
     },
 
     onDomLoad: function()
     {
-        var tmp;
-
-        if (tmp = $('file_upload_1')) {
-            tmp.observe('change', this.uploadChanged.bind(this));
+        var tmp = document.getElementById('file_upload_1');
+        if (tmp) {
+            tmp.addEventListener('change', this.uploadChanged.bind(this));
         }
     }
 
 };
 
-document.observe('dom:loaded', Gollem.onDomLoad.bind(Gollem));
-document.observe('click', Gollem.clickHandler.bindAsEventListener(Gollem));
-document.observe('HordeDialog:onClick', Gollem.okHandler.bindAsEventListener(Gollem));
-document.observe('HordeDialog:close', Gollem.closeHandler.bindAsEventListener(Gollem));
+document.addEventListener('DOMContentLoaded', Gollem.onDomLoad.bind(Gollem));
+document.addEventListener('click', Gollem.clickHandler.bind(Gollem));
+document.addEventListener('HordeDialog:onClick', Gollem.okHandler.bind(Gollem));
+document.addEventListener('HordeDialog:close', Gollem.closeHandler.bind(Gollem));
