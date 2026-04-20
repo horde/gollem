@@ -126,6 +126,9 @@ $backends['ftp'] = [
         // The type of the remote FTP server. Possible values: 'unix', 'win',
         // 'netware'. By default, we attempt to auto-detect type.
         // 'type' => 'unix',
+        // If true, MLSD command will be used to obtain directory listing
+        // (with auto fallback to non-MLSD mode, if not supported)
+        // 'mlsd' => false,
     ],
     'loginparams' => [
         // Allow the user to change the FTP server
