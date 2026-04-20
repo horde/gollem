@@ -51,7 +51,7 @@ class Gollem
      */
     public static function setDir($dir)
     {
-        $dir = Horde_Util::realPath($dir);
+        $dir = self::realUncPath($dir);
 
         if (!self::verifyDir($dir)
             || !self::checkPermissions('directory', Horde_Perms::READ, $dir)) {
@@ -305,7 +305,7 @@ class Gollem
      */
     public static function createFolder($dir, $name, $gollem_vfs = null)
     {
-        $totalpath = Horde_Util::realPath($dir . '/' . $name);
+        $totalpath = self::realUncPath($dir . '/' . $name);
         if (!self::verifyDir($totalpath)) {
             throw new Gollem_Exception(sprintf(_("Access denied to folder \"%s\"."), $totalpath));
         }
@@ -590,7 +590,7 @@ class Gollem
      */
     public static function verifyDir($dir)
     {
-        return Horde_String::substr(Horde_Util::realPath($dir), 0, Horde_String::length(self::$backend['root'])) == self::$backend['root'];
+        return Horde_String::substr(self::realUncPath($dir), 0, Horde_String::length(self::$backend['root'])) == self::$backend['root'];
     }
 
     /**
@@ -735,7 +735,7 @@ class Gollem
      */
     public static function getDisplayPath($path)
     {
-        $path = Horde_Util::realPath($path);
+        $path = self::realUncPath($path);
         if (self::$backend['root'] != '/'
             && strpos($path, self::$backend['root']) === 0) {
             $path = substr($path, Horde_String::length(self::$backend['root']));
@@ -839,6 +839,24 @@ class Gollem
                 }
                 return Horde::url('manager.php');
         }
+    }
+
+    /**
+     * Support UNC paths, for example, //server/share/path
+     *
+     */
+    public static function realUncPath($path)
+    {
+        $unc = substr($path, 0, 2) === '//';
+        if ($unc) {
+            $path = substr($path, 2);
+        }
+        $path = Horde_Util::realPath($path);
+        if ($unc) {
+            $path = '//' . $path;
+        }
+
+        return $path;
     }
 
 }

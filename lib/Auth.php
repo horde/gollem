@@ -112,7 +112,7 @@ class Gollem_Auth
         if (empty($backend['root'])) {
             $backend['root'] = '/';
         }
-        $backend['root'] = Horde_Util::realPath($backend['root']);
+        $backend['root'] = Gollem::realUncPath($backend['root']);
 
         // Make sure we have a 'home' parameter.
         if (empty($backend['home'])) {
@@ -129,7 +129,7 @@ class Gollem_Auth
         if (strpos($backend['home'], '/') !== 0) {
             $backend['home'] = $backend['root'] . '/' . $backend['home'];
         }
-        $backend['home'] = Horde_Util::realPath($backend['home']);
+        $backend['home'] = Gollem::realUncPath($backend['home']);
         $backend['dir'] = $backend['home'];
 
         // Verify that home is below root.
