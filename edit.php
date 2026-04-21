@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * Gollem edit script.
  *
@@ -63,7 +65,7 @@ switch ($vars->actionID) {
 
         $view = $injector->createInstance('Horde_View');
         $view->self_url = Horde::url('edit.php');
-        $view->forminput = Horde_Util::formInput();
+        $view->forminput = Util::formInput();
         $view->vars = $vars;
         $view->data = $data;
 

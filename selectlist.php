@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * Selectlist handler.
  *
@@ -78,7 +80,7 @@ $self_url = Horde::url('selectlist.php');
 /* Set up the template object. */
 $view = $injector->createInstance('Horde_View');
 $view->self_url = $self_url;
-$view->forminput = Horde_Util::formInput();
+$view->forminput = Util::formInput();
 $view->cacheid = $cacheid;
 $view->currdir = htmlspecialchars(Gollem::$backend['dir']);
 $view->formid = htmlspecialchars($vars->formid);
@@ -117,7 +119,7 @@ if (is_array($info['list'])
                  * @deprecated Use Horde_Themes_Image::tag() instead
                  * @see Horde_Deprecated::img()
                  */
-$icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon($val['type']));
+                $icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon($val['type']));
             }
             $item['graphic'] = $icon_cache[$val['type']];
         }

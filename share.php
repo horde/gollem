@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * Gollem share proxy script.
  *
@@ -21,7 +23,7 @@ require_once __DIR__ . '/lib/Application.php';
 Horde_Registry::appInit('gollem');
 
 /* Check if the user has permissions to create shares here. */
-$share = Horde_Util::getFormData('share');
+$share = Util::getFormData('share');
 @[$backend_key, $dir] = explode('|', $share);
 $backend = Gollem_Auth::getBackend($backend_key);
 

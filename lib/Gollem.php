@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * Gollem base library.
  *
@@ -70,7 +72,7 @@ class Gollem
      */
     public static function changeDir()
     {
-        $dir = Horde_Util::getFormData('dir');
+        $dir = Util::getFormData('dir');
         if (is_null($dir)) {
             self::_setLabel();
         } else {
@@ -851,7 +853,7 @@ class Gollem
         if ($unc) {
             $path = substr($path, 2);
         }
-        $path = Horde_Util::realPath($path);
+        $path = Util::realPath($path);
         if ($unc) {
             $path = '//' . $path;
         }

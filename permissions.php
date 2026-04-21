@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * Gollem permissions administration page.
  *
@@ -23,7 +25,7 @@ if (!Gollem_Auth::getBackend()) {
 }
 
 /* Edit permissions for the preferred backend if none is selected. */
-$key = Horde_Util::getFormData('backend', Gollem_Auth::getPreferredBackend());
+$key = Util::getFormData('backend', Gollem_Auth::getPreferredBackend());
 $app = $registry->getApp();
 $backendTag = $app . ':backends:' . $key;
 $perms = $injector->getInstance('Horde_Perms');

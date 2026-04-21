@@ -323,7 +323,7 @@ class Gollem_Api extends Horde_Registry_Api
              * @deprecated Use Horde_Themes_Image::tag() instead
              * @see Horde_Deprecated::img()
              */
-$link_text = Horde::img('gollem.png', $link_text);
+            $link_text = Horde::img('gollem.png', $link_text);
         }
         return '<script type="text/javascript">document.write(\''
             . addslashes($link . $link_text) . '<\' + \'/a>\');</script>';

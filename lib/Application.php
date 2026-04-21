@@ -37,6 +37,7 @@ if (!defined('HORDE_BASE')) {
 }
 
 use Horde\Util\Variables;
+use Horde\Util\Util;
 
 /* Load the Horde Framework core (needed to autoload
  * Horde_Registry_Application::). */
@@ -86,14 +87,19 @@ class Gollem_Application extends Horde_Registry_Application
      */
     public function perms()
     {
+        $backends = Gollem_Auth::getBackend();
+        if (!is_array($backends)) {
+            $this->_logInitFailure('perms');
+            return [];
+        }
+
         $perms = [
             'backends' => [
                 'title' => _("Backends"),
             ],
         ];
 
-        // Run through every backend.
-        foreach (Gollem_Auth::getBackend() as $key => $val) {
+        foreach ($backends as $key => $val) {
             $perms['backends:' . $key] = [
                 'title' => $val['name'],
             ];
@@ -113,13 +119,19 @@ class Gollem_Application extends Horde_Registry_Application
     {
         $params = [];
 
-        if ($GLOBALS['conf']['backend']['backend_list'] == 'shown') {
+        if (($GLOBALS['conf']['backend']['backend_list'] ?? '') == 'shown') {
+            $backends = Gollem_Auth::getBackend();
+            if (!is_array($backends)) {
+                $this->_logInitFailure('authLoginParams');
+                return parent::authLoginParams();
+            }
+
             $backend_list = [];
             $selected = is_null($this->_oldbackend)
-                ? Horde_Util::getFormData('backend_key', Gollem_Auth::getPreferredBackend())
+                ? Util::getFormData('backend_key', Gollem_Auth::getPreferredBackend())
                 : $this->_oldbackend;
 
-            foreach (Gollem_Auth::getBackend() as $key => $val) {
+            foreach ($backends as $key => $val) {
                 $backend_list[$key] = [
                     'name' => $val['name'],
                     'selected' => ($selected == $key),
@@ -204,18 +216,23 @@ class Gollem_Application extends Horde_Registry_Application
      */
     public function authValidate()
     {
-        if (($backend_key = Horde_Util::getFormData('backend_key'))
+        if (($backend_key = Util::getFormData('backend_key'))
             && $backend_key != $GLOBALS['session']->get('gollem', 'backend_key')) {
             Gollem_Auth::changeBackend($backend_key);
         }
 
-        return !empty(Gollem::$backend['auth']);
+        return is_array(Gollem::$backend) && !empty(Gollem::$backend['auth']);
     }
 
     /**
      */
     public function menu($menu)
     {
+        if (!is_array(Gollem::$backend)) {
+            $this->_logInitFailure('menu');
+            return;
+        }
+
         $backend_key = Gollem_Auth::getPreferredBackend();
 
         $menu->add(
@@ -271,21 +288,29 @@ class Gollem_Application extends Horde_Registry_Application
      */
     public function sidebar($sidebar)
     {
+        if (($GLOBALS['conf']['backend']['backend_list'] ?? '') != 'shown') {
+            return;
+        }
+
+        $backends = Gollem_Auth::getBackend();
+        if (!is_array($backends)) {
+            $this->_logInitFailure('sidebar');
+            return;
+        }
+
         $backend = Gollem_Auth::getPreferredBackend();
         $url = $GLOBALS['registry']->getServiceLink('login', 'horde')
             ->add(['url' => Horde::signUrl(Horde::url('manager.php', true)),
                 'app' => 'gollem']);
 
-        if ($GLOBALS['conf']['backend']['backend_list'] == 'shown') {
-            foreach (Gollem_Auth::getBackend() as $key => $val) {
-                $row = [
-                    'selected' => $backend == $key,
-                    'url' => $url->add('backend_key', $key),
-                    'label' => $val['name'],
-                    'type' => 'radiobox',
-                ];
-                $sidebar->addRow($row, 'backends');
-            }
+        foreach ($backends as $key => $val) {
+            $row = [
+                'selected' => $backend == $key,
+                'url' => $url->add('backend_key', $key),
+                'label' => $val['name'],
+                'type' => 'radiobox',
+            ];
+            $sidebar->addRow($row, 'backends');
         }
     }
 
@@ -298,10 +323,16 @@ class Gollem_Application extends Horde_Registry_Application
         $parent = null,
         array $params = []
     ) {
+        $backends = Gollem_Auth::getBackend();
+        if (!is_array($backends)) {
+            $this->_logInitFailure('topbarCreate');
+            return;
+        }
+
         $icon = Horde_Themes::img('gollem.png');
         $url = Horde::url('manager.php');
 
-        foreach (Gollem_Auth::getBackend() as $key => $val) {
+        foreach ($backends as $key => $val) {
             $tree->addNode([
                 'id' => $parent . $key,
                 'parent' => $parent,
@@ -356,6 +387,24 @@ class Gollem_Application extends Horde_Registry_Application
     public function getInitialPage()
     {
         return strval(Gollem::getInitialPage()->setRaw(true));
+    }
+
+    protected function _logInitFailure(string $method): void
+    {
+        global $notification, $registry;
+
+        $message = sprintf('Gollem not initialized in %s()', $method);
+        Horde::log($message, 'WARN');
+
+        try {
+            if ($registry->isAdmin()) {
+                $notification->push(
+                    _("Gollem is not properly configured."),
+                    'horde.warning'
+                );
+            }
+        } catch (Throwable $e) {
+        }
     }
 
 }

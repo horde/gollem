@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * The Gollem_Auth class provides authentication for Gollem.
  *
@@ -208,7 +210,7 @@ class Gollem_Auth
                  * @deprecated Use $registry->loadConfigFile() instead
                  * @see Horde_Deprecated::loadConfiguration()
                  */
-$backends = Horde::loadConfiguration('backends.php', 'backends', 'gollem');
+                $backends = Horde::loadConfiguration('backends.php', 'backends', 'gollem');
                 if (is_null($backends)) {
                     return false;
                 }

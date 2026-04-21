@@ -1,5 +1,7 @@
 <?php
 
+use Horde\Util\Util;
+
 /**
  * Gollem main file manager script.
  *
@@ -115,6 +117,10 @@ switch ($vars->actionID) {
                 if (isset($_FILES[$val]) && ($_FILES[$val]['error'] != 4)) {
                     try {
                         $browser->wasFileUploaded($val);
+                        /**
+                         * WARNING: Horde_Util::dispelMagicQuotes() removed in PSR-4 version
+                         * Magic quotes are obsolete in PHP 8+. Remove this call.
+                         */
                         $filename = Horde_Util::dispelMagicQuotes($_FILES[$val]['name']);
 
                         Gollem::writeFile($old_dir, $filename, $_FILES[$val]['tmp_name']);
@@ -281,7 +287,7 @@ foreach ($all_columns as $column) {
 }
 
 $template->action = $refresh_url;
-$template->forminput = Horde_Util::formInput();
+$template->forminput = Util::formInput();
 $template->dir = Gollem::$backend['dir'];
 $template->navlink = Gollem::directoryNavLink(Gollem::$backend['dir'], $manager_url);
 $template->refresh = Horde::widget([
@@ -409,7 +415,7 @@ if (is_array($list) && $numitem && $read_perms) {
                  * @deprecated Use Horde_Themes_Image::tag() instead
                  * @see Horde_Deprecated::img()
                  */
-$icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
+                $icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
             }
             $item['graphic'] = $icon_cache[$val['type']];
         }

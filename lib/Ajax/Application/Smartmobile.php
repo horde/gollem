@@ -95,7 +95,7 @@ class Gollem_Ajax_Application_Smartmobile extends Horde_Core_Ajax_Application_Ha
                          * @deprecated Use Horde_Themes_Image::tag() instead
                          * @see Horde_Deprecated::img()
                          */
-$icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
+                        $icon_cache[$val['type']] = Horde::img($injector->getInstance('Horde_Core_Factory_MimeViewer')->getIcon(Horde_Mime_Magic::extToMime($val['type'])), '', '', '');
                     }
                     $icon = $icon_cache[$val['type']];
 
