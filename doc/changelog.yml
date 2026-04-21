@@ -1,4 +1,24 @@
 ---
+5.0.0-beta2:
+  api: 5.0.0-beta2
+  state:
+    release: beta
+    api: beta
+  date: 2026-04-21
+  license:
+    identifier: GPL-2.0
+    uri: https://spdx.org/licenses/GPL-2.0.html
+  notes: |-
+    test: Initialize a minimal test suite for gollem
+    docs: Convert documents to markdown
+    style: php-cs-fixer
+    chore: Add empty routes file
+    docs: create/update conf.php.dist
+    doc: Mention 'mlsd' parameter in backends.php
+    fix: Support UNC paths
+    refactor: Remove most reliance on prototype.js
+    fix: More defensive code when trying to drop tables
+    docs: Clarify where to put local overrides
 5.0.0-beta1:
   api: 5.0.0-beta1
   state:

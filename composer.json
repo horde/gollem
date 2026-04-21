@@ -26,7 +26,7 @@
         "vfs",
         "webdav"
     ],
-    "time": "2026-04-02",
+    "time": "2026-04-21",
     "repositories": [],
     "require": {
         "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^3 || ^2",
@@ -59,7 +59,11 @@
             "lib/"
         ]
     },
-    "autoload-dev": {},
+    "autoload-dev": {
+        "psr-4": {
+            "Horde\\Gollem\\Test\\": "test/"
+        }
+    },
     "config": {
         "allow-plugins": {
             "horde/horde-installer-plugin": true
