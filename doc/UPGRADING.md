@@ -1,56 +1,51 @@
-==================
- Upgrading Gollem
-==================
+# Upgrading Gollem
 
-:Contact: gollem@lists.horde.org
+Contact: gollem@lists.horde.org
 
-.. contents:: Contents
-.. section-numbering::
-
-
-General instructions
-====================
+## General instructions
 
 These are instructions to upgrade from earlier Gollem versions. Please backup
 your existing data before running any of the steps described below. You can't
 use the updated data with your old Gollem version anymore.
 
-Upgrading Gollem is as easy as running::
+Upgrading Gollem is as easy as running:
 
-   pear upgrade -a -B horde/gollem
+```
+pear upgrade -a -B horde/gollem
+```
 
 If you want to upgrade Gollem with all binary dependencies, you need to remove
-the ``-B`` flag. Please note that this might also try to install PHP extensions
+the `-B` flag. Please note that this might also try to install PHP extensions
 through PECL that might need further configuration or activation in your PHP
-configuration::
+configuration:
 
-   pear upgrade -a horde/gollem
+```
+pear upgrade -a horde/gollem
+```
 
 If you want to upgrade to an alpha or beta version of Gollem, you need to tell
 the PEAR installer to prefer non-stable package versions. Please note that this
-might also install pre-release 3rd-party PEAR packages::
+might also install pre-release 3rd-party PEAR packages:
 
-   pear -d preferred_state=alpha upgrade -a horde/gollem
+```
+pear -d preferred_state=alpha upgrade -a horde/gollem
+```
 
 If you want to upgrade from an Gollem version prior to 2.0, please follow the
-instructions in INSTALL_ to install the most recent Gollem version using the
-PEAR installer.
+instructions in [INSTALL](INSTALL.md) to install the most recent Gollem
+version using the PEAR installer.
 
 After updating to a newer Gollem version, you **always** need to update
 configurations and database schemes. Log in as an administrator, go to
 Administration => Configuration and update anything that's highlighted as
 outdated.
 
-
-Upgrading Gollem From 2.x To 3.x
-================================
+## Upgrading Gollem From 2.x To 3.x
 
 This is a non-exhaustive, quick explanation of what has changed between a
 Gollem 2.x installation to Gollem 3.x.
 
-
-File sharing
-------------
+### File sharing
 
 File sharing support has been added and is enabled by default for the "file"
 and "sqlhome" backend configuration examples.
@@ -61,26 +56,17 @@ actually **needs** a backend type that does not enforce per-user permissions.
 
 See the comments for the "shares" parameter in `backends.php` for details.
 
-
-Upgrading Gollem From 1.x To 2.x
-================================
+## Upgrading Gollem From 1.x To 2.x
 
 This is a non-exhaustive, quick explanation of what has changed between a
 Gollem 1.x installation to Gollem 2.x.
 
-
-MIME Viewer Options (mime_drivers.php)
---------------------------------------
+### MIME Viewer Options (mime_drivers.php)
 
 Gollem specific MIME configuration is no longer needed, so this configuration
 file can be removed.
 
+### Server Options (backends.php)
 
-Server Options (backends.php)
------------------------------
-
-The 'clipboard' option has been removed.  The availability of the clipboard
+The 'clipboard' option has been removed. The availability of the clipboard
 is now entirely dependent on the user's edit permissions for the application.
-
-
-.. _INSTALL: INSTALL
