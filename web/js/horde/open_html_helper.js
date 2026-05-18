@@ -1,0 +1,1 @@
+../../../vendor/horde/core/js/open_html_helper.js

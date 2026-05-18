@@ -384,7 +384,7 @@ if (is_array($list) && $numitem && $read_perms) {
         }
 
         $item = [
-            'date' => htmlspecialchars(strftime($prefs->getValue('date_format_mini'), $val['date'])),
+            'date' => htmlspecialchars(\Horde\Date\Format::formatDate($val['date'], $prefs->getValue('date_format_mini'), $GLOBALS['language'] ?? 'en_US')),
             'dl' => false,
             'edit' => false,
             'group' => empty($val['group']) ? '-' : htmlspecialchars($val['group']),
