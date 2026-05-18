@@ -1,0 +1,1 @@
+../../../vendor/horde/core/js/dialog.js

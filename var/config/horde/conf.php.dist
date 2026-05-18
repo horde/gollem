@@ -1,0 +1,216 @@
+<?php
+/**
+ * Horde Configuration File
+ *
+ * This file contains intial configuration settings for Horde.
+ * It contains basic settings that allow you to log into Horde and
+ * complete the configuration with configuration interface. The first
+ * change you should do is to select a sensible authentication driver
+ * and administrator user name.
+ *
+ * The only settings that might need changes if you are not running
+ * Horde in a "default" setup are documented below.
+ *
+ * Strings should be enclosed in 'quotes'.
+ * Integers should be given literally (without quotes).
+ * Boolean values may be true or false (never quotes).
+ *
+ * $Id: cbbda4ea6f6bcba0a6bf6f8ffb952f9878706bf5 $
+ */
+
+// Determines how we generate full URLs (for location headers and
+// such). Possible values are:
+//   0 - Assume that we are not using SSL and never generate https URLS.
+//   1 - Assume that we are using SSL and always generate https URLS.
+//       NOTE: If you do this, you MUST hardcode the correct HTTPS port
+//       number in $conf['server']['port'] below. Otherwise Horde will
+//       be unable to generate correct HTTPS URLs when a user tries to
+//       access Horde via a non-HTTPS port.
+//   2 - Attempt to auto-detect, and generate URLs appropriately.
+$conf['use_ssl'] = 2;
+
+// What server name should we use? You'll probably know if you need to
+// change this default; only in situations where you need to override
+// what Apache thinks the server name is.
+$conf['server']['name'] = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+// What port number is the webserver running on? Again, you shouldn't
+// need to change the default, and you probably know it if you do. The
+// exception is if you have $conf['use_ssl'] set to 1, as described
+// above.
+// $conf['server']['port'] = 80;
+
+// Cookie Domain Configuration
+//
+// This setting controls which domains can access Horde's session cookies.
+// The correct value depends on your deployment scenario:
+//
+// SCENARIO 1: Localhost Development
+//   Set to empty string for local development without a domain:
+//   $conf['cookie']['domain'] = '';
+//   Example: http://localhost/horde or http://127.0.0.1/horde
+//
+// SCENARIO 2: Single Domain (DEFAULT - RECOMMENDED)
+//   Use default $_SERVER['SERVER_NAME'] or $_SERVER['HTTP_HOST'] for single-domain operation:
+//   $conf['cookie']['domain'] = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'];
+//   Example: https://mail.example.com
+//   Cookies ONLY work on mail.example.com, not calendar.example.com
+//   This is the most secure option - each subdomain is isolated.
+//
+// SCENARIO 3: Multiple Subdomains (SHARED COOKIES)
+//   Use '.example.com' (with leading dot) to share cookies across subdomains:
+//   $conf['cookie']['domain'] = '.example.com';
+//   Example: mail.example.com, calendar.example.com, contacts.example.com
+//   All subdomains share the same session cookie.
+//
+//   SECURITY WARNING: Setting a broad cookie domain means ALL subdomains
+//   are equally trusted. If an attacker compromises ANY subdomain, they
+//   can steal sessions from ALL other subdomains. Only use this if:
+//   - All subdomains are under your control
+//   - All subdomains have the same security level
+//   - You understand the security implications
+//
+//   OWASP recommends against broad cookie domains. Consider using a central
+//   authentication service (OAuth2/OIDC) instead for better security.
+//
+// SCENARIO 4: Multiple Unrelated Domains (NOT SUPPORTED)
+//   Cookies CANNOT be shared across completely different domains like:
+//   - www.mail-service.com AND www.calendar-app.com
+//
+//   Browser security (Same-Origin Policy) prevents this. If you need to
+//   authenticate users across unrelated domains, implement a central
+//   authentication service using OAuth2 or OpenID Connect. Each domain
+//   would then validate tokens from the central auth service.
+//
+// IMPORTANT: If using SCENARIO 3 (subdomain cookies), you must also
+// configure SameSite cookie policy. For cross-subdomain API calls, you
+// may need to set:
+//   $conf['cookie']['samesite'] = 'None';  // Requires HTTPS
+// See session configuration for SameSite options.
+//
+$conf['cookie']['domain'] = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? '';
+
+// What path should we set cookies to? For maximum security this should
+// match the URL where Horde is on your webserver.
+// If Horde is at /horde, then this should be '/horde'.
+// If Horde is installed as the document root, then this
+// needs to be '/' - NOT ''.
+// ** BUT, if IE will be used to access Horde modules, you should read
+//    this first (discussing issues with IE's Content Advisor):
+//    http://lists.horde.org/archives/imp/Week-of-Mon-20030113/029149.html
+$conf['cookie']['path'] = '/';
+
+// Disable the test script (horde/test.php)? For security reasons, this is
+// disabled by default.
+$conf['testdisable'] = true;
+
+// YOU SHOULDN'T CHANGE ANTHING BELOW THIS LINE.
+$conf['debug_level'] = E_ALL & ~E_NOTICE;
+$conf['umask'] = 077;
+$conf['compress_pages'] = true;
+$conf['max_exec_time'] = 0;
+$conf['session']['name'] = 'Horde';
+$conf['session']['cache_limiter'] = 'nocache';
+
+// Session Maximum Lifetime Configuration
+//
+// IMPORTANT: If using JWT authentication with refresh tokens, this value
+// MUST be greater than or equal to the JWT refresh token lifetime
+// ($conf['auth']['jwt']['refresh_ttl']).
+//
+// Why: Horde's hybrid authentication model stores backend credentials
+// (IMAP/SMTP passwords) in the session. When a JWT refresh token is used
+// to obtain a new access token, the session must still exist to provide
+// these credentials. If the session expires before the refresh token,
+// API calls will fail even though the JWT is still valid.
+//
+// Recommended: 2592000 seconds (30 days) - matches default refresh token lifetime
+// Minimum: Must be >= $conf['auth']['jwt']['refresh_ttl'] if JWT is enabled
+// Security: Longer sessions mean longer credential exposure, but with rolling
+//           timeouts (session extends on activity), this is acceptable for
+//           webmail and groupware applications where users access regularly.
+//
+// Examples:
+//   High security:  86400 (1 day)
+//   Standard:       2592000 (30 days) - RECOMMENDED
+//   Extended:       7776000 (90 days)
+//
+$conf['session']['max_time'] = 2592000;  // 30 days (was 72000 = 20 hours)
+
+// Session Cookie Timeout
+//
+// Controls when the session cookie expires in the browser.
+// 0 = Cookie expires when browser closes (RECOMMENDED)
+// Non-zero = Cookie lifetime in seconds (NOT RECOMMENDED - see conf.xml)
+//
+$conf['session']['timeout'] = 0;
+$conf['auth']['admins'] = array('administrator');
+$conf['auth']['driver'] = 'auto';
+$conf['auth']['params'] = array('username' => 'administrator');
+$conf['prefs']['driver'] = 'Sql';
+$conf['portal']['fixed_blocks'] = array();
+$conf['imsp']['enabled'] = false;
+$conf['kolab']['enabled'] = false;
+$conf['log']['priority'] = 'INFO';
+$conf['log']['ident'] = 'HORDE';
+$conf['log']['name'] = LOG_USER;
+$conf['log']['type'] = 'syslog';
+$conf['log']['enabled'] = true;
+
+// JWT Authentication Configuration
+//
+// JSON Web Token (JWT) authentication for stateless API access.
+// When enabled, clients can authenticate via /api/v1/auth/login and receive
+// JWT access and refresh tokens for subsequent API requests.
+//
+// SETUP INSTRUCTIONS:
+//
+// 1. Generate a strong random secret (32+ bytes):
+//    openssl rand -base64 32 > ${HORDE_CONFIG_BASE}/horde/jwt.secret
+//
+//    Where ${HORDE_CONFIG_BASE} is the path to your var/config directory.
+//    Example: openssl rand -base64 32 > /var/horde/config/horde/jwt.secret
+//
+// 2. Set secure file permissions (readable only by web server user):
+//    chmod 600 ${HORDE_CONFIG_BASE}/horde/jwt.secret
+//    chown www-data:www-data ${HORDE_CONFIG_BASE}/horde/jwt.secret
+//
+// 3. Enable JWT authentication below
+//
+// SECURITY REQUIREMENTS:
+// - File must contain at least 32 bytes (256 bits) of random data
+// - File permissions must be 600 (readable only by web server user)
+// - Store outside web root if possible
+// - Never commit to version control (add to .gitignore)
+//
+$conf['auth']['jwt']['enabled'] = false;
+
+// Path to file containing JWT signing secret
+//
+// DEFAULT LOCATION (when empty or not set):
+//   ${HORDE_CONFIG_BASE}/horde/jwt.secret
+//
+// Where HORDE_CONFIG_BASE is typically:
+//   - Modern deployment: /path/to/var/config
+//   - Legacy deployment: vendor/horde/horde/../../../var/config
+//
+// CUSTOM LOCATION:
+// You can specify:
+//   - Absolute path (recommended for production): /var/horde/secrets/jwt.secret
+//   - Relative path (resolved relative to HORDE_CONFIG_BASE): horde/jwt.secret
+//
+// Leave empty to use default location.
+//
+$conf['auth']['jwt']['secret_file'] = '';
+
+// JWT issuer identifier (typically your domain or application name)
+$conf['auth']['jwt']['issuer'] = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+// Access token lifetime (seconds) - short-lived tokens for API requests
+// Recommended: 3600 (1 hour), Range: 300-7200 (5 minutes to 2 hours)
+$conf['auth']['jwt']['access_ttl'] = 3600;
+
+// Refresh token lifetime (seconds) - long-lived tokens to obtain new access tokens
+// MUST be <= $conf['session']['max_time'] for hybrid authentication
+// Recommended: 2592000 (30 days), Range: 86400-7776000 (1-90 days)
+$conf['auth']['jwt']['refresh_ttl'] = 2592000;

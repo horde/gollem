@@ -110,7 +110,7 @@ class Gollem_Ajax_Application_Smartmobile extends Horde_Core_Ajax_Application_Ha
                         'n' => $val['name'] . ' (' . Gollem::formatFileSize($val['size']) . ')',
                         'i' => $icon,
                         'u' => strval($url->setRaw(true)),
-                        'd' => strftime($GLOBALS['prefs']->getValue('date_format_mini'), $val['date']),
+                        'd' => \Horde\Date\Format::formatDate($val['date'], $GLOBALS['prefs']->getValue('date_format_mini'), $GLOBALS['language'] ?? 'en_US'),
                     ];
                     break;
             }
