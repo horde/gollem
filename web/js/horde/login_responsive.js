@@ -1,0 +1,1 @@
+../../../vendor/horde/horde/js/login_responsive.js

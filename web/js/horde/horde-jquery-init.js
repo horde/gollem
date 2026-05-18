@@ -1,0 +1,1 @@
+../../../vendor/horde/core/js/horde-jquery-init.js

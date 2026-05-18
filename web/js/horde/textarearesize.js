@@ -1,0 +1,1 @@
+../../../vendor/horde/horde/js/textarearesize.js
