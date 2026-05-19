@@ -1,4 +1,5 @@
 <?php
+use Horde\Injector\Injector;
 
 /**
  * A Horde_Injector based Horde_Vfs factory.
@@ -30,7 +31,7 @@ class Gollem_Factory_VfsDefault extends Horde_Core_Factory_Injector
      * @return Horde_Vfs  The VFS object.
      * @throws Horde_Exception
      */
-    public function create(Horde_Injector $injector)
+    public function create(Horde_Injector|Injector $injector)
     {
         return $injector
             ->getInstance('Gollem_Factory_Vfs')
