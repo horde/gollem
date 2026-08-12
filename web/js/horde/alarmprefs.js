@@ -1,1 +1,0 @@
-../../../vendor/horde/core/js/alarmprefs.js

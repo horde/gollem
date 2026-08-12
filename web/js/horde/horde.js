@@ -1,1 +1,0 @@
-../../../vendor/horde/core/js/horde.js

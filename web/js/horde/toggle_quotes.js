@@ -1,1 +1,0 @@
-../../../vendor/horde/core/js/toggle_quotes.js
