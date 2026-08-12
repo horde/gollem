@@ -1,1 +1,0 @@
-../../../vendor/horde/horde/js/slider2.js

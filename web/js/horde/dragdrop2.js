@@ -1,1 +1,0 @@
-../../../vendor/horde/horde/js/dragdrop2.js
