@@ -62,3 +62,7 @@ run-tests.log
 /phpstan.neon
 # PHPStan cache directory
 /.phpstan.cache/
+
+# Local install / sandbox layout (never belongs in the package)
+/web/
+/var/
