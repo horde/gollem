@@ -26,7 +26,7 @@
         "vfs",
         "webdav"
     ],
-    "time": "2026-04-21",
+    "time": "2026-08-14",
     "repositories": [],
     "require": {
         "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^3 || ^2",
