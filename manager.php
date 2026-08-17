@@ -605,7 +605,7 @@ if (is_array($list) && $numitem && $read_perms) {
 } else {
     $template->empty_dir = true;
 }
-$template->itemcount = sprintf(ngettext(_("%d item"), _("%d items"), $total), $total);
+$template->itemcount = sprintf(ngettext("%d item", "%d items", $total), $total);
 
 $page_output->addScriptFile('manager.js');
 $page_output->addScriptPackage('Horde_Core_Script_Package_Dialog');
