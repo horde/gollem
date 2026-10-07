@@ -373,7 +373,7 @@ if (is_array($list) && $numitem && $read_perms) {
 
     foreach ($list as $key => $val) {
         /* Check if a filter is not empty and filter matches filename. */
-        if (strlen($vars->searchfield)
+        if (!empty($vars->searchfield)
             && !preg_match('/' . preg_quote($vars->searchfield, '/') . '/', $val['name'])) {
             continue;
         }
