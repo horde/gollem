@@ -26,7 +26,7 @@ if ($isPopup) {
     $template->closebutton = _("Close");
     $page_output->topbar = $page_output->sidebar = false;
     $page_output->addInlineScript([
-        '$("closebutton").observe("click", function() { window.close(); })',
+        'document.getElementById("closebutton").addEventListener("click", function() { window.close(); })',
     ], true);
 }
 
